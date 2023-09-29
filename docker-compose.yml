@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  svelte_network:
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: Svelte_container
+    ports:
+      - '3000:3000'
+    networks:
+      - svelte_network
+
+  db:
+    image: mariadb:10.6.10-focal
+    container_name: parashop_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: parashop
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    networks:
+      - svelte_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: parashop_phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+    depends_on:
+      - db
+    networks:
+      - svelte_network
+volumes:
+  db:
+  phpmyadmin:
+  node:
