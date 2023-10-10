@@ -3,7 +3,6 @@
 	id="whoobe-t7qyk"
 	class="flex flex-col items-center justify-center w-full px-6 m-auto bg-white rounded-lg shadow md:w-1/2 lg:w-1/3"
 	method="post"
-	action="?/login"
 >
 	<h2 class="my-4 text-2xl">Login</h2>
 	<div id="whoobe-h90kl" class="flex flex-col justify-start w-full p-2">
