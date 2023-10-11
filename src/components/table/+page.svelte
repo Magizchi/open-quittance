@@ -12,13 +12,15 @@
 	}
 
 	export let columns: Columns[];
-	export let infos: Infos[];
+	export let infos: any[];
+	const columnsWithInfo = columns.slice();
+	columns.push({ title: '', dataIndex: '' });
 </script>
 
 <section>
 	<div class="m-5 overflow-hidden border border-gray-200 rounded-lg shadow-md">
 		<table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
-			<thead class="bg-gray-50">
+			<thead class="w-full bg-gray-100">
 				<tr>
 					{#each columns as column, i}
 						<th scope="col" class="px-6 py-4 font-medium text-gray-900">{column.title}</th>
@@ -28,41 +30,27 @@
 			<tbody class="border-t border-gray-100 divide-y divide-gray-100">
 				{#each infos as info, i}
 					<tr class="hover:bg-gray-50">
-						<th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-							<div class="text-sm">
-								<div class="font-medium text-gray-700">{info.name}</div>
-								<div class="text-gray-400">jobs@sailboatui.com</div>
-							</div>
+						{#each columnsWithInfo as columnIndex}
+							<td class="px-6 py-4">
+								<p class="text-sm font-medium text-gray-700">
+									{info[`${columnIndex.dataIndex}`]}
+								</p>
+							</td>
+						{/each}
+						<!-- <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
+							<p>{info[`${columns[0].dataIndex}`]}</p>
 						</th>
 						<td class="px-6 py-4">
-							<span
-								class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-green-600 rounded-full bg-green-50"
-							>
-								<span class="h-1.5 w-1.5 rounded-full bg-green-600" />
-								{info.status}
-							</span>
+							<p class="">
+								{info[`${columns[1].dataIndex}`]}
+							</p>
 						</td>
-						<td class="px-6 py-4">{info.city}</td>
+						<td class="px-6 py-4"><p>{info[`${columns[2].dataIndex}`]}</p></td>
 						<td class="px-6 py-4">
-							{info.nbLocataire}
-							<!-- <div class="flex gap-2">
-                            <span
-                                class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-blue-600 rounded-full bg-blue-50"
-                            >
-                                Design
-                            </span>
-                            <span
-                                class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-indigo-600 rounded-full bg-indigo-50"
-                            >
-                                Product
-                            </span>
-                            <span
-                                class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-violet-50 text-violet-600"
-                            >
-                                Develop
-                            </span>
-                        </div> -->
-						</td>
+							<p>
+								{info[`${columns[3].dataIndex}`]}
+							</p>
+						</td> -->
 						<td class="px-6 py-4">
 							<div class="flex justify-end gap-4">
 								<!-- <a x-data="{ tooltip: 'Delete' }" href="/"> -->
