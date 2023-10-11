@@ -15,9 +15,8 @@
 		},
 		{
 			title: 'Nombre de locataire',
-			dataIndex: 'nombreLocataire'
-		},
-		{ title: '', dataIndex: 'buttons' }
+			dataIndex: 'nbLocataire'
+		}
 	];
 
 	const infos = [
