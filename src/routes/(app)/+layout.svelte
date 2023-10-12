@@ -37,21 +37,21 @@
 					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
 						<div class="flex items-center">
 							<i class="mr-2 fas fa-calendar-alt" />
-							<span>Agenda</span>
+							<span>Locations</span>
 						</div>
 						<i class="text-xs fas fa-chevron-down" />
 					</div>
-					<ul class="hidden ml-4 desplegable">
+					<ul class="ml-4 desplegable">
 						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
+							<a href="/companies" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Gestion de citas
+								Entreprises
 							</a>
 						</li>
 						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
+							<a href="/locataires" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Polizas
+								Locataires
 							</a>
 						</li>
 					</ul>
@@ -116,7 +116,7 @@
 						</div>
 						<i class="text-xs fas fa-chevron-down" />
 					</div>
-					<ul class="hidden ml-4 desplegable">
+					<ul class="ml-4 desplegable">
 						<li>
 							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
