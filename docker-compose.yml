@@ -16,10 +16,10 @@ services:
 
   db:
     image: mariadb:10.6.10-focal
-    container_name: parashop_mysql
+    container_name: pdfman_mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: parashop
+      MYSQL_DATABASE: pdfman
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
@@ -29,7 +29,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: parashop_phpmyadmin
+    container_name: pdfman_phpmyadmin
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
