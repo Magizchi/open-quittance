@@ -19,6 +19,8 @@
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
+		"daisyui": "^3.9.2",
+		"drizzle-kit": "^0.19.13",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -35,8 +37,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"drizzle-orm": "^0.28.6",
 		"file-saver": "^2.0.5",
-		"puppeteer": "^21.3.6",
-		"sharp": "^0.32.6"
+		"mysql": "^2.18.1",
+		"mysql2": "^3.6.2",
+		"puppeteer": "^21.3.6"
 	}
 }

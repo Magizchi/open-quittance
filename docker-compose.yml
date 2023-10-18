@@ -15,7 +15,7 @@ services:
       - svelte_network
 
   db:
-    image: mariadb:10.6.10-focal
+    image: mysql:latest
     container_name: pdfman_mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
