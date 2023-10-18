@@ -1,3 +1,7 @@
+<script>
+	export let form;
+</script>
+
 <!-- This is an example component -->
 <form
 	id="whoobe-t7qyk"
@@ -70,6 +74,9 @@
 				placeholder="password"
 				required={false}
 			/>
+			{#if form?.incorrect}
+				<p class="error">wrong mot de passe!</p>
+			{/if}
 		</div>
 		<button
 			value="button"
