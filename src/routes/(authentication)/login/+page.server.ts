@@ -6,6 +6,14 @@ import { eq } from "drizzle-orm";
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET_TOKEN } from '$env/static/private';
 
+//JWT
+export const load = ({ cookies }) => {
+    const cookiesJwt = cookies.get('auth')
+    if (cookiesJwt) {
+        throw redirect(303, "/")
+    }
+}
+
 export const actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData();
