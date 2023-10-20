@@ -1,4 +1,8 @@
-<header class="w-full mt-5 text-gray-700 bg-white shadow-sm body-font">
+<script>
+	export let data;
+</script>
+
+<header class="w-full text-gray-700 bg-white shadow-sm body-font">
 	<div class="container flex flex-col items-start p-6 mx-auto md:flex-row">
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<a class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
@@ -13,22 +17,17 @@
 				/></svg
 			>
 		</a>
-		<nav class="flex items-center justify-center text-base md:ml-auto">
-			<a href="#_" class="mr-5 font-medium hover:text-gray-900">Home</a>
-			<a href="#_" class="mr-5 font-medium hover:text-gray-900">About</a>
-			<a href="#_" class="font-medium hover:text-gray-900">Contact</a>
-		</nav>
-		<div class="items-center h-full pl-6 ml-6 border-l border-gray-200">
-			<a href="#_" class="mr-5 font-medium hover:text-gray-900">Login</a>
+		<div class=" items-center h-full pl-6 ml-6 md:ml-auto border-l border-gray-200">
 			<a
 				href="#_"
 				class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
 			>
-				Sign Up
+				Mon profil
 			</a>
 		</div>
 	</div>
 </header>
+
 <main class="flex">
 	<aside class="w-64 min-h-screen p-4 text-white bg-gray-800">
 		<nav>
