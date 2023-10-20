@@ -35,7 +35,7 @@ export const actions = {
 
         if (!user) {
             return fail(404, {
-                message: "Utilisateur n'existe pas",
+                message: "Identifiant ou Mot de passe incorrect",
                 incorrect: true
             });
         }
@@ -44,11 +44,15 @@ export const actions = {
 
         if (!authenticated) {
             return fail(401, {
-                message: "non autorisé",
+                message: "Identifiant ou Mot de passe incorrect",
                 incorrect: true
             })
         }
-        const jsonwt = jwt.sign({ authToke: userInfo }, JWT_SECRET_TOKEN)
+        const uuid = await bcrypt.genSalt()
+        await db.update(ownersTable)
+            .set({ loginToken: uuid })
+            .where(eq(ownersTable.email, login.toString()));
+        const jsonwt = jwt.sign({ authToke: { ...userInfo, loginToken: uuid } }, JWT_SECRET_TOKEN)
         cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" })
 
         throw redirect(303, "/")
