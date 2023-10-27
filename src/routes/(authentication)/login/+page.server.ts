@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { redirect, fail } from '@sveltejs/kit';
 import db from "$lib/server/database";
-import { ownersTable } from "$lib/server/schema";
+import { usersTable } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET_TOKEN } from '$env/static/private';
@@ -22,17 +22,18 @@ export const actions = {
 
         if (!login || !password) {
             return fail(403, {
+                message: "Donnée incorrect",
                 incorrect: true
             });
         }
+        console.log('avant requete')
         const [user] = await db.select({
-            id: ownersTable.id,
-            email: ownersTable.email,
-            hash: ownersTable.password
+            id: usersTable.id,
+            email: usersTable.email,
+            hash: usersTable.password
         })
-            .from(ownersTable)
-            .where(eq(ownersTable.email, login.toString())) as { id: number; email: string; hash: string }[]
-
+            .from(usersTable)
+            .where(eq(usersTable.email, login.toString())) as { id: number; email: string; hash: string }[]
         if (!user) {
             return fail(404, {
                 message: "Identifiant ou Mot de passe incorrect",
@@ -49,9 +50,9 @@ export const actions = {
             })
         }
         const uuid = await bcrypt.genSalt()
-        await db.update(ownersTable)
+        await db.update(usersTable)
             .set({ loginToken: uuid })
-            .where(eq(ownersTable.email, login.toString()));
+            .where(eq(usersTable.email, login.toString()));
         const jsonwt = jwt.sign({ authToke: { ...userInfo, loginToken: uuid } }, JWT_SECRET_TOKEN)
         cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" })
 
