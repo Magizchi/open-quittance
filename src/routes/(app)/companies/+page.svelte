@@ -1,44 +1,29 @@
 <script>
-	import Table from '../../../components/table/+page.svelte';
+	import Table from '$lib/components/table/+page.svelte';
+	export let data;
+	console.log('data', data.owners);
 	const columns = [
 		{
 			title: 'Nom',
-			dataIndex: 'name'
+			dataIndex: 'companyName'
 		},
 		{
 			title: 'Statut',
 			dataIndex: 'status'
 		},
 		{
+			title: 'Adresse',
+			dataIndex: 'address'
+		},
+		{
 			title: 'Ville',
 			dataIndex: 'city'
 		},
 		{
-			title: 'Nombre de locataire',
-			dataIndex: 'nbLocataire'
-		}
-	];
-
-	const infos = [
-		{
-			name: 'SCI GANESHA',
-			status: 'SCI',
-			city: 'DRANCY',
-			nbLocataire: 1
-		},
-		{
-			name: 'SCI GANESHA',
-			status: 'SCI',
-			city: 'DRANCY',
-			nbLocataire: 1
-		},
-		{
-			name: 'SCI GANESHA',
-			status: 'SCI',
-			city: 'DRANCY',
-			nbLocataire: 1
+			title: 'Code Postal',
+			dataIndex: 'postalCode'
 		}
 	];
 </script>
 
-<Table {columns} {infos} />
+<Table {columns} infos={data.owners} />
