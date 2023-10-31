@@ -1,5 +1,5 @@
 <script>
-	import Input from '../../../../components/Input/+page.svelte';
+	import Input from '$lib/components/Input/+page.svelte';
 </script>
 
 <!-- This is an example component -->
