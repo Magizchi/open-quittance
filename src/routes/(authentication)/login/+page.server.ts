@@ -53,7 +53,7 @@ export const actions = {
         await db.update(usersTable)
             .set({ loginToken: uuid })
             .where(eq(usersTable.email, login.toString()));
-        const jsonwt = jwt.sign({ authToke: { ...userInfo, loginToken: uuid } }, JWT_SECRET_TOKEN)
+        const jsonwt = jwt.sign({ ...userInfo, loginToken: uuid }, JWT_SECRET_TOKEN)
         cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" })
 
         throw redirect(303, "/")

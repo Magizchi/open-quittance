@@ -1,8 +1,7 @@
 <script>
 	export let form;
 
-	const jean = () => {
-		console.log('onchange');
+	const setMessage = () => {
 		form = { message: '', incorrect: false };
 	};
 </script>
@@ -80,7 +79,7 @@
 						name="password"
 						placeholder="password"
 						required={false}
-						on:change={() => jean()}
+						on:change={() => setMessage()}
 					/>
 					{#if form?.incorrect}
 						<p class="text-red-500">{form.message}</p>
