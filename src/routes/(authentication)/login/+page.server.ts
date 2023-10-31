@@ -26,7 +26,7 @@ export const actions = {
                 incorrect: true
             });
         }
-        console.log('avant requete')
+
         const [user] = await db.select({
             id: usersTable.id,
             email: usersTable.email,

@@ -1,5 +1,10 @@
 <script>
 	export let form;
+
+	const jean = () => {
+		console.log('onchange');
+		form = { message: '', incorrect: false };
+	};
 </script>
 
 <!-- This is an example component -->
@@ -21,7 +26,7 @@
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						aria-hidden="true"
 						role="img"
-						width="1em"
+						width="3em"
 						height="1em"
 						preserveAspectRatio="xMidYMid meet"
 						viewBox="0 0 26 26"
@@ -66,18 +71,21 @@
 						<circle cx="22" cy="10" r="2" fill="currentColor" />
 					</svg>
 				</span>
-				<input
-					type="password"
-					value=""
-					class="w-full h-10 pl-1 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-300"
-					id="password"
-					name="password"
-					placeholder="password"
-					required={false}
-				/>
-				{#if form?.incorrect}
-					<p class="error">wrong mot de passe!</p>
-				{/if}
+				<div class="flex-grow">
+					<input
+						value=""
+						type="password"
+						class="w-full h-10 pl-1 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-300"
+						id="password"
+						name="password"
+						placeholder="password"
+						required={false}
+						on:change={() => jean()}
+					/>
+					{#if form?.incorrect}
+						<p class="text-red-500">{form.message}</p>
+					{/if}
+				</div>
 			</div>
 			<button
 				value="button"
