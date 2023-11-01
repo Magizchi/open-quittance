@@ -22,7 +22,7 @@
 				href="#_"
 				class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
 			>
-				Mon profil
+				{data.name}
 			</a>
 		</div>
 	</div>
@@ -58,79 +58,20 @@
 				<li class="opcion-con-desplegable">
 					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
 						<div class="flex items-center">
-							<i class="mr-2 fas fa-money-bill-wave" />
-							<span>Contabilidad</span>
-						</div>
-						<i class="text-xs fas fa-chevron-down" />
-					</div>
-					<ul class="hidden ml-4 desplegable">
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Tratamientos
-							</a>
-						</li>
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Gastos
-							</a>
-						</li>
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Facturas
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="opcion-con-desplegable">
-					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
-						<div class="flex items-center">
-							<i class="mr-2 fas fa-chart-bar" />
-							<span>Informes</span>
-						</div>
-						<i class="text-xs fas fa-chevron-down" />
-					</div>
-					<ul class="hidden ml-4 desplegable">
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Presupuestos
-							</a>
-						</li>
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Informe médico
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="opcion-con-desplegable">
-					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
-						<div class="flex items-center">
 							<i class="mr-2 fas fa-file-alt" />
-							<span>Documentación</span>
+							<span>Documents</span>
 						</div>
 						<i class="text-xs fas fa-chevron-down" />
 					</div>
 					<ul class="ml-4 desplegable">
 						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
+							<a href="/quittances" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Firmas pendientes
-							</a>
-						</li>
-						<li>
-							<a href="/" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Documentos
+								Quittances
 							</a>
 						</li>
 					</ul>
 				</li>
-				<!-- Agrega más enlaces para la navegación lateral -->
 			</ul>
 		</nav>
 	</aside>
