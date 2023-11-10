@@ -9,50 +9,44 @@ export const usersTable = mysqlTable('users', {
     loginToken: varchar('loginToken', { length: 255 }),
 })
 
-export const companiesTable = mysqlTable('companies', {
+export const ownersTable = mysqlTable('owners', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
     userId: bigint('user_id', { mode: 'number' }).references(() => usersTable.id),
-    companyName: varchar('name', { length: 255 }).notNull(),
-    siretNumber: int('siretNumber'),
+    companyName: varchar('companyName', { length: 255 }).notNull(),
     address: varchar('address', { length: 255 }).notNull(),
     city: varchar('city', { length: 255 }).notNull(),
     postalCode: varchar('postalCode', { length: 5 }).notNull(),
+    status: varchar('status', { length: 255 }).notNull(),
 })
 
-// export const ownersTable = mysqlTable('owners', {
-//     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-//     userId: bigint('user_id', { mode: 'number' }).references(() => usersTable.id),
-//     companieName: varchar('name', { length: 255 }),
-//     address: varchar('address', { length: 255 }),
-//     city: varchar('city', { length: 255 }),
-//     postalCode: varchar('postalCode', { length: 5 }),
-// })
-
-// export const tenantsTable = mysqlTable('tenants', {
-//     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-//     userId: bigint('user_id', { mode: 'number' }).references(() => usersTable.id),
-//     companieName: varchar('name', { length: 255 }),
-//     address: varchar('address', { length: 255 }),
-//     city: varchar('city', { length: 255 }),
-//     postalCode: varchar('postalCode', { length: 5 }),
-// })
+export const tenantsTable = mysqlTable('tenants', {
+    id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
+    userId: bigint('user_id', { mode: 'number' }).references(() => usersTable.id),
+    companyName: varchar('companyName', { length: 255 }).notNull(),
+    address: varchar('address', { length: 255 }).notNull(),
+    city: varchar('city', { length: 255 }).notNull(),
+    postalCode: varchar('postalCode', { length: 5 }).notNull(),
+    status: varchar('status', { length: 255 }).notNull(),
+})
 
 export const localsTable = mysqlTable('locals', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    name: varchar('name', { length: 255 }),
-    address: varchar('address', { length: 255 }),
-    city: varchar('city', { length: 255 }),
-    postalCode: varchar('postalCode', { length: 5 }),
-    ownerId: bigint('owner_id', { mode: 'number' }).references(() => companiesTable.id),
-    tenantId: bigint('tenant_id', { mode: 'number' }).references(() => companiesTable.id)
+    name: varchar('name', { length: 255 }).notNull(),
+    address: varchar('address', { length: 255 }).notNull(),
+    city: varchar('city', { length: 255 }).notNull(),
+    postalCode: varchar('postalCode', { length: 5 }).notNull(),
+    rent: int('rent').notNull(),
+    charge: int('charger').notNull(),
+    tax: int('tax').notNull(),
+    ownerId: bigint('owner_id', { mode: 'number' }).references(() => ownersTable.id),
+    tenantId: bigint('tenant_id', { mode: 'number' }).references(() => tenantsTable.id)
 })
-
 
 export const receiptsTable = mysqlTable('receipts', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
     paymentDate: date('paymentDate'),
     createAt: date('createAt'),
     period: varchar('period', { length: 255 }),
-    ownerId: bigint('owner_id', { mode: 'number' }).references(() => companiesTable.id),
-    tenantId: bigint('tenant_id', { mode: 'number' }).references(() => companiesTable.id)
+    ownerId: bigint('owner_id', { mode: 'number' }).references(() => ownersTable.id),
+    tenantId: bigint('tenant_id', { mode: 'number' }).references(() => tenantsTable.id)
 })
