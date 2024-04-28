@@ -8,11 +8,11 @@ import { JWT_SECRET_TOKEN } from '$env/static/private';
 
 //JWT
 export const load = ({ cookies }) => {
-    const cookiesJwt = cookies.get('auth')
+    const cookiesJwt = cookies.get('auth');
     if (cookiesJwt) {
-        throw redirect(303, "/")
+        throw redirect(303, "/");
     }
-}
+};
 
 export const actions = {
     default: async ({ request, cookies }) => {
@@ -27,35 +27,38 @@ export const actions = {
             });
         }
 
+        // Check user email
         const [user] = await db.select({
             id: usersTable.id,
             email: usersTable.email,
             hash: usersTable.password
         })
             .from(usersTable)
-            .where(eq(usersTable.email, login.toString())) as { id: number; email: string; hash: string }[]
+            .where(eq(usersTable.email, login.toString())) as { id: number; email: string; hash: string; }[];
         if (!user) {
             return fail(404, {
                 message: "Identifiant ou Mot de passe incorrect",
                 incorrect: true
             });
         }
-        const { hash, ...userInfo } = user
+        // Check password
+        const { hash, ...userInfo } = user;
         const authenticated = await bcrypt.compare(password.toString(), hash);
 
         if (!authenticated) {
             return fail(401, {
                 message: "Identifiant ou Mot de passe incorrect",
                 incorrect: true
-            })
+            });
         }
-        const uuid = await bcrypt.genSalt()
+        // Add jwt token
+        const uuid = await bcrypt.genSalt();
         await db.update(usersTable)
             .set({ loginToken: uuid })
             .where(eq(usersTable.email, login.toString()));
-        const jsonwt = jwt.sign({ ...userInfo, loginToken: uuid }, JWT_SECRET_TOKEN)
-        cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" })
+        const jsonwt = jwt.sign({ ...userInfo, loginToken: uuid }, JWT_SECRET_TOKEN);
+        cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" });
 
-        throw redirect(303, "/")
+        throw redirect(303, "/");
     }
 };
