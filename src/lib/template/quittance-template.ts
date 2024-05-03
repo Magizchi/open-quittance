@@ -89,7 +89,7 @@ const docDefinition = (info: {
             text: [
                 `Quittance de loyer du mois de `,
                 {
-                    text: `${dayjs().locale('fr').format('MMMM').toUpperCase()}`,
+                    text: `${dayjs(info.startDate).locale('fr').format('MMMM').toUpperCase()}`,
                     bold: true
                 }
             ],
