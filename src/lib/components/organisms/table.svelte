@@ -1,6 +1,11 @@
 <script lang="ts">
-	export let columns: any[];
-	export let rows: ArrayLike<any>;
+	interface ColumnsProps {
+		header: string;
+		dataIndex: string;
+	}
+
+	export let columns: ColumnsProps[];
+	export let rows: any[];
 </script>
 
 <section>
@@ -17,7 +22,7 @@
 			</thead>
 			<tbody>
 				{#each rows as row}
-					<slot rental={row} />
+					<slot {row} />
 				{/each}
 			</tbody>
 		</table>
