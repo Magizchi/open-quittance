@@ -20,6 +20,13 @@ export const actions = {
                 message: "Erreur dans les données"
             };
         }
+        if (data.get('postalCode')!.toString().length > 5) {
+            return {
+                success: false,
+                status: 400,
+                message: "Erreur dans les données"
+            };
+        }
         const newLandlord: NewLandlordType = {
             companyName: data.get('companyName')?.toString(),
             siret: data.get('siret')?.toString(),
