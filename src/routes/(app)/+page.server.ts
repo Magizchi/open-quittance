@@ -1,7 +1,7 @@
 import type { RentalModel } from '$lib/models/rental.model';
 import db from '$lib/server/database.js';
 import { landlordsTable, propertiesTable, receiptsTable, rentalsTable, tenantsTable } from '$lib/server/schema.js';
-import { CreateReceipts } from '$lib/utils/service/rental';
+import { CreateReceipts } from '$lib/utils/service/createReceipts.js';
 import dayjs from 'dayjs';
 import { desc, eq, notInArray, sql } from 'drizzle-orm';
 

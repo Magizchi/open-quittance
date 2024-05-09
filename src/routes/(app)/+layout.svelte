@@ -17,12 +17,12 @@
 				/></svg
 			>
 		</a>
-		<div class=" items-center h-full pl-6 ml-6 md:ml-auto border-l border-gray-200">
+		<div class="items-center h-full pl-6 ml-6 border-l border-gray-200 md:ml-auto">
 			<a
 				href="#_"
 				class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
 			>
-				{data.name}
+				{data.user.firstName}
 			</a>
 		</div>
 	</div>
@@ -33,43 +33,76 @@
 		<nav>
 			<ul class="space-y-2">
 				<li class="opcion-con-desplegable">
-					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
+					<!-- <div class="flex items-center justify-between p-2 hover:bg-gray-700">
 						<div class="flex items-center">
 							<i class="mr-2 fas fa-calendar-alt" />
 							<span>Locations</span>
 						</div>
 						<i class="text-xs fas fa-chevron-down" />
-					</div>
+					</div> -->
 					<ul class="ml-4 desplegable">
+						<li>Propriétaire</li>
 						<li>
-							<a href="/companies" class="flex items-center p-2 hover:bg-gray-700">
+							<a href="/landlords" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Entreprises
+								Liste des Propriétaires
+							</a>
+							<a href="/landlords/create" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Créer un Propriétaire
 							</a>
 						</li>
+						<li>Locataire</li>
 						<li>
+							<a href="/tenants" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Liste des locataire
+							</a>
+							<a href="/tenants/create" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Créer un locataire
+							</a>
+						</li>
+						<li>Propriété</li>
+						<li>
+							<a href="/properties" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								listes propriété
+							</a>
+							<a href="/properties/create" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Création des propriété
+							</a>
+						</li>
+						<li>Location</li>
+						<li>
+							<a href="/rentals" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Liste Locations
+							</a>
+							<a href="/rentals/create" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Créer Locations
+							</a>
+						</li>
+						<li>Quittance</li>
+						<li>
+							<a href="/receipts" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								listes Quittances
+							</a>
+							<a href="/receipts/create" class="flex items-center p-2 hover:bg-gray-700">
+								<i class="mr-2 text-xs fas fa-chevron-right" />
+								Création des Quittances
+							</a>
+						</li>
+
+						<!-- <li>
 							<a href="/locataires" class="flex items-center p-2 hover:bg-gray-700">
 								<i class="mr-2 text-xs fas fa-chevron-right" />
 								Locataires
 							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="opcion-con-desplegable">
-					<div class="flex items-center justify-between p-2 hover:bg-gray-700">
-						<div class="flex items-center">
-							<i class="mr-2 fas fa-file-alt" />
-							<span>Documents</span>
-						</div>
-						<i class="text-xs fas fa-chevron-down" />
-					</div>
-					<ul class="ml-4 desplegable">
-						<li>
-							<a href="/quittances" class="flex items-center p-2 hover:bg-gray-700">
-								<i class="mr-2 text-xs fas fa-chevron-right" />
-								Quittances
-							</a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 			</ul>
