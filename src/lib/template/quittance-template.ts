@@ -3,6 +3,8 @@
 import { NumberToLetter } from 'convertir-nombre-lettre';
 import dayjs from "dayjs";
 import type { Style, TDocumentDefinitions } from "pdfmake/interfaces";
+import 'dayjs/locale/fr';
+dayjs.locale('fr');
 
 const Space = (spaceSize: number) => ({
     text: ' ', lineHeight: spaceSize
@@ -99,14 +101,14 @@ const docDefinition = (info: {
         Space(2),
         Text('Adresse de location :', { decoration: 'underline' }),
         Space(2),
-        Text(`${info.property_address}, ${info.property_city} ${info.property_postalCode}`, { alignment: 'center' }),
+        Text(`${info.property_address}, ${info.property_postalCode} ${info.property_city}`, { alignment: 'center' }),
         Space(2),
         {
             text: [
                 `Reçus de ${info.tenant_fullName} `,
                 ' la somme de ', { text: info.rent + info.condo_fees, bold: true },
                 ` euros (${NumberToLetter(info.rent + info.condo_fees)} euros), au titre du paiement du loyer et des charges du local sis `,
-                { text: `${info.property_address} ${info.property_city} ${info.property_postalCode}`, bold: true },
+                { text: `${info.property_address}, ${info.property_postalCode} ${info.property_city}`, bold: true },
                 ` pour la période de location du ${dayjs(info.startDate).format('DD/MM/YYYY')} au ${dayjs(info.endDate).format('DD/MM/YYYY')} et lui en donne quittance, sous réserve de tous mes droits.`
             ],
             alignment: 'justify',
@@ -117,7 +119,8 @@ const docDefinition = (info: {
         Space(1),
         Text(`Loyer : ${info.rent} €`),
         Text(`Provision de charge : ${info.condo_fees} €`),
-        Text(`Total : ${info.rent + info.condo_fees} €`),
+        Text(`Taxes: ${info.taxes} €`),
+        Text(`Total : ${info.rent + info.condo_fees + info.taxes} €`),
         Text(`Date de paiement : ${info.paymentDate ? dayjs(info.paymentDate).format('DD/MM/YYYY') : 'Paiement non reçu'}`),
         Space(2),
         Text(`Fait à Bobigny le ${dayjs(info.createAt).format('DD/MM/YYYY')}`),
