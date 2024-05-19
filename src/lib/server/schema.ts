@@ -11,9 +11,8 @@ export const usersTable = mysqlTable('users', {
 
 export const landlordsTable = mysqlTable('landlords', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    companyName: varchar('companyName', { length: 255 }),
+    name: varchar('name', { length: 255 }).notNull(),
     siret: varchar('siret', { length: 255 }),
-    fullName: varchar('fullName', { length: 255 }).notNull(),
     address: varchar('address', { length: 255 }).notNull(),
     city: varchar('city', { length: 255 }).notNull(),
     postalCode: varchar('postalCode', { length: 5 }).notNull(),
@@ -21,9 +20,8 @@ export const landlordsTable = mysqlTable('landlords', {
 
 export const tenantsTable = mysqlTable('tenants', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    companyName: varchar('companyName', { length: 255 }),
+    name: varchar('name', { length: 255 }).notNull(),
     siret: varchar('siret', { length: 255 }),
-    fullName: varchar('fullName', { length: 255 }).notNull(),
     address: varchar('address', { length: 255 }).notNull(),
     city: varchar('city', { length: 255 }).notNull(),
     postalCode: varchar('postalCode', { length: 5 }).notNull(),
