@@ -1,10 +1,33 @@
-<script>
+<script lang="ts">
+	import FormForUser from '$lib/components/organisms/Forms/createUser.svelte';
+	import FormProperty from '$lib/components/organisms/Forms/createProperty.svelte';
+	import Clickable from '$lib/components/atoms/Clickable.svelte';
+
 	import Table from '$lib/components/organisms/table.svelte';
+	import Td from '$lib/components/organisms/Table/td.svelte';
+
+	import Modal from '$lib/components/atoms/Modal.svelte';
+
 	export let data;
+	export let form;
+
+	let showModal = false;
+	let propertyForm = [{ title: 'Propriété 1', component: FormProperty }];
+
+	const AddForm = () => {
+		return (propertyForm = [
+			...propertyForm,
+			{
+				title: `Propriété ${propertyForm.length + 1}`,
+				component: FormProperty
+			}
+		]);
+	};
+
 	const columns = [
 		{
-			header: 'Entreprise',
-			dataIndex: 'companyName'
+			header: 'Propriétaire',
+			dataIndex: 'name'
 		},
 		{
 			header: 'Siret',
@@ -25,29 +48,72 @@
 		{
 			header: 'Code Postal',
 			dataIndex: 'postalCode'
+		},
+		{
+			header: 'Options',
+			dataIndex: 'options'
 		}
 	];
 </script>
 
-<Table {columns} rows={data.landlords} let:row>
-	<tr>
-		<td class="px-5 py-3">
-			{row.companyName}
-		</td>
-		<td class="px-5 py-3">
-			{row.siret}
-		</td>
-		<td class="px-5 py-3">
-			{row.fullName}
-		</td>
-		<td class="px-5 py-3">
-			{row.address}
-		</td>
-		<td class="px-5 py-3">
-			{row.city}
-		</td>
-		<td class="px-5 py-3">
-			{row.postalCode}
-		</td>
-	</tr>
-</Table>
+<section class="px-10">
+	<div class="flex py-10 m-5">
+		<div class="w-11/12">
+			<h1>Propriétaire</h1>
+		</div>
+		<div class="w-1/12">
+			<Clickable on:click={() => (showModal = true)}>Ajouter</Clickable>
+		</div>
+	</div>
+	<Table {columns} rows={data.landlords} let:row let:id>
+		<tr class="border-blue-600 [&:not(:last-child)]:border-b">
+			<Td>
+				<a href={'/landlords/' + row.id}>
+					{row.name}
+				</a>
+				//{id}//
+			</Td>
+			<Td>
+				{row.siret}
+			</Td>
+			<Td>
+				{row.fullName}
+			</Td>
+			<Td>
+				{row.address}
+			</Td>
+			<Td>
+				{row.city}
+			</Td>
+			<Td>
+				{row.postalCode}
+			</Td>
+			<Td>
+				<a href="/">Ajouter propriété</a>
+			</Td>
+		</tr>
+	</Table>
+	<Modal bind:showModal>
+		<form method="POST" class="space-y-10" action="?/create">
+			<div>
+				<!-- <fieldset id="personalInfo">
+					<legend>Taille du jus de fruits</legend> -->
+				<FormForUser />
+				<!-- </fieldset> -->
+			</div>
+			<div class="space-y-5">
+				{#each propertyForm as form, id}
+					<div class="space-y-2">
+						<!-- <fieldset id="property"> -->
+						<h2>{form.title}</h2>
+						<!-- <legend>Taille du jus de fruits2</legend> -->
+						<svelte:component this={form.component} {id} />
+						<!-- </fieldset> -->
+					</div>
+				{/each}
+			</div>
+			<button type="submit">submit</button>
+		</form>
+		<button type="button" on:click={AddForm}>+</button>
+	</Modal>
+</section>
