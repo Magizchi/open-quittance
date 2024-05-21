@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Select from '$lib/components/Select/+page.svelte';
+	import Select from '$lib/components/atoms/Select.svelte';
 	export let properties;
 	export let tenants;
 

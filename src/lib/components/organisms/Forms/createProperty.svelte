@@ -1,14 +1,9 @@
 <script lang="ts">
 	import Input from '$lib/components/atoms/Input.svelte';
-	import Select from '$lib/components/Select/+page.svelte';
-
 	export let id;
-
-	let selectedLandlord: any;
 </script>
 
 <div>
-	<!-- <Select name="landlord" bind:value={selectedLandlord} options={data} /> -->
 	<Input name={`properties[${id}][name]`} placeholder="Nom du local" value={`mega form ${id}`} />
 	<Input name={`properties[${id}][address]`} placeholder="Adresse" value={`mega form ${id}`} />
 	<Input name={`properties[${id}][city]`} placeholder="Ville" value="mega form" />
