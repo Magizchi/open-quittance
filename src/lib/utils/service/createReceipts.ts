@@ -14,7 +14,7 @@ export const CreateReceipts = async (rental: RentalModel, startDate: string, end
         rental_id: rental.rentals!.id,
         number: '',
         landlord_id: rental.landlords!.id,
-        landlord_fullName: rental.landlords!.fullName,
+        landlord_fullName: rental.landlords!.name,
         landlord_address: rental.landlords!.address,
         landlord_city: rental.landlords!.city,
         landlord_postalCode: rental.landlords!.postalCode,
@@ -22,7 +22,7 @@ export const CreateReceipts = async (rental: RentalModel, startDate: string, end
         tenant_id: rental.tenants!.id,
         tenant_address: rental.tenants!.address,
         tenant_city: rental.tenants!.city,
-        tenant_fullName: rental.tenants!.fullName,
+        tenant_fullName: rental.tenants!.name,
         tenant_postalCode: rental.tenants!.postalCode,
 
         rent: rental.properties!.rent,
