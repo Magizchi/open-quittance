@@ -1,0 +1,3 @@
+<td class="">
+	<slot />
+</td>
