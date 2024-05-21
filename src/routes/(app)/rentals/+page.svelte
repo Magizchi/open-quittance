@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Table from '$lib/components/organisms/table.svelte';
+	import Table from '$lib/components/organisms/Table/table.svelte';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import FormRental from '$lib/components/organisms/Forms/createRental.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';

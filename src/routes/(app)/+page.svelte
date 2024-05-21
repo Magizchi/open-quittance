@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { saveAs } from 'file-saver';
-	import Table from '$lib/components/organisms/table.svelte';
+	import Table from '$lib/components/organisms/Table/table.svelte';
 	import dayjs from 'dayjs';
 	import PrintIcon from '$lib/components/atoms/Icons/PrintIcon.svelte';
 	import { PenIcon } from '$lib/components/atoms/Icons/icon.js';

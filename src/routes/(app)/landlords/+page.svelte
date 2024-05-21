@@ -3,7 +3,7 @@
 	import FormProperty from '$lib/components/organisms/Forms/createProperty.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 
-	import Table from '$lib/components/organisms/table.svelte';
+	import Table from '$lib/components/organisms/Table/table.svelte';
 	import Td from '$lib/components/organisms/Table/td.svelte';
 
 	import Modal from '$lib/components/atoms/Modal.svelte';

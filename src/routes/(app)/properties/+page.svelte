@@ -1,5 +1,5 @@
 <script>
-	import Table from '$lib/components/organisms/table.svelte';
+	import Table from '$lib/components/organisms/Table/table.svelte';
 	export let data;
 	const columns = [
 		{
