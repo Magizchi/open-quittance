@@ -1,0 +1,21 @@
+<script lang="ts">
+	export let href: string | null = null;
+</script>
+
+{#if href}
+	<a
+		{...$$restProps}
+		class="w-full p-2 font-bold text-white bg-gray-700 border-2 border-gray-200 rounded-xl active:bg-red-500"
+		{href}
+	>
+		<slot />
+	</a>
+{:else}
+	<button
+		{...$$restProps}
+		on:click
+		class="w-full p-2 font-bold text-white bg-gray-700 border-2 border-gray-200 rounded-xl active:bg-red-500"
+	>
+		<slot />
+	</button>
+{/if}
