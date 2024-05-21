@@ -1,12 +1,14 @@
 <script lang="ts">
 	export let name: string;
+	export let className: string | null = null;
 </script>
 
 <slot name="label" />
 <div class="flex">
 	{#if $$slots.CustomIcon}
 		<span
-			class="flex items-center justify-center h-10 text-2xl text-gray-400 border border-r-0 rounded-l-lg min-w-10 z-highest"
+			class={'flex items-center justify-center h-10 text-2xl text-gray-400 border border-r-0 rounded-l-lg min-w-10 z-highest' +
+				className}
 		>
 			<slot name="CustomIcon" />
 		</span>
