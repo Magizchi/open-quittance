@@ -13,7 +13,7 @@
 		<thead class="w-full bg-gray-100">
 			<tr>
 				{#each columns as column}
-					<th class="">
+					<th class="p-3">
 						{column.header}
 					</th>
 				{/each}
