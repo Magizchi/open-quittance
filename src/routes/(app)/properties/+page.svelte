@@ -1,5 +1,5 @@
 <script>
-	import Table from '$lib/components/organisms/Table/table.svelte';
+	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	export let data;
 	const columns = [
 		{
@@ -30,24 +30,24 @@
 </script>
 
 <Table {columns} rows={data.properties} let:row>
-	<tr>
-		<td class="px-5 py-3">
+	<Tr>
+		<Td>
 			{row.landlord}
-		</td>
-		<td class="px-5 py-3">
+		</Td>
+		<Td>
 			{row.name}
-		</td>
-		<td class="px-5 py-3">
+		</Td>
+		<Td>
 			{`${row.address} ${row.city} ${row.postalCode}`}
-		</td>
-		<td class="px-5 py-3">
+		</Td>
+		<Td>
 			{row.rent}
-		</td>
-		<td class="px-5 py-3">
+		</Td>
+		<Td>
 			{row.condoFees}
-		</td>
-		<td class="px-5 py-3">
+		</Td>
+		<Td>
 			{row.taxes}
-		</td>
-	</tr>
+		</Td>
+	</Tr>
 </Table>

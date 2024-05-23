@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { saveAs } from 'file-saver';
-	import Table from '$lib/components/organisms/Table/table.svelte';
 	import dayjs from 'dayjs';
 	import PrintIcon from '$lib/components/atoms/Icons/PrintIcon.svelte';
 	import { PenIcon } from '$lib/components/atoms/Icons/icon.js';
+	import { Table, Tr, Td } from '$lib/components/organisms/Table';
+
 	export let data;
 	let pdfBuffer: any;
 
@@ -67,18 +68,18 @@
 
 <section>
 	<Table {columns} rows={data.receiptList} let:row>
-		<tr>
+		<Tr>
 			{#if typeof row === 'string'}
 				<td colspan={columns.length} class="font-bold text-gray-600 bg-gray-300">{row}</td>
 			{:else}
-				<td class="px-5 py-3">
+				<Td>
 					<p class="flex flex-col">
 						{row.landlord_fullName}
 					</p>
-				</td>
-				<td class="px-5 py-3">{row.tenant_fullName}</td>
-				<td class="px-5 py-3">{row.property_address}</td>
-				<td class="px-5 py-3">
+				</Td>
+				<Td>{row.tenant_fullName}</Td>
+				<Td>{row.property_address}</Td>
+				<Td>
 					<p class="flex flex-col">
 						{row.property_address}
 						<span class="flex space-x-2">
@@ -86,23 +87,21 @@
 							{row.property_postalCode}
 						</span>
 					</p>
-				</td>
-				<td class="px-5 py-3">{dayjs(row.createAt).format('DD/MM/YYYY')}</td>
-				<td class="px-5 py-3">
+				</Td>
+				<Td>{dayjs(row.createAt).format('DD/MM/YYYY')}</Td>
+				<Td>
 					{row.rent + row.condo_fees + row.taxes}
-				</td>
-				<td class="px-5 py-3"
-					>{row.paymentDate ? dayjs(row.paymentDate).format('DD/MM/YYYY') : 'not paid'}</td
-				>
-				<td>
+				</Td>
+				<Td>{dayjs(row.paymentDate).format('DD/MM/YYYY') ?? 'not paid'}</Td>
+				<Td>
 					<button on:click={() => getPdf(row.id)}>
 						<PrintIcon width="25" class="m-3" />
 					</button>
 					<button disabled={row.paymentDate ? true : false} on:click={() => SetPaymentDate(row.id)}>
 						<PenIcon width="25" class="m-3" />
 					</button>
-				</td>
+				</Td>
 			{/if}
-		</tr>
+		</Tr>
 	</Table>
 </section>

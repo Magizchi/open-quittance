@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Table from '$lib/components/organisms/Table/table.svelte';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import FormRental from '$lib/components/organisms/Forms/createRental.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
+	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 
 	export let data;
 	let showModal = false;
@@ -36,16 +36,16 @@
 		</div>
 	</div>
 	<Table {columns} rows={data.rentals} let:row>
-		<tr>
-			<td class="px-5 py-3">
+		<Tr>
+			<Td>
 				<p class="flex flex-col">
 					{row.landlord.name}
 				</p>
-			</td>
-			<td class="px-5 py-3">{row.tenant.name}</td>
-			<td class="px-5 py-3">{row.property.name}</td>
-			<td class="px-5 py-3">{row.property.city}</td>
-		</tr>
+			</Td>
+			<Td>{row.tenant.name}</Td>
+			<Td>{row.property.name}</Td>
+			<Td>{row.property.city}</Td>
+		</Tr>
 	</Table>
 	<Modal bind:showModal>
 		<form method="POST" class="space-y-10" action="?/create">

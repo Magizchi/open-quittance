@@ -1,8 +1,8 @@
 <script>
-	import Table from '$lib/components/organisms/Table/table.svelte';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import FormForUser from '$lib/components/organisms/Forms/createUser.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
+	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 
 	export let data;
 
@@ -42,23 +42,23 @@
 		</div>
 	</div>
 	<Table {columns} rows={data.tenants} let:row>
-		<tr>
-			<td class="px-5 py-3">
+		<Tr>
+			<Td>
 				{row.name}
-			</td>
-			<td class="px-5 py-3">
+			</Td>
+			<Td>
 				{row.siret}
-			</td>
-			<td class="px-5 py-3">
+			</Td>
+			<Td>
 				{row.address}
-			</td>
-			<td class="px-5 py-3">
+			</Td>
+			<Td>
 				{row.city}
-			</td>
-			<td class="px-5 py-3">
+			</Td>
+			<Td>
 				{row.postalCode}
-			</td>
-		</tr>
+			</Td>
+		</Tr>
 	</Table>
 
 	<Modal bind:showModal>

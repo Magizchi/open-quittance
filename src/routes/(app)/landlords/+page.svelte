@@ -2,10 +2,7 @@
 	import FormForUser from '$lib/components/organisms/Forms/createUser.svelte';
 	import FormProperty from '$lib/components/organisms/Forms/createProperty.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
-
-	import Table from '$lib/components/organisms/Table/table.svelte';
-	import Td from '$lib/components/organisms/Table/td.svelte';
-
+	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 
 	export let data;
@@ -66,12 +63,11 @@
 		</div>
 	</div>
 	<Table {columns} rows={data.landlords} let:row let:id>
-		<tr class="border-blue-600 [&:not(:last-child)]:border-b">
+		<Tr>
 			<Td>
 				<a href={'/landlords/' + row.id}>
 					{row.name}
 				</a>
-				//{id}//
 			</Td>
 			<Td>
 				{row.siret}
@@ -91,24 +87,18 @@
 			<Td>
 				<a href="/">Ajouter propriété</a>
 			</Td>
-		</tr>
+		</Tr>
 	</Table>
 	<Modal bind:showModal>
 		<form method="POST" class="space-y-10" action="?/create">
 			<div>
-				<!-- <fieldset id="personalInfo">
-					<legend>Taille du jus de fruits</legend> -->
 				<FormForUser />
-				<!-- </fieldset> -->
 			</div>
 			<div class="space-y-5">
 				{#each propertyForm as form, id}
 					<div class="space-y-2">
-						<!-- <fieldset id="property"> -->
 						<h2>{form.title}</h2>
-						<!-- <legend>Taille du jus de fruits2</legend> -->
 						<svelte:component this={form.component} {id} />
-						<!-- </fieldset> -->
 					</div>
 				{/each}
 			</div>
