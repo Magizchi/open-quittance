@@ -40,10 +40,6 @@
 			dataIndex: 'tenant'
 		},
 		{
-			header: 'Propriété',
-			dataIndex: 'property'
-		},
-		{
 			header: 'Adresse du local',
 			dataIndex: 'address'
 		},
@@ -66,7 +62,10 @@
 	];
 </script>
 
-<section>
+<section class="px-10 bg-slate-100">
+	<div class="flex mx-5">
+		<h1 class="text-2xl font-bold">Tableau de bord</h1>
+	</div>
 	<Table {columns} rows={data.receiptList} let:row>
 		<Tr>
 			{#if typeof row === 'string'}
@@ -78,7 +77,6 @@
 					</p>
 				</Td>
 				<Td>{row.tenant_fullName}</Td>
-				<Td>{row.property_address}</Td>
 				<Td>
 					<p class="flex flex-col">
 						{row.property_address}

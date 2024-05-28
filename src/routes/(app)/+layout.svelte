@@ -56,8 +56,8 @@
 			</ul>
 		</nav>
 	</aside>
-	<div class="flex flex-col w-full m-2 bg-white rounded-xl">
-		<header class="w-full h-16 p-5 text-gray-700 bg-white body-font rounded-t-xl">
+	<div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
+		<header class="w-full h-16 p-5 text-gray-700 bg-slate-100 body-font rounded-t-xl">
 			<Bread />
 		</header>
 		<main>
