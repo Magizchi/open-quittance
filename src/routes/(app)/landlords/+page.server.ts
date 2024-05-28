@@ -64,16 +64,25 @@ export const actions = {
             }
         }
 
-        await db.transaction(async (tx) => {
-            const [savedLandlord] = await tx.insert(landlordsTable).values(landlord);
-            console.log('l', savedLandlord);
-            properties.forEach(item => item['landlord_id'] = savedLandlord.insertId);
-            const [saveProperties] = await tx.insert(propertiesTable).values(properties);
+        try {
+            await db.transaction(async (tx) => {
+                //Save the landlords first to give the ID 
+                const [savedLandlord] = await tx.insert(landlordsTable).values(landlord);
+                //Add the new landlord Id to the properties before save
+                properties.forEach(item => item['landlord_id'] = savedLandlord.insertId);
+                const [saveProperties] = await tx.insert(propertiesTable).values(properties);
 
+                return {
+                    landlord: savedLandlord,
+                    properties: saveProperties
+                };
+            });
+        } catch (err) {
             return {
-                landlord: savedLandlord,
-                properties: saveProperties
+                success: false,
+                status: 400,
+                message: "Erreur:" + err
             };
-        });
+        }
     },
 };
