@@ -1,3 +1,3 @@
-<tr class="border-blue-600 [&:not(:last-child)]:border-b">
+<tr class="border-slate-300 [&:not(:last-child)]:border-b">
 	<slot />
 </tr>

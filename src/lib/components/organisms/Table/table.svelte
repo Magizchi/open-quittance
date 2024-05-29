@@ -10,7 +10,7 @@
 
 <div class="m-5 overflow-hidden border border-gray-200 rounded-lg shadow-md">
 	<table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
-		<thead class="w-full bg-gray-100">
+		<thead class="w-full bg-white">
 			<tr>
 				{#each columns as column}
 					<th class="p-3">
