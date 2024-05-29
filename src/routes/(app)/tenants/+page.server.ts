@@ -38,7 +38,5 @@ export const actions = {
                 message: "Erreur:" + err
             };
         }
-
-
     }
 };
