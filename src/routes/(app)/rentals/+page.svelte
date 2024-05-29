@@ -26,10 +26,10 @@
 	];
 </script>
 
-<section class="flex flex-col p-5">
-	<div class="flex py-10 m-5">
+<section class="px-10">
+	<div class="flex mx-5">
 		<div class="w-11/12">
-			<h1>Location en cours</h1>
+			<h1 class="text-2xl font-bold">Liste des Locations en cours</h1>
 		</div>
 		<div class="w-1/12">
 			<Clickable on:click={() => (showModal = true)}>Ajouter</Clickable>
@@ -47,10 +47,13 @@
 			<Td>{row.property.city}</Td>
 		</Tr>
 	</Table>
-	<Modal bind:showModal>
-		<form method="POST" class="space-y-10" action="?/create">
+	<Modal bind:showModal class="p-5 shadow-md rounded-2xl shadow-black scroll-m-10">
+		<form method="POST" class="px-10 space-y-10" action="?/create">
+			<h2 class="text-2xl font-bold">Location</h2>
 			<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
-			<button type="submit">submit</button>
+			<div class="flex justify-end">
+				<Clickable type="submit">Sauvegarder</Clickable>
+			</div>
 		</form>
 	</Modal>
 </section>

@@ -25,12 +25,13 @@ export const load = async () => {
             .leftJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
             .leftJoin(landlordsTable, eq(propertiesTable.landlord_id, landlordsTable.id));
 
-    const propertiesOptions = (await db.select({
-        propertyId: propertiesTable.id,
-        name: propertiesTable.name,
-        city: propertiesTable.city
-    })
-        .from(propertiesTable)
+    const propertiesOptions = (
+        await db.select({
+            propertyId: propertiesTable.id,
+            name: propertiesTable.name,
+            city: propertiesTable.city
+        })
+            .from(propertiesTable)
     ).map(item => {
         const test = rentals.filter(({ property }) => property?.id === item.propertyId);
 
@@ -74,11 +75,18 @@ export const actions = {
                 message: 'Erreur dans les données'
             };
         }
-        await db.insert(rentalsTable).values({
-            tenant_id: +data.get('tenant')!.toString(),
-            property_id: +data.get('property')!.toString(),
-            startedAt: dayjs(data.get('date')!.toString()).toDate()
-        });
-
+        try {
+            await db.insert(rentalsTable).values({
+                tenant_id: +data.get('tenant')!.toString(),
+                property_id: +data.get('property')!.toString(),
+                startedAt: dayjs(data.get('date')!.toString()).toDate()
+            });
+        } catch (err) {
+            return {
+                success: false,
+                status: 400,
+                message: 'Erreur:' + err
+            };
+        }
     }
 };
