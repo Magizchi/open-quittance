@@ -3,12 +3,12 @@
 	export let id;
 </script>
 
-<div>
-	<Input name={`properties[${id}][name]`} placeholder="Nom du local" value={`mega form ${id}`} />
-	<Input name={`properties[${id}][address]`} placeholder="Adresse" value={`mega form ${id}`} />
-	<Input name={`properties[${id}][city]`} placeholder="Ville" value="mega form" />
-	<Input name={`properties[${id}][postalCode]`} placeholder="Code postal" value="5000" />
-	<Input name={`properties[${id}][rent]`} placeholder="Loyer" value="500" />
-	<Input name={`properties[${id}][condo_fees]`} placeholder="Charge" value="500" />
-	<Input name={`properties[${id}][taxes]`} placeholder="Taxes" value="500" />
+<div class="space-y-2">
+	<Input name={`properties[${id}][name]`} placeholder="Nom du local" />
+	<Input name={`properties[${id}][address]`} placeholder="Adresse" />
+	<Input name={`properties[${id}][city]`} placeholder="Ville" />
+	<Input name={`properties[${id}][postalCode]`} placeholder="Code postal" />
+	<Input name={`properties[${id}][rent]`} placeholder="Loyer" />
+	<Input name={`properties[${id}][condo_fees]`} placeholder="Charge" />
+	<Input name={`properties[${id}][taxes]`} placeholder="Taxes" />
 </div>
