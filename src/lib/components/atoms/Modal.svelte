@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Clickable from './Clickable.svelte';
+
 	export let showModal: Boolean;
 	let dialog: HTMLDialogElement;
 
@@ -11,12 +13,12 @@
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
 	on:click|self={() => dialog.close()}
+	{...$$restProps}
 >
-	<div>
-		<slot name="header" />
-		<hr />
+	<div class="relative">
 		<slot />
-		<hr />
-		<button on:click={() => dialog.close()}>close modal</button>
+		<div class="absolute top-0 right-0">
+			<Clickable on:click={() => dialog.close()}>X</Clickable>
+		</div>
 	</div>
 </dialog>
