@@ -11,11 +11,12 @@
 		"test": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"drizzle:migration": "npx drizzle-kit generate:mysql --schema=./src/lib/server/schema.ts"
+		"migration": "npx drizzle-kit generate:mysql --schema=./src/lib/server/schema.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.30.4",
+		"@tailwindcss/forms": "^0.5.7",
 		"@types/bcrypt": "^5.0.1",
 		"@types/blob-stream": "^0.1.33",
 		"@types/cookie": "^0.5.1",
