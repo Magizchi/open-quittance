@@ -1,17 +1,15 @@
-import type { landlordsTable, propertiesTable } from '$lib/server/schema.js';
+import type { LandlordModel, PropertyModel } from '$lib/models';
 
-type landlordType = typeof landlordsTable.$inferInsert;
-type propertyType = typeof propertiesTable.$inferInsert;
 type errorType = { message: string; status: number; };
 type returnFormat = {
-    landlord: landlordType,
-    properties: propertyType[],
+    landlord: LandlordModel,
+    properties: PropertyModel[],
     error: errorType;
 };
 
 const FormatFormData = (data: FormData): returnFormat => {
-    const landlord: landlordType = {} as landlordType;
-    const properties: propertyType[] = [] as propertyType[];
+    const landlord: LandlordModel = {} as LandlordModel;
+    const properties: PropertyModel[] = [] as PropertyModel[];
     let error: errorType = {} as errorType;
     // Create object Landlord and Array of properties with formData
     for (const key of data.keys()) {
@@ -39,7 +37,7 @@ const FormatFormData = (data: FormData): returnFormat => {
             const prop = match[2];
 
             if (!properties[index]) {
-                properties[index] = {} as propertyType;
+                properties[index] = {} as PropertyModel;
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
