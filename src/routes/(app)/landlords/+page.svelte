@@ -6,7 +6,7 @@
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import BenIcon from '$lib/components/atoms/Icons/BenIcon.svelte';
 	import BuildingIcon from '$lib/components/atoms/Icons/BuildingIcon.svelte';
-	import Input from '$lib/components/atoms/Input.svelte';
+	import FromCreateProperties from '$lib/components/organisms/Forms/formCreateProperties.svelte';
 
 	import type { landlordsTable } from '$lib/server/schema';
 
@@ -71,8 +71,8 @@
 	];
 </script>
 
-<section class="px-10">
-	<div class="flex mx-5">
+<section class="px-10 space-y-3">
+	<div class="flex">
 		<div class="w-11/12">
 			<h1 class="text-2xl font-bold">Liste des Propriétaires</h1>
 		</div>
@@ -110,7 +110,7 @@
 		</Tr>
 	</Table>
 </section>
-<Modal bind:showModal={showLandlordForm} class="p-5 shadow-md rounded-2xl shadow-black scroll-m-10">
+<Modal bind:showModal={showLandlordForm}>
 	<form id="FormProperty" method="POST" class="space-y-10 min-w-min" action="?/create">
 		<div class="px-10 space-y-5">
 			<h2 class="text-2xl font-bold">Propriétaire</h2>
@@ -138,31 +138,6 @@
 		<Clickable form="FormProperty" type="submit">Sauvegarder</Clickable>
 	</div>
 </Modal>
-<Modal bind:showModal={showAddPropertyForm} class="p-5 shadow-md rounded-2xl scroll-m-10">
-	<form id="AddProperty" method="POST" class="space-y-10 min-w-min" action="?/add">
-		<div class="px-10 space-y-5">
-			<h3 class="text-2xl font-bold text-slate-700">
-				Ajouter une/des proriété(s) pour : <br />
-				<span class="text-black">{landlord.name}</span>
-			</h3>
-			<div class="space-y-4">
-				{#each propertyForm as form, id}
-					<div class="space-y-2">
-						<div class="flex justify-between">
-							<h2 class="w-10/12 text-lg">{form.title} {id + 1}</h2>
-							<Clickable type="button" on:click={() => removeProperty(id)}>
-								<BenIcon class="w-5 text-red-600" />
-							</Clickable>
-						</div>
-						<Input name={`properties[${id}][landlord_id]`} value={landlord.id} type="hidden" />
-						<svelte:component this={form.component} {id} />
-					</div>
-				{/each}
-			</div>
-		</div>
-	</form>
-	<div class="flex justify-between px-10 py-3">
-		<Clickable type="button" on:click={AddForm}>Ajouter</Clickable>
-		<Clickable form="AddProperty" type="submit">Sauvegarder</Clickable>
-	</div>
+<Modal bind:showModal={showAddPropertyForm}>
+	<FromCreateProperties {AddForm} {landlord} {propertyForm} {removeProperty} />
 </Modal>

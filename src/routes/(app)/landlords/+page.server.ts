@@ -1,8 +1,6 @@
 import db from '$lib/server/database';
 import { landlordsTable, propertiesTable } from '$lib/server/schema.js';
-
-type landlordType = typeof landlordsTable.$inferInsert;
-type propertyType = typeof propertiesTable.$inferInsert;
+import FormatFormData from '$lib/utils/FormatFormData.js';
 
 export const load = async ({ parent }) => {
     await parent();
@@ -23,47 +21,9 @@ export const actions = {
     create: async ({ request }) => {
         const data = await request.formData();
 
-        const landlord: landlordType = {} as landlordType;
-        const properties: propertyType[] = [] as propertyType[];
+        const { landlord, properties, error } = FormatFormData(data);
 
-        // Create object Landlord and Array of properties with formData
-        for (const key of data.keys()) {
-
-            if (key === '' || data.get(key) === '' || data.get(key) === null) {
-                return {
-                    success: false,
-                    status: 400,
-                    message: "Erreur dans les données"
-                };
-            }
-
-            if (key.includes('postalCode')) {
-                if (data.get(key)!.toString().length > 5) {
-                    return {
-                        success: false,
-                        status: 400,
-                        message: "Erreur dans les données"
-                    };
-                }
-            }
-
-            const match = key.match(/^properties\[(\d+)\]\[(.+)\]$/);
-            if (match) {
-                const index = parseInt(match[1], 10);
-                const prop = match[2];
-
-                if (!properties[index]) {
-                    properties[index] = {} as propertyType;
-                }
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
-                properties[index][prop] = data.get(key)!.toString();
-            } else {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
-                landlord[key] = data.get(key)!.toString();
-            }
-        }
+        if (error.status) return error;
 
         try {
             await db.transaction(async (tx) => {
@@ -89,46 +49,9 @@ export const actions = {
 
     add: async ({ request }) => {
         const data = await request.formData();
-        const properties: propertyType[] = [] as propertyType[];
+        const { properties, error } = FormatFormData(data);
 
-        // Create object Landlord and Array of properties with formData
-        for (const key of data.keys()) {
-
-            if (key === '' || data.get(key) === '' || data.get(key) === null) {
-                return {
-                    success: false,
-                    status: 400,
-                    message: "Erreur dans les données"
-                };
-            }
-
-            if (key.includes('postalCode')) {
-                if (data.get(key)!.toString().length > 5) {
-                    return {
-                        success: false,
-                        status: 400,
-                        message: "Erreur dans les données"
-                    };
-                }
-            }
-
-            const match = key.match(/^properties\[(\d+)\]\[(.+)\]$/);
-            if (match) {
-                const index = parseInt(match[1], 10);
-                const prop = match[2];
-
-                if (!properties[index]) {
-                    properties[index] = {} as propertyType;
-                }
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
-                properties[index][prop] = data.get(key)!.toString();
-            } else {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
-                landlord[key] = data.get(key)!.toString();
-            }
-        }
+        if (error.status) return error;
 
         try {
             await db.insert(propertiesTable).values(properties);
