@@ -8,7 +8,7 @@
 	export let rows: any[];
 </script>
 
-<div class="m-5 overflow-hidden border border-gray-200 rounded-lg shadow">
+<div class="overflow-hidden border border-gray-200 rounded-lg shadow">
 	<table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
 		<thead class="w-full bg-white">
 			<tr>
@@ -20,9 +20,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each rows as row, id}
-				<slot {row} {id} />
-			{/each}
+			{#if rows.length > 0}
+				{#each rows as row, id}
+					<slot {row} {id} />
+				{/each}
+			{:else}
+				<td colspan={columns.length} class="p-2 text-center">No Data</td>
+			{/if}
 		</tbody>
 	</table>
 </div>
