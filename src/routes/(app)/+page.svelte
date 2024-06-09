@@ -62,10 +62,8 @@
 	];
 </script>
 
-<section class="px-10 bg-slate-100">
-	<div class="flex mx-5">
-		<h1 class="text-2xl font-bold">Tableau de bord</h1>
-	</div>
+<section class="px-10 space-y-3 bg-slate-100">
+	<h1 class="text-2xl font-bold">Tableau de bord</h1>
 	<Table {columns} rows={data.receiptList} let:row>
 		<Tr>
 			{#if typeof row === 'string'}
