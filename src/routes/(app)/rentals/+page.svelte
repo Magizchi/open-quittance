@@ -26,8 +26,8 @@
 	];
 </script>
 
-<section class="px-10">
-	<div class="flex mx-5">
+<section class="px-10 space-y-3">
+	<div class="flex">
 		<div class="w-11/12">
 			<h1 class="text-2xl font-bold">Liste des Locations en cours</h1>
 		</div>
@@ -47,13 +47,13 @@
 			<Td>{row.property.city}</Td>
 		</Tr>
 	</Table>
-	<Modal bind:showModal class="p-5 shadow-md rounded-2xl shadow-black scroll-m-10">
-		<form method="POST" class="px-10 space-y-10" action="?/create">
-			<h2 class="text-2xl font-bold">Location</h2>
-			<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
-			<div class="flex justify-end">
-				<Clickable type="submit">Sauvegarder</Clickable>
-			</div>
-		</form>
-	</Modal>
 </section>
+<Modal bind:showModal>
+	<form method="POST" class="px-10 space-y-10" action="?/create">
+		<h2 class="text-2xl font-bold">Location</h2>
+		<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
+		<div class="flex justify-end">
+			<Clickable type="submit">Sauvegarder</Clickable>
+		</div>
+	</form>
+</Modal>
