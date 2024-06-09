@@ -13,6 +13,7 @@
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
 	on:click|self={() => dialog.close()}
+	class="p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px]"
 	{...$$restProps}
 >
 	<div class="relative">
