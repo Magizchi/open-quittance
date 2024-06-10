@@ -43,6 +43,7 @@ export const propertiesTable = mysqlTable('properties', {
 export const rentalsTable = mysqlTable('rentals', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
     startedAt: date('startedAt').notNull(),
+    endDate: date('endDate'),
     tenant_id: bigint('tenant_id', { mode: 'number' }).notNull().references(() => tenantsTable.id),
     property_id: bigint('property_id', { mode: 'number' }).notNull().references(() => propertiesTable.id),
 });
