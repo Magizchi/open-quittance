@@ -30,6 +30,14 @@
 			}
 		]);
 	};
+
+	const deleteProperty = async (id: number) => {
+		await fetch(`/api/properties/${id}`, {
+			method: 'DELETE'
+		});
+
+		data.properties = data.properties.filter((item) => item.id !== id);
+	};
 	const columnsProperty = [
 		{
 			header: 'Nom',
@@ -114,7 +122,7 @@
 								property = row;
 							}}>MODIFIER</Clickable
 						>
-						<Clickable>SUPPRIMER</Clickable>
+						<Clickable on:click={() => deleteProperty(row.id)}>SUPPRIMER</Clickable>
 					</div>
 				</Td>
 			</Tr>
