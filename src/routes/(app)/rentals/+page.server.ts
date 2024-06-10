@@ -19,7 +19,10 @@ export const load = async () => {
                 id: propertiesTable.id,
                 name: propertiesTable.name,
                 city: propertiesTable.city
-            }
+            },
+            rentalId: rentalsTable.id,
+            startDate: rentalsTable.startedAt,
+            endDate: rentalsTable.endDate
         }).from(rentalsTable)
             .leftJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
             .leftJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
@@ -76,11 +79,34 @@ export const actions = {
             };
         }
         try {
+            console.log('ici', data.get('tenant'), data.get('property'));
             await db.insert(rentalsTable).values({
                 tenant_id: +data.get('tenant')!.toString(),
                 property_id: +data.get('property')!.toString(),
                 startedAt: dayjs(data.get('date')!.toString()).toDate()
             });
+        } catch (err) {
+            return {
+                success: false,
+                status: 400,
+                message: 'Erreur:' + err
+            };
+        }
+    },
+    delete: async ({ request }) => {
+        const data = await request.formData();
+        console.log('daata', data);
+
+        if (data.get('endDate') === '' || data.get('rentalId') === '') {
+            return {
+                success: false,
+                status: 400,
+                message: 'Erreur dans les données'
+            };
+        }
+
+        try {
+            await db.update(rentalsTable).set({ endDate: dayjs(data.get('endDate')!.toString()).toDate() }).where(eq(rentalsTable.id, +data.get('rentalId')!.toString()));
         } catch (err) {
             return {
                 success: false,

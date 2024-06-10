@@ -3,9 +3,13 @@
 	import FormRental from '$lib/components/organisms/Forms/createRental.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
+	import dayjs from 'dayjs';
+	import Input from '$lib/components/atoms/Input.svelte';
+	import type RentalModel from '$lib/models/rental.model.js';
 
 	export let data;
 	let showModal = false;
+	let showModalEndRentals = false;
 	const columns = [
 		{
 			header: 'Bailleur',
@@ -22,8 +26,22 @@
 		{
 			header: 'Ville',
 			dataIndex: 'city'
+		},
+		{
+			header: 'Début de location',
+			dataIndex: 'startDate'
+		},
+		{
+			header: 'Fin de location',
+			dataIndex: 'endDate'
+		},
+		{
+			header: 'Options',
+			dataIndex: 'options'
 		}
 	];
+
+	let rental = {} as RentalModel;
 </script>
 
 <section class="px-10 space-y-3">
@@ -45,6 +63,19 @@
 			<Td>{row.tenant.name}</Td>
 			<Td>{row.property.name}</Td>
 			<Td>{row.property.city}</Td>
+			<Td>{dayjs(row.startDate).format('DD/MM/YYYY')}</Td>
+			<Td>{row.endDate ? dayjs(row.endDate).format('DD/MM/YYYY') : '/'}</Td>
+			<Td>
+				<div>
+					<Clickable
+						disabled={row.endDate ? true : false}
+						on:click={() => {
+							showModalEndRentals = true;
+							rental = row;
+						}}>Fin de location</Clickable
+					>
+				</div>
+			</Td>
 		</Tr>
 	</Table>
 </section>
@@ -54,6 +85,25 @@
 		<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
 		<div class="flex justify-end">
 			<Clickable type="submit">Sauvegarder</Clickable>
+		</div>
+	</form>
+</Modal>
+<Modal bind:showModal={showModalEndRentals}>
+	<form method="POST" class="px-10 space-y-5" action="?/delete">
+		<h2 class="text-2xl font-bold">Fin de location</h2>
+		<div class="space-y-3">
+			<p class="font-bold">Bailleur : <span class="font-normal">{rental.landlord?.name}</span></p>
+			<p class="font-bold">Locataire : <span class="font-normal">{rental.tenant?.name}</span></p>
+			<p class="font-bold">
+				Propriété : <span class="font-normal"
+					>{rental.property?.name} - {rental.property?.city}</span
+				>
+			</p>
+			<Input name="endDate" type="date" />
+			<Input name="rentalId" value={rental.rentalId} type="hidden" />
+		</div>
+		<div class="flex justify-end">
+			<Clickable>Valider</Clickable>
 		</div>
 	</form>
 </Modal>
