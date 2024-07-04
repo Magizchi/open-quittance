@@ -1,6 +1,6 @@
 import type { LandlordModel, PropertyModel } from '$lib/models';
 
-type errorType = { message: string; status: number; };
+type errorType = { message: string; status: number; success: boolean; };
 type returnFormat = {
     landlord: LandlordModel,
     properties: PropertyModel[],
@@ -11,10 +11,12 @@ const FormatFormData = (data: FormData): returnFormat => {
     const landlord: LandlordModel = {} as LandlordModel;
     const properties: PropertyModel[] = [] as PropertyModel[];
     let error: errorType = {} as errorType;
+
     // Create object Landlord and Array of properties with formData
     for (const key of data.keys()) {
         if (key === '' || data.get(key) === '' || data.get(key) === null) {
             error = {
+                success: false,
                 status: 400,
                 message: "Erreur dans les données"
             };
@@ -22,13 +24,14 @@ const FormatFormData = (data: FormData): returnFormat => {
         }
 
         if (key.includes('postalCode')) {
-            if (data.get(key)!.toString().length > 5) {
+            if (data.get(key)!.toString().length !== 5) {
                 error = {
+                    success: false,
                     status: 400,
                     message: "Erreur dans les données"
                 };
+                break;
             }
-            break;
         }
 
         const match = key.match(/^properties\[(\d+)\]\[(.+)\]$/);
@@ -39,6 +42,7 @@ const FormatFormData = (data: FormData): returnFormat => {
             if (!properties[index]) {
                 properties[index] = {} as PropertyModel;
             }
+
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
             properties[index][prop] = data.get(key)!.toString();
