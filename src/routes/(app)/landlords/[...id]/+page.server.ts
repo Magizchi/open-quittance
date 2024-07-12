@@ -1,5 +1,5 @@
 import db from '$lib/server/database.js';
-import { landlordsTable, propertiesTable, rentalsTable } from '$lib/server/schema.js';
+import { landlordsTable, propertiesTable, rentalsTable, tenantsTable } from '$lib/server/schema.js';
 import FormatFormData from "$lib/utils/FormatFormData.js";
 import { eq } from 'drizzle-orm';
 
@@ -15,6 +15,7 @@ export const load = async ({ params }) => {
         await db.select()
             .from(rentalsTable)
             .leftJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
+            .leftJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
             .where(eq(propertiesTable.landlord_id, landlord.id));
 
     return { landlord, properties: landlordProperties, rentals: landlordRentals };

@@ -7,8 +7,13 @@
 	import type { PropertyModel } from '$lib/models';
 	import FormProperty from '$lib/components/organisms/Forms/createProperty.svelte';
 	import FromCreateProperties from '$lib/components/organisms/Forms/formCreateProperties.svelte';
+	import dayjs from 'dayjs';
+	import { createNotification } from '$lib/stores/notification/store.js';
 
 	export let data;
+	export let form;
+
+	$: if (form) createNotification(form);
 
 	let showModal = false;
 	let property: PropertyModel;
@@ -32,11 +37,11 @@
 	};
 
 	const deleteProperty = async (id: number) => {
-		await fetch(`/api/properties/${id}`, {
+		const response = await fetch(`/api/properties/${id}`, {
 			method: 'DELETE'
-		});
-
+		}).then((data) => data.json());
 		data.properties = data.properties.filter((item) => item.id !== id);
+		createNotification(response);
 	};
 	const columnsProperty = [
 		{
@@ -136,10 +141,16 @@
 		<Table columns={columnsRentals} rows={data.rentals} let:row>
 			<Tr>
 				<Td>
-					{row.name}
+					<div>
+						{row.properties.name}
+						{row.properties.address}
+					</div>
 				</Td>
 				<Td>
-					<!-- {row.rentals} -->
+					{row.tenants.name}
+				</Td>
+				<Td>
+					{dayjs(row.startedAt).format('DD/MM/YYYY')}
 				</Td>
 			</Tr>
 		</Table>
