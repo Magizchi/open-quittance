@@ -3,6 +3,7 @@ import { receiptsTable } from '$lib/server/schema';
 import docDefinition from '$lib/template/quittance-template';
 import GeneratePdf from '$lib/utils/PdfGenerator';
 import { json } from '@sveltejs/kit';
+import dayjs from 'dayjs';
 import { eq } from 'drizzle-orm';
 
 export async function GET({ url }) {
@@ -24,5 +25,5 @@ export async function GET({ url }) {
     const pdfData = docDefinition(receipt); // template + receipt data
     const pdfBlob = await GeneratePdf(pdfData); // blob from this template
 
-    return new Response(pdfBlob, { status: 200 });
+    return new Response(pdfBlob, { status: 200, headers: { "document-name": `${receipt.tenant_fullName.replaceAll(' ', '-')}-${dayjs(receipt.paymentDate).format('MMMM')}-${dayjs(receipt.paymentDate).get('year')}` } });
 };  
