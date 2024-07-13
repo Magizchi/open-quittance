@@ -1,6 +1,6 @@
-import type { RentalModel } from '$lib/models/rental.model';
 import db from '$lib/server/database.js';
 import { landlordsTable, propertiesTable, receiptsTable, rentalsTable, tenantsTable } from '$lib/server/schema.js';
+import FormDataToJson from '$lib/utils/FormDataToJson';
 import { CreateReceipts } from '$lib/utils/service/createReceipts.js';
 import dayjs from 'dayjs';
 import { desc, eq, notInArray, sql } from 'drizzle-orm';
@@ -25,7 +25,7 @@ export const load = async ({ parent }) => {
     }
 
     // Get rentals where there no receipts for this month
-    const rentals: RentalModel[] =
+    const rentals =
         await db.select().from(rentalsTable)
             .rightJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
             .rightJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
@@ -63,4 +63,22 @@ export const load = async ({ parent }) => {
         });
 
     return { receiptList };
+};
+
+export const actions = {
+    paymentDate: async ({ request }) => {
+        const data = await request.formData();
+        const info = FormDataToJson(data);
+        try {
+
+            await db.update(receiptsTable).set({ createAt: dayjs(info.paymentDate).toDate(), paymentDate: dayjs(info.paymentDate).toDate() })
+                .where(eq(receiptsTable.id, +info.receiptID));
+        } catch (err) {
+            return {
+                success: false,
+                status: 400,
+                message: err
+            };
+        }
+    }
 };
