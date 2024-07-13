@@ -8,7 +8,7 @@ export async function DELETE({ params }) {
     try {
         console.log(params);
         await db.delete(propertiesTable).where(eq(propertiesTable.id, +params.id));
-        return json({ message: 'deleted' }, { status: 201 });
+        return json({ message: 'Propriété supprimer', success: true }, { status: 201 });
     } catch (err) {
         return new Response(null, { status: 204 }); json({ err }, { status: 400 });
     }
