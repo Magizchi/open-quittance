@@ -3,11 +3,11 @@ import { landlordsTable, propertiesTable, receiptsTable, rentalsTable, tenantsTa
 import FormDataToJson from '$lib/utils/FormDataToJson';
 import { CreateReceipts } from '$lib/utils/service/createReceipts.js';
 import dayjs from 'dayjs';
-import { desc, eq, notInArray, sql } from 'drizzle-orm';
+import { and, desc, eq, notInArray, sql } from 'drizzle-orm';
 
 export const load = async ({ parent }) => {
     await parent();
-
+    // create receipt every time, need to be a CRON
     // Check if receipt exist for this month
     let receiptOfThisMonth =
         await db.selectDistinct({
@@ -30,7 +30,7 @@ export const load = async ({ parent }) => {
             .rightJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
             .rightJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
             .rightJoin(landlordsTable, eq(landlordsTable.id, propertiesTable.landlord_id))
-            .where(notInArray(rentalsTable.id, receiptOfThisMonth.map(item => item!.rental_id)));
+            .where(and(notInArray(rentalsTable.id, receiptOfThisMonth.map(item => item!.rental_id)), sql`${rentalsTable.endDate} > now()`));
 
 
     // Create receipts for this month
