@@ -4,12 +4,10 @@
 	import 'dayjs/locale/fr';
 	dayjs.locale('fr');
 
-	import PrintIcon from '$lib/components/atoms/Icons/PrintIcon.svelte';
-	import { PenIcon } from '$lib/components/atoms/Icons/icon.js';
+	import { PdfIcon, PenIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
-	import Notification from '$lib/components/atoms/notification/notification.svelte';
 
 	export let data;
 
@@ -132,24 +130,31 @@
 					{row.rent + row.condo_fees + row.taxes}
 				</Td>
 				<Td>
-					<button
-						on:click={() => {
-							loading = true;
-							getPdf(row.id);
-						}}
-					>
-						<PrintIcon width="25" class="m-3" />
-					</button>
-					<button
-						disabled={row.paymentDate ? true : false}
-						class={row.paymentDate ? 'text-gray-400' : 'text-green-400'}
-						on:click={() => {
-							showModalPaymentDate = true;
-							selectedReceipts = row;
-						}}
-					>
-						<PenIcon width="25" class="m-3" />
-					</button>
+					<div class="flex items-center space-x-5">
+						<button
+							class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+							on:click={() => {
+								loading = true;
+								getPdf(row.id);
+							}}
+						>
+							<PdfIcon width="25" /> PDF
+						</button>
+						{#if !row.paymentDate}
+							<button
+								class="text-green-400"
+								on:click={() => {
+									showModalPaymentDate = true;
+									selectedReceipts = row;
+								}}
+							>
+								<div class="flex items-center space-x-2">
+									<PenIcon width="25" />
+									A valider
+								</div>
+							</button>
+						{/if}
+					</div>
 				</Td>
 			{/if}
 		</Tr>
