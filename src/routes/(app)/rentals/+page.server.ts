@@ -36,13 +36,13 @@ export const load = async () => {
         })
             .from(propertiesTable)
     ).map(item => {
-        const test = rentals.filter(({ property }) => property?.id === item.propertyId);
+        const allReadyRented = rentals.filter(({ property }) => property?.id === item.propertyId);
 
-        if (test.length > 0) {
+        if (allReadyRented.length > 0) {
             return ({
                 value: item.propertyId,
                 label: `${item.name}:${item.city}`,
-                description: test[0].tenant?.name
+                description: allReadyRented[0].tenant?.name
             });
         }
         return ({
@@ -56,10 +56,20 @@ export const load = async () => {
         id: tenantsTable.id,
     })
         .from(tenantsTable) as unknown as { id: string, name: string; }[])
-        .map(item => ({
-            value: item.id,
-            label: item.name
-        }));
+        .map(item => {
+            const checkIsRenter = rentals.filter(({ tenant }) => tenant?.id === +item.id);
+            if (checkIsRenter.length > 0) {
+                return ({
+                    value: item.id,
+                    label: item.name,
+                    description: checkIsRenter[0].property?.name
+                });
+            }
+            return ({
+                value: item.id,
+                label: item.name
+            });
+        });
     return { rentals, propertiesOptions, tenantsOptions };
 };
 
