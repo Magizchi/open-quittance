@@ -148,7 +148,9 @@
 									selectedReceipts = row;
 								}}
 							>
-								<div class="flex items-center space-x-2">
+								<div
+									class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+								>
 									<PenIcon width="25" />
 									A valider
 								</div>
