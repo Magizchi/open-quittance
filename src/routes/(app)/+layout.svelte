@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Bread from '$lib/components/bread/+page.svelte';
 	import { page } from '$app/stores';
+	import Balise from '$lib/components/atoms/notification/balise.svelte';
 
 	// export let data;
 </script>
@@ -60,8 +61,9 @@
 		<header class="w-full h-16 p-5 text-gray-700 bg-slate-100 body-font rounded-t-xl">
 			<Bread />
 		</header>
-		<main>
-			<slot />
+		<main class="relative">
+			<Balise />
+			<slot class="z-0" />
 		</main>
 	</div>
 </div>
