@@ -14,6 +14,11 @@ const Text = (text: string, decoration?: Style) => ({
     text, lineHeight: 1.3, ...decoration
 });
 
+/**
+ * Its default template for receipt pdf document
+ * @param info = Rental, Tenant, Landlord, properties to create receipt
+ * @returns 
+ */
 const docDefinition = (info: {
     id: number;
     number: string;
