@@ -1,45 +1,13 @@
 import db from '$lib/server/database.js';
-import { landlordsTable, propertiesTable, receiptsTable, rentalsTable, tenantsTable } from '$lib/server/schema.js';
-import FormDataToJson from '$lib/utils/FormDataToJson';
-import { CreateReceipts } from '$lib/utils/service/createReceipts.js';
+import { receiptsTable } from '$lib/server/schema.js';
+import { GenerateNewReceipts, addPaymentDate } from '$lib/utils/service/receipts';
 import dayjs from 'dayjs';
-import { and, desc, eq, notInArray, sql } from 'drizzle-orm';
+import { desc } from 'drizzle-orm';
 
 export const load = async ({ parent }) => {
     await parent();
-    // create receipt every time, need to be a CRON
-    // Check if receipt exist for this month
-    let receiptOfThisMonth =
-        await db.selectDistinct({
-            rental_id: receiptsTable.rental_id
-        })
-            .from(receiptsTable)
-            .where(sql`MONTH(${receiptsTable.startDate}) = ${dayjs().get('month') + 1}`) as { rental_id: number; }[];
 
-    const firstDateOfThisMonth = dayjs().startOf('month').format('YYYY/MM/DD');
-    const lastDateOfThisMonth = dayjs().endOf('month').format('YYYY/MM/DD');
-
-    // Add an element before crash
-    if (receiptOfThisMonth.length === 0) {
-        receiptOfThisMonth = [{ rental_id: 0 }];
-    }
-
-    // Get rentals where there no receipts for this month
-    const rentals =
-        await db.select().from(rentalsTable)
-            .rightJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
-            .rightJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
-            .rightJoin(landlordsTable, eq(landlordsTable.id, propertiesTable.landlord_id))
-            .where(and(notInArray(rentalsTable.id, receiptOfThisMonth.map(item => item!.rental_id)), sql`${rentalsTable.endDate} > now()`));
-
-
-    // Create receipts for this month
-    rentals.forEach(rental => {
-        if (dayjs(rental.rentals?.startedAt) < dayjs()) {
-            CreateReceipts(rental, firstDateOfThisMonth, lastDateOfThisMonth);
-        }
-    });
-
+    await GenerateNewReceipts();
     let lastMonth: unknown = null;
 
     const receiptList: (string | {
@@ -67,18 +35,6 @@ export const load = async ({ parent }) => {
 
 export const actions = {
     paymentDate: async ({ request }) => {
-        const data = await request.formData();
-        const info = FormDataToJson(data);
-        try {
-
-            await db.update(receiptsTable).set({ createAt: dayjs(info.paymentDate).toDate(), paymentDate: dayjs(info.paymentDate).toDate() })
-                .where(eq(receiptsTable.id, +info.receiptID));
-        } catch (err) {
-            return {
-                success: false,
-                status: 400,
-                message: err
-            };
-        }
+        return await addPaymentDate(request);
     }
 };

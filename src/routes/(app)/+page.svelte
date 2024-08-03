@@ -45,18 +45,6 @@
 		saveAs(blob, `quittance-${documentName}.pdf`);
 	}
 
-	async function SetPaymentDate(receiptId: number) {
-		await fetch('/api/receipts', {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json; charset=UTF-8'
-			},
-			body: JSON.stringify({ receiptId })
-		}).then((data) => data.json());
-
-		// add modal
-	}
-
 	const columns = [
 		{
 			header: 'Bailleur',
