@@ -35,7 +35,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex">
 		<div class="w-11/12">
-			<h1 class="text-2xl font-bold">Liste des Locataires</h1>
+			<h1 class="text-2xl font-bold">Locataires</h1>
 		</div>
 		<div class="w-1/12">
 			<Clickable on:click={() => (showModal = true)}>Ajouter</Clickable>
