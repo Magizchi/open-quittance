@@ -1,19 +1,42 @@
+// import type {rentalsTable} from '$lib/server/schema';
+
+// type rentalType = typeof rentalsTable.$inferSelect;
 
 export default interface RentalModel {
-    tenant: {
-        id: number,
-        name: string,
+    rentals: {
+        id: number;
+        startedAt: Date;
+        endDate: Date | null;
+        tenant_id: number;
+        property_id: number;
+    };
+    tenants: {
+        id: number;
+        name: string;
+        siret: string | null;
+        address: string;
+        city: string;
+        postalCode: string;
+    };
+    landlords: {
+        id: number;
+        name: string;
+        siret: string | null;
+        address: string;
+        city: string;
+        postalCode: string;
     },
-    landlord: {
+    properties: {
         id: number,
         name: string,
-    },
-    property: {
-        id: number,
-        name: string,
-        city: string,
+        address: string;
+        city: string;
+        postalCode: string;
+        rent: number;
+        condo_fees: number;
+        taxes: number;
     },
     rentalId: number,
-    startDate: string | Date,
+    startAt: string | Date,
     endDate: string | Date;
 }
