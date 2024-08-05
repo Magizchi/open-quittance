@@ -78,77 +78,83 @@
 	];
 </script>
 
-<section class="relative px-10 space-y-3 bg-slate-100">
+<section class="relative px-10 space-y-5 bg-slate-100">
 	<h1 class="text-2xl font-bold">Tableau de bord</h1>
-	<Table {columns} rows={data.receiptList} let:row>
-		<Tr>
-			{#if typeof row === 'string'}
-				<td colspan={columns.length} class="font-bold text-gray-600 bg-gray-300">{row}</td>
-			{:else}
-				<Td>
-					<p class="flex flex-col">
-						{row.landlord_fullName}
-					</p>
-				</Td>
-				<Td>{row.tenant_fullName}</Td>
-				<Td>
-					<p class="flex flex-col">
-						{row.property_address}
-						<span class="flex space-x-2">
-							{row.property_city}
-							{row.property_postalCode}
-						</span>
-					</p>
-				</Td>
-				<Td>
-					{#if row.paymentDate}
-						<p class="font-bold text-green-400">Payé</p>
-					{:else}
-						<p>Brouillon</p>
-					{/if}
-				</Td>
-				<Td>
-					{#if row.paymentDate}
-						<p>{dayjs(row.paymentDate).format('DD/MM/YYYY')}</p>
-					{:else}
-						<p>/</p>
-					{/if}
-				</Td>
-				<Td>
-					{row.rent + row.condo_fees + row.taxes}
-				</Td>
-				<Td>
-					<div class="flex items-center space-x-5">
-						<button
-							class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
-							on:click={() => {
-								loading = true;
-								getPdf(row.id);
-							}}
-						>
-							<PdfIcon width="25" /> PDF
-						</button>
-						{#if !row.paymentDate}
+
+	<div class="space-y-2">
+		<h2 class="font-semibold">
+			Quittance du mois {dayjs().locale('fr').format('MMMM').toUpperCase()}
+		</h2>
+		<Table {columns} rows={data.receiptList} let:row>
+			<Tr>
+				{#if typeof row === 'string'}
+					<td colspan={columns.length} class="font-bold text-gray-600 bg-gray-300">{row}</td>
+				{:else}
+					<Td>
+						<p class="flex flex-col">
+							{row.landlord_fullName}
+						</p>
+					</Td>
+					<Td>{row.tenant_fullName}</Td>
+					<Td>
+						<p class="flex flex-col">
+							{row.property_address}
+							<span class="flex space-x-2">
+								{row.property_city}
+								{row.property_postalCode}
+							</span>
+						</p>
+					</Td>
+					<Td>
+						{#if row.paymentDate}
+							<p class="font-bold text-green-400">Payé</p>
+						{:else}
+							<p>Brouillon</p>
+						{/if}
+					</Td>
+					<Td>
+						{#if row.paymentDate}
+							<p>{dayjs(row.paymentDate).format('DD/MM/YYYY')}</p>
+						{:else}
+							<p>/</p>
+						{/if}
+					</Td>
+					<Td>
+						{row.rent + row.condo_fees + row.taxes}
+					</Td>
+					<Td>
+						<div class="flex items-center space-x-5">
 							<button
-								class="text-green-400"
+								class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
 								on:click={() => {
-									showModalPaymentDate = true;
-									selectedReceipts = row;
+									loading = true;
+									getPdf(row.id);
 								}}
 							>
-								<div
-									class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
-								>
-									<PenIcon width="25" />
-									A valider
-								</div>
+								<PdfIcon width="25" /> PDF
 							</button>
-						{/if}
-					</div>
-				</Td>
-			{/if}
-		</Tr>
-	</Table>
+							{#if !row.paymentDate}
+								<button
+									class="text-green-400"
+									on:click={() => {
+										showModalPaymentDate = true;
+										selectedReceipts = row;
+									}}
+								>
+									<div
+										class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+									>
+										<PenIcon width="25" />
+										A valider
+									</div>
+								</button>
+							{/if}
+						</div>
+					</Td>
+				{/if}
+			</Tr>
+		</Table>
+	</div>
 </section>
 
 <Modal bind:showModal={showModalPaymentDate}>
