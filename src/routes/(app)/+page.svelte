@@ -142,10 +142,9 @@
 									}}
 								>
 									<div
-										class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+										class="flex items-center space-x-2 font-semibold hover:scale-110 hover:transition-all hover:duration-300"
 									>
-										<PenIcon width="25" />
-										A valider
+										Valider
 									</div>
 								</button>
 							{/if}
