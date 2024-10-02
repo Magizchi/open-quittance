@@ -2,19 +2,19 @@ import dayjs from 'dayjs';
 import { writable, type Writable } from 'svelte/store';
 
 export interface Toast {
-    [x: string]: string | null | boolean | number;
+    [x: string]: string | null | boolean | number | unknown;
 }
 
 // Liste des notifications
 export const listNotification: Writable<Toast[]> = writable([]);
 // CRUD notification
 
-export const createNotification = (notification: Toast, id: string = dayjs().unix().toString()) => {
+export const createNotification = (notification: Toast, delay: number = 5000, id: string = dayjs().unix().toString(),) => {
     listNotification.update(($listNotification) => [{ id, ...notification, }, ...$listNotification]);
 
     setTimeout(() => {
         deleteNotification({ id, ...notification });
-    }, 5000);
+    }, delay);
 };
 
 export const delayNotification = () => { };
