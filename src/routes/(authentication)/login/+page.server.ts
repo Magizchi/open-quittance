@@ -3,13 +3,14 @@ import { redirect, fail } from '@sveltejs/kit';
 import db from "$lib/server/database";
 import { usersTable } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
-import jwt from 'jsonwebtoken';
-import { JWT_SECRET_TOKEN } from '$env/static/private';
+import { createCookie } from "$lib/utils/remember_me.js";
+import { getSession } from "$lib/utils/Session.js";
 
 //JWT
 export const load = ({ cookies }) => {
-    const cookiesJwt = cookies.get('auth');
-    if (cookiesJwt) {
+    const cookiesJwt = cookies.get('remember_me');
+    const sessionJwt = cookies.get('session');
+    if (cookiesJwt && sessionJwt) {
         throw redirect(303, "/");
     }
 };
@@ -35,6 +36,7 @@ export const actions = {
         })
             .from(usersTable)
             .where(eq(usersTable.email, login.toString())) as { id: number; email: string; hash: string; }[];
+
         if (!user) {
             return fail(404, {
                 message: "Identifiant ou Mot de passe incorrect",
@@ -51,13 +53,15 @@ export const actions = {
                 incorrect: true
             });
         }
-        // Add jwt token
-        const uuid = await bcrypt.genSalt();
-        await db.update(usersTable)
-            .set({ loginToken: uuid })
-            .where(eq(usersTable.email, login.toString()));
-        const jsonwt = jwt.sign({ ...userInfo, loginToken: uuid }, JWT_SECRET_TOKEN);
-        cookies.set('auth', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict" });
+
+        // Add Cookie "remember_me"
+        await createCookie(userInfo, cookies);
+
+        //Verif session
+        const session = getSession(cookies);
+        if (!session) {
+            throw redirect(303, "/landlords");
+        }
 
         throw redirect(303, "/");
     }

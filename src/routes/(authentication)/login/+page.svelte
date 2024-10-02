@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let form;
+	console.log('form', form);
 	import { UserIcon, KeyIcon } from '$lib/components/atoms/Icons/icon.js';
 	import Input from '$lib/components/atoms/Input.svelte';
 	const setMessage = () => {
@@ -26,6 +27,10 @@
 			>
 				<KeyIcon slot="CustomIcon" class="text-gray-400" width="25" />
 			</Input>
+
+			<p class="text-red-400">
+				{#if form}{form.message}{/if}
+			</p>
 
 			<button class="w-full px-4 py-2 my-4 text-white bg-blue-400 rounded hover:bg-blue-700">
 				connection
