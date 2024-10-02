@@ -2,7 +2,7 @@
 
 // type receiptTypeII = typeof receiptsTable.$inferSelect;
 
-interface receiptType {
+interface ReceiptModel {
     id: number;
     number: string | number,
     landlord_id: string | number;
@@ -31,4 +31,4 @@ interface receiptType {
     createAt: null | string | Date;
 }
 
-export default interface ReceiptsModel extends receiptType { }
+export default interface ReceiptsModel extends ReceiptModel { }
