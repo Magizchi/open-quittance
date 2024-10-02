@@ -3,9 +3,16 @@
 </script>
 
 <div class="grid gap-2 lg:grid-cols-2">
-	<Input placeholder="Nom de l'entreprise" name="name" />
-	<Input placeholder="Siret" name="siret" />
-	<Input placeholder="address" name="address" />
-	<Input placeholder="postal code" name="postalCode" />
-	<Input placeholder="city" name="city" />
+	<Input
+		label="Nom de l'entreprise"
+		placeholder="Nom de l'entreprise"
+		name="name"
+		required="required"
+	/>
+	<Input label="Siret" placeholder="Siret" name="siret" />
+	<div class="col-span-2">
+		<Input label="Adresse" placeholder="address" name="address" required="required" />
+	</div>
+	<Input label="Code Postal" placeholder="postal code" name="postalCode" required="required" />
+	<Input label="Ville" placeholder="city" name="city" required="required" />
 </div>
