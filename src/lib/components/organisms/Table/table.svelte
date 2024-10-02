@@ -5,7 +5,8 @@
 	}
 
 	export let columns: ColumnsProps[];
-	export let rows: any[];
+	export let rows: any[] = [];
+	export const index: number = 0;
 </script>
 
 <div class="overflow-hidden border border-gray-200 rounded-lg shadow">
@@ -21,8 +22,8 @@
 		</thead>
 		<tbody>
 			{#if rows.length > 0}
-				{#each rows as row, id}
-					<slot {row} {id} />
+				{#each rows as row, index}
+					<slot {row} {index} />
 				{/each}
 			{:else}
 				<td colspan={columns.length} class="p-2 text-center">No Data</td>
