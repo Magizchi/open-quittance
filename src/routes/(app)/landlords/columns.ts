@@ -19,12 +19,4 @@ export const columns = [
         header: 'Code Postal',
         dataIndex: 'postalCode'
     },
-    {
-        header: 'Nombre de propriété',
-        dataIndex: 'properties'
-    },
-    {
-        header: 'Options',
-        dataIndex: 'options'
-    }
 ];

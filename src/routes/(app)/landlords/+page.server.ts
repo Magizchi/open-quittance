@@ -1,6 +1,7 @@
 import db from '$lib/server/database';
 import { landlordsTable, propertiesTable } from '$lib/server/schema.js';
 import FormatFormData from '$lib/utils/FormatFormData.js';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ parent }) => {
     await parent();
@@ -21,23 +22,28 @@ export const actions = {
     create: async ({ request }) => {
         const data = await request.formData();
 
-        const { landlord, properties, error } = FormatFormData(data);
+        const { landlord, error } = FormatFormData(data);
 
-        if (error.status) return error;
+        if (error.status) return {
+            success: false,
+            status: 400,
+            message: "Erreur:" + error.message
+        };
 
         try {
             await db.transaction(async (tx) => {
                 //Save the landlords first to give the ID 
-                const [savedLandlord] = await tx.insert(landlordsTable).values(landlord);
+                await tx.insert(landlordsTable).values(landlord);
                 //Add the new landlord Id to the properties before save
-                properties.forEach(item => item['landlord_id'] = savedLandlord.insertId);
-                const [saveProperties] = await tx.insert(propertiesTable).values(properties);
+                // properties.forEach(item => item['landlord_id'] = savedLandlord.insertId);
+                // const [saveProperties] = await tx.insert(propertiesTable).values(properties);
 
-                return {
-                    landlord: savedLandlord,
-                    properties: saveProperties
-                };
             });
+            return {
+                success: true,
+                status: 302,
+                message: 'Created'
+            };
         } catch (err) {
             return {
                 success: false,
@@ -45,6 +51,8 @@ export const actions = {
                 message: "Erreur:" + err
             };
         }
+
+        redirect(302, '/landlords/9');
     },
 
     add: async ({ request }) => {
