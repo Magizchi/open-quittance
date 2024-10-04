@@ -5,19 +5,14 @@ import { getSession } from '$lib/utils/Session.js';
 import { redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 
-export const load = async ({ parent, cookies, locals }) => {
-    console.log('**********************************************');
-    console.log('locals', locals);
-    console.log('**********************************************');
+export const load = async ({ parent, cookies }) => {
+
     await parent();
     const sessionInfo = getSession(cookies);
-    console.log('sessionInfo', sessionInfo);
-
     if (!sessionInfo) {
         return { properties: [] };
     }
     const properties = await db.select().from(propertiesTable).where(eq(propertiesTable.landlord_id, sessionInfo.landlordId));
-    console.log('properties', properties);
 
     return { properties };
 };

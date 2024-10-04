@@ -80,10 +80,18 @@
 
 <section class="relative px-10 space-y-3 bg-slate-100">
 	<h1 class="text-2xl font-bold">Listes des quittances</h1>
-	<Table {columns} rows={data.receiptList} let:row>
+	<Table {columns} rows={data.receiptList} let:row let:index>
 		<Tr>
-			{#if typeof row === 'string'}
-				<td colspan={columns.length} class="font-bold text-gray-600 bg-gray-300">{row}</td>
+			{#if index === 0}
+				<td colspan={columns.length} class="pl-2 font-bold text-gray-600 bg-gray-300">
+					{dayjs().format('MMMM')}
+					{dayjs().format('YYYY')}
+				</td>
+			{:else if dayjs(row.startDate).format('MMMM') !== dayjs(data.receiptList[index - 1].startDate).format('MMMM')}
+				<td colspan={columns.length} class="pl-2 font-bold text-gray-600 bg-gray-300">
+					{dayjs(row.startDate).format('MMMM')}
+					{dayjs(row.startDate).format('YYYY')}
+				</td>
 			{:else}
 				<Td>
 					<p class="flex flex-col">
@@ -137,10 +145,9 @@
 								}}
 							>
 								<div
-									class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+									class="flex items-center space-x-2 font-semibold hover:scale-110 hover:transition-all hover:duration-300"
 								>
-									<PenIcon width="25" />
-									A valider
+									Valider
 								</div>
 							</button>
 						{/if}

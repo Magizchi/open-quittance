@@ -19,7 +19,7 @@
 	<button
 		{...$$restProps}
 		on:click
-		class="px-4 py-2 text-white rounded font-hind"
+		class="w-full px-4 py-2 text-white rounded font-hind"
 		class:bg-indigo-500={primary}
 		class:hover:bg-indigo-600={primary}
 		class:bg-slate-500={secondary}

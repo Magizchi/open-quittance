@@ -4,7 +4,7 @@
 	import 'dayjs/locale/fr';
 	dayjs.locale('fr');
 
-	import { PdfIcon, PenIcon } from '$lib/components/atoms/Icons/icon.js';
+	import { PdfIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';

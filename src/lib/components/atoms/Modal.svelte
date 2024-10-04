@@ -13,13 +13,13 @@
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
 	on:click|self={() => dialog.close()}
-	class="p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px]"
+	class="shadow-md rounded-2xl scroll-m-10 min-w-[476px]"
 	{...$$restProps}
 >
 	<div class="relative">
 		<slot />
-		<div class="absolute top-0 right-0">
+		<!-- <div class="absolute top-0 right-0">
 			<Clickable on:click={() => dialog.close()}>X</Clickable>
-		</div>
+		</div> -->
 	</div>
 </dialog>

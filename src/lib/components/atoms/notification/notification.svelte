@@ -19,7 +19,6 @@
 
 	$: if (showModal) {
 		setTimeout(() => {
-			console.log('Dans setTimeout');
 			showModal = false;
 		}, 5000);
 	}

@@ -96,7 +96,7 @@
 			<h2 class="text-xl">Propriété(s)</h2>
 			<Clickable on:click={() => (showAddPropertyForm = true)}>Ajouter</Clickable>
 		</div>
-		<Table columns={columnsProperty} rows={data.properties} let:row let:id>
+		<Table columns={columnsProperty} rows={data.properties} let:row>
 			<Tr>
 				<Td>
 					{row.name}

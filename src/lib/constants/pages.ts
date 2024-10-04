@@ -1,0 +1,1 @@
+export const cookies = 'remember_me';

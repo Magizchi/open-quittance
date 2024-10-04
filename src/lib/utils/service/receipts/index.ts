@@ -97,6 +97,5 @@ export const CreateReceipts = async (rental: RentalModel, startDate: string, end
         endDate: dayjs(endDate).toDate(),
         createAt: dayjs(dayjs().format('YYYY/MM/DD')).toDate()
     };
-    console.log('newReceipts', newReceipts);
     return await db.insert(receiptsTable).values(newReceipts);
 };

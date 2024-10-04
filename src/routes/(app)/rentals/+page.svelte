@@ -92,11 +92,11 @@
 	<form method="POST" class="px-10 space-y-5" action="?/delete">
 		<h2 class="text-2xl font-bold">Fin de location</h2>
 		<div class="space-y-3">
-			<p class="font-bold">Bailleur : <span class="font-normal">{rental.landlord?.name}</span></p>
-			<p class="font-bold">Locataire : <span class="font-normal">{rental.tenant?.name}</span></p>
+			<p class="font-bold">Bailleur : <span class="font-normal">{rental.landlords?.name}</span></p>
+			<p class="font-bold">Locataire : <span class="font-normal">{rental.tenants?.name}</span></p>
 			<p class="font-bold">
 				Propriété : <span class="font-normal"
-					>{rental.property?.name} - {rental.property?.city}</span
+					>{rental.properties?.name} - {rental.properties?.city}</span
 				>
 			</p>
 			<Input name="endDate" type="date" />
