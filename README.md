@@ -42,3 +42,8 @@ You can preview the production build with `npm run preview`.
     https://keestalkstech.com/2022/08/jupyter-notebooks-vscode-dev-container-with-puppeteer-support/
 ### Add chromium
     https://stackoverflow.com/questions/58997430/how-to-install-chromium-in-docker-based-on-ubuntu-19-10-and-20-04
+
+
+# lancer projet local
+
+    npm run dev -- -host
