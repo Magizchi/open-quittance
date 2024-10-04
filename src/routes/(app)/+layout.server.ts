@@ -24,13 +24,11 @@ export const load = async ({ cookies }) => {
 
     if (!user) {
         cookies.delete('remember_me');
-        cookies.delete('session');
         throw redirect(303, '/login');
     }
 
     if (user.loginToken !== cookieInfo.loginToken) {
         cookies.delete('remember_me');
-        cookies.delete('session');
         throw redirect(303, '/login');
     }
 
