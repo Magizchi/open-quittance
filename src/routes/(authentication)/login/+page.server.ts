@@ -4,6 +4,7 @@ import db from "$lib/server/database";
 import { usersTable } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import { createCookie } from "$lib/utils/remember_me.js";
+import { Routes } from "$lib/constants/routes.js";
 
 export const load = ({ cookies }) => {
     const cookiesJwt = cookies.get('remember_me');
@@ -54,6 +55,6 @@ export const actions = {
         // Add Cookie "remember_me"
         await createCookie(userInfo, cookies);
 
-        throw redirect(303, "/");
+        throw redirect(303, Routes.landing);
     }
 };
