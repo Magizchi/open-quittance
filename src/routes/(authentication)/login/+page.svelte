@@ -1,40 +1,53 @@
 <script lang="ts">
 	export let form;
-	console.log('form', form);
-	import { UserIcon, KeyIcon } from '$lib/components/atoms/Icons/icon.js';
 	import Input from '$lib/components/atoms/Input.svelte';
+	import logo from '$lib/assets/image/machine_quittance.jpg';
+	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	const setMessage = () => {
 		form = { message: '', incorrect: false };
 	};
 </script>
 
-<section class="flex items-center justify-center w-full h-screen">
-	<form
-		class="flex flex-col items-center justify-center w-full px-6 m-auto bg-white rounded-lg shadow md:w-1/2 lg:w-1/3"
-		method="post"
-	>
-		<h2 class="my-4 text-2xl">Connectez-vous</h2>
-		<div class="flex flex-col justify-start w-full p-2 space-y-4">
-			<Input id="username" name="username" placeholder="Email ou identifiant">
-				<UserIcon slot="CustomIcon" class="text-gray-400" width="25" />
-			</Input>
-			<Input
-				id="password"
-				name="password"
-				type="password"
-				placeholder="Mots de passe"
-				on:change={() => setMessage()}
-			>
-				<KeyIcon slot="CustomIcon" class="text-gray-400" width="25" />
-			</Input>
+<section class="relative flex items-center justify-center h-screen bg-slate-200">
+	<div class="absolute inset-0 w-full h-full bg-amber-500 clip-path-diagonal" />
+	<div class="z-20 flex flex-row justify-center">
+		<div
+			class="flex items-center justify-center w-4/12 border-t-2 border-b-2 border-l-2 border-indigo-500 shadow-md bg-slate-100 rounded-l-xl"
+		>
+			<div class="flex flex-col items-center w-full">
+				<h1 class="my-10 text-3xl font-bold text-indigo-700 font-hind">
+					OPEN <span class="text-amber-500">QUITTANCE</span>
+				</h1>
+				<form class="w-1/2" method="post">
+					<div class="space-y-5">
+						<Input id="username" name="username" placeholder="Email ou identifiant" label="Email" />
+						<Input
+							id="password"
+							name="password"
+							type="password"
+							placeholder="Mots de passe"
+							on:change={() => setMessage()}
+							label="Mot de passe"
+						/>
+						<p class="">
+							{#if form}{form.message}{/if}
+						</p>
 
-			<p class="text-red-400">
-				{#if form}{form.message}{/if}
-			</p>
-
-			<button class="w-full px-4 py-2 my-4 text-white bg-blue-400 rounded hover:bg-blue-700">
-				connection
-			</button>
+						<div class="flex justify-end">
+							<Clickable primary type="submit">Connection</Clickable>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</form>
+		<div class="w-4/12 border-t-2 border-b-2 border-r-2 border-indigo-500 rounded-r-xl">
+			<img alt="logo" src={logo} class="flex flex-grow bg-cover rounded-r-xl" />
+		</div>
+	</div>
 </section>
+
+<style>
+	.clip-path-diagonal {
+		clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+	}
+</style>
