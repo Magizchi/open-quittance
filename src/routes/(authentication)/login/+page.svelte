@@ -10,14 +10,19 @@
 
 <section class="relative flex items-center justify-center h-screen bg-slate-200">
 	<div class="absolute inset-0 w-full h-full bg-amber-500 clip-path-diagonal" />
-	<div class="z-20 flex flex-row justify-center">
+	<div
+		class="z-20 w-full flex flex-row justify-center max-w-[1280px] min-h-[620px] border-2 shadow-sm border-indigo-500 rounded-xl m-10"
+	>
 		<div
-			class="flex items-center justify-center w-4/12 border-t-2 border-b-2 border-l-2 border-indigo-500 shadow-md bg-slate-100 rounded-l-xl"
+			class="flex items-center justify-center w-full md:w-1/2 bg-slate-100 rounded-xl md:rounded-none md:rounded-l-xl"
 		>
 			<div class="flex flex-col items-center w-full">
-				<h1 class="my-10 text-3xl font-bold text-indigo-700 font-hind">
-					OPEN <span class="text-amber-500">QUITTANCE</span>
-				</h1>
+				<div class="flex flex-col items-center mb-10 space-y-1">
+					<h1 class="text-2xl font-bold text-indigo-500 md:text-3xl font-hind">
+						OPEN <span class="text-amber-500">QUITTANCE</span>
+					</h1>
+					<p class="text-slate-700">Création et suivie des quittances</p>
+				</div>
 				<form class="w-1/2" method="post">
 					<div class="space-y-5">
 						<Input id="username" name="username" placeholder="Email ou identifiant" label="Email" />
@@ -33,15 +38,15 @@
 							{#if form}{form.message}{/if}
 						</p>
 
-						<div class="flex justify-end">
+						<div class="w-full md:flex md:justify-end">
 							<Clickable primary type="submit">Connection</Clickable>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-		<div class="w-4/12 border-t-2 border-b-2 border-r-2 border-indigo-500 rounded-r-xl">
-			<img alt="logo" src={logo} class="flex flex-grow bg-cover rounded-r-xl" />
+		<div class="hidden w-1/2 rounded-r-xl md:block">
+			<img alt="logo" src={logo} class="w-full h-full bg-contain rounded-r-xl" />
 		</div>
 	</div>
 </section>
