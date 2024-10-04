@@ -3,22 +3,13 @@ import db from '$lib/server/database.js';
 import { landlordsTable, usersTable } from '$lib/server/schema.js';
 import { eq } from 'drizzle-orm';
 import CheckCookie from '$lib/utils/CheckCookie';
-import { CheckSession } from '$lib/utils/Session.js';
 
 export const load = async ({ cookies }) => {
     const cookieInfo = CheckCookie(cookies);
 
     if (!cookieInfo) {
-        console.log('la.1');
         cookies.delete('remember_me');
         throw redirect(303, '/login');
-    }
-
-    const sessionInfo = CheckSession(cookies);
-    if (!sessionInfo) {
-        console.log('la.2');
-        cookies.delete('remember_me');
-        // throw redirect(303, '/login');
     }
 
     const [user] = (await db.select({
@@ -43,7 +34,11 @@ export const load = async ({ cookies }) => {
         throw redirect(303, '/login');
     }
 
-    const landlords = await db.select().from(landlordsTable);
+    const landlords = await db.select().from(landlordsTable).where(eq(landlordsTable.user_id, user.id));
 
-    return { ...user, ...sessionInfo, landlords };
+    if (landlords.length === 0) {
+        throw redirect(303, '/landords/create');
+    }
+
+    return { ...user };
 };
