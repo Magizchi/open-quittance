@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import Balise from '$lib/components/atoms/notification/balise.svelte';
+	import { Routes } from '$lib/constants/routes';
 </script>
 
 <div class="flex bg-slate-800">
@@ -12,20 +13,23 @@
 		<nav>
 			<ul class="space-y-3">
 				<li class="w-full">
-					<Clickable href="/" aria-current={$page.url.pathname === '/'}>Quittances</Clickable>
+					<Clickable href={Routes.landing} aria-current={$page.url.pathname === `${Routes.landing}`}
+						>Quittances</Clickable
+					>
 				</li>
 				<li class="w-full space-y-2">
-					<Clickable href="/properties" aria-current={$page.url.pathname === '/properties'}
-						>Propriétés</Clickable
+					<Clickable
+						href={Routes.properties}
+						aria-current={$page.url.pathname === `${Routes.properties}`}>Propriétés</Clickable
 					>
 				</li>
 				<li>
-					<Clickable href="/tenants" aria-current={$page.url.pathname === '/tenants'}
+					<Clickable href={Routes.tenants} aria-current={$page.url.pathname === `${Routes.tenants}`}
 						>Locataires</Clickable
 					>
 				</li>
 				<li>
-					<Clickable href="/rentals" aria-current={$page.url.pathname === '/rentals'}
+					<Clickable href={Routes.rentals} aria-current={$page.url.pathname === `${Routes.rentals}`}
 						>Locations</Clickable
 					>
 				</li>
