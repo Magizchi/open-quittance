@@ -4,13 +4,10 @@ import db from "$lib/server/database";
 import { usersTable } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import { createCookie } from "$lib/utils/remember_me.js";
-import { getSession } from "$lib/utils/Session.js";
 
-//JWT
 export const load = ({ cookies }) => {
     const cookiesJwt = cookies.get('remember_me');
-    const sessionJwt = cookies.get('session');
-    if (cookiesJwt && sessionJwt) {
+    if (cookiesJwt) {
         throw redirect(303, "/");
     }
 };
@@ -56,12 +53,6 @@ export const actions = {
 
         // Add Cookie "remember_me"
         await createCookie(userInfo, cookies);
-
-        //Verif session
-        const session = getSession(cookies);
-        if (!session) {
-            throw redirect(303, "/landlords");
-        }
 
         throw redirect(303, "/");
     }
