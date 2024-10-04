@@ -10,7 +10,7 @@
 {#if href}
 	<a
 		{...$$restProps}
-		class="flex p-2 font-bold text-white bg-gray-700 border-2 border-gray-200 flew-grow rounded-xl active:bg-red-500"
+		class="flex p-2 hover:bg-teal-400 rounded-lg text-slate-200 hover:text-white aria-[current=true]:bg-teal-500 aria-[current=true]:text-white"
 		{href}
 	>
 		<slot />
