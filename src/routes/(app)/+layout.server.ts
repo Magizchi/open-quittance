@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import CheckCookie from '$lib/utils/CheckCookie';
 import { Routes } from '$lib/constants/routes';
 
-export const load = async ({ cookies }) => {
+export const load = async ({ cookies, url }) => {
     const cookieInfo = CheckCookie(cookies);
 
     if (!cookieInfo) {
@@ -33,12 +33,16 @@ export const load = async ({ cookies }) => {
         throw redirect(303, Routes.login);
     }
 
-    const landlords = await db.select().from(landlordsTable).where(eq(landlordsTable.user_id, user.id));
+    const landlords = await db.select().from(landlordsTable);
     let needCreateLandlords = false;
+
     if (!landlords.length) {
         needCreateLandlords = true;
     }
 
+    if (!landlords.length && Routes.createLandlords !== url.pathname) {
+        throw redirect(303, Routes.createLandlords);
+    }
 
-    return { ...user, openModal: needCreateLandlords };
+    return { ...user, needCreateLandlords };
 };
