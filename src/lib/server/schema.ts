@@ -9,19 +9,8 @@ export const usersTable = mysqlTable('users', {
     loginToken: varchar('loginToken', { length: 255 }),
 });
 
-export const organisationsTable = mysqlTable('organisations', {
-    id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    user_id: bigint('user_id', { mode: 'number' }).notNull().references(() => usersTable.id),
-    name: varchar('name', { length: 255 }).notNull(),
-    siret: varchar('siret', { length: 255 }),
-    address: varchar('address', { length: 255 }).notNull(),
-    city: varchar('city', { length: 255 }).notNull(),
-    postalCode: varchar('postalCode', { length: 5 }).notNull(),
-});
-
 export const landlordsTable = mysqlTable('landlords', {
     id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    user_id: bigint('user_id', { mode: 'number' }).notNull().references(() => usersTable.id),
     name: varchar('name', { length: 255 }).notNull(),
     siret: varchar('siret', { length: 255 }),
     address: varchar('address', { length: 255 }).notNull(),
@@ -88,12 +77,4 @@ export const receiptsTable = mysqlTable('receipts', {
     startDate: date('startDate').notNull(),
     endDate: date('endDate').notNull(),
     createAt: date('createAt'),
-
-});
-
-export const sessionsTables = mysqlTable('sessions', {
-    id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-    user_id: bigint('user_id', { mode: 'number' }).notNull().references(() => usersTable.id),
-    organisation_id: bigint('organisation_id', { mode: 'number' }).references(() => organisationsTable.id),
-    sessionToken: varchar('loginToken', { length: 255 }),
 });
