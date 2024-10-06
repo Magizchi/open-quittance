@@ -4,10 +4,9 @@ import db from "$lib/server/database";
 import { landlordsTable } from "$lib/server/schema.js";
 import { eq } from "drizzle-orm";
 import { createNotification } from "$lib/stores/notification/store.js";
-import { setSession } from "$lib/utils/Session.js";
 
 export const actions = {
-    default: async ({ request, cookies }) => {
+    default: async ({ request }) => {
         const data = await request.formData();
         const { postalCode, address, city, landlordName } = FormDataToJson(data);
 
@@ -21,16 +20,12 @@ export const actions = {
             });
         }
 
-        const [addedLandlord] = await db.insert(landlordsTable).values({
+        await db.insert(landlordsTable).values({
             address,
             postalCode,
             city,
             name: landlordName,
-            user_id: 1
         });
-
-        // Add cookie Session
-        setSession({ landlordId: addedLandlord.insertId, landlordName }, cookies);
 
         throw redirect(303, "/");
     }
