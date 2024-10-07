@@ -2,7 +2,7 @@
 	// Link
 	export let href: string | null = null;
 	export let current: boolean = false;
-
+	export let likeButton: boolean = false;
 	// Button && Link
 	export let primary: boolean = false;
 	export let secondary: boolean = false;
@@ -14,7 +14,7 @@
 {#if href}
 	<a
 		{...$$restProps}
-		class="flex p-2 text-white rounded-lg font-hind aria-[current=true]:bg-teal-500 aria-[current=true]:hover:bg-teal-600"
+		class="flex px-4 py-2 text-white rounded font-hind aria-[current=true]:bg-teal-500 aria-[current=true]:hover:bg-teal-600"
 		class:bg-indigo-500={primary}
 		class:hover:bg-indigo-600={primary}
 		class:bg-slate-500={secondary}
@@ -25,6 +25,8 @@
 		class:hover:bg-rose-600={error}
 		class:bg-amber-500={warning}
 		class:hover:bg-amber-600={warning}
+		class:justify-center={likeButton}
+		class:w-full={likeButton}
 		{href}
 	>
 		<slot />
