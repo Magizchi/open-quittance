@@ -74,38 +74,8 @@ export const load = async () => {
 };
 
 export const actions = {
-    create: async ({ request }) => {
-        const data = await request.formData();
-
-        if (
-            data.get('property') === '' ||
-            data.get('tenant') === '' ||
-            data.get('date') === ''
-        ) {
-            return {
-                success: false,
-                status: 400,
-                message: 'Erreur dans les données'
-            };
-        }
-        try {
-            console.log('ici', data.get('tenant'), data.get('property'));
-            await db.insert(rentalsTable).values({
-                tenant_id: +data.get('tenant')!.toString(),
-                property_id: +data.get('property')!.toString(),
-                startedAt: dayjs(data.get('date')!.toString()).toDate()
-            });
-        } catch (err) {
-            return {
-                success: false,
-                status: 400,
-                message: 'Erreur:' + err
-            };
-        }
-    },
     delete: async ({ request }) => {
         const data = await request.formData();
-        console.log('daata', data);
 
         if (data.get('endDate') === '' || data.get('rentalId') === '') {
             return {
