@@ -1,14 +1,14 @@
 <script lang="ts">
+	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import Input from '$lib/components/atoms/Input.svelte';
-	export let id;
 	export let defaultValues: any | null = {
 		name: '',
 		address: '',
 		city: '',
-		postalCode: '',
-		rent: '',
-		condo_fees: '',
-		taxes: ''
+		postalCode: 0,
+		rent: 0,
+		condo_fees: 0,
+		taxes: 0
 	};
 </script>
 
@@ -16,55 +16,60 @@
 	<div class="col-span-2">
 		<Input
 			label="Local"
-			name={`properties[${id}][name]`}
+			name={`name`}
 			bind:value={defaultValues['name']}
-			placeholder="local de bobigny"
+			placeholder="denomination du local"
+			required
 		/>
 	</div>
 	<div class="col-span-2">
 		<Input
-			label="Adresse"
-			name={`properties[${id}][address]`}
+			label="Adresse*"
+			name={`address`}
 			bind:value={defaultValues['address']}
 			placeholder="1, Avenue de paris"
+			required
 		/>
 	</div>
-	<div class="col-span-">
-		<Input
-			name={`properties[${id}][city]`}
-			bind:value={defaultValues['city']}
-			placeholder="Ville"
-		/>
-	</div>
-	<div class="col-span-1">
-		<Input
-			name={`properties[${id}][postalCode]`}
-			bind:value={defaultValues['postalCode']}
-			placeholder="Code postal"
-		/>
-	</div>
+	<Input name={`city`} bind:value={defaultValues['city']} placeholder="Ville" required />
+	<Input
+		name={`postalCode`}
+		bind:value={defaultValues['postalCode']}
+		placeholder="Code postal"
+		type="number"
+		required
+	/>
 	<div class="col-span-2">
 		<Input
-			label="Loyer"
-			name={`properties[${id}][rent]`}
+			label="Loyer*"
+			name={`rent`}
+			type="number"
 			bind:value={defaultValues['rent']}
 			placeholder="1100"
+			min={0}
+			required
 		/>
 	</div>
 	<div class="col-span-2">
 		<Input
-			label="Charges"
-			name={`properties[${id}][condo_fees]`}
+			label="Charges*"
+			name={`condo_fees`}
 			bind:value={defaultValues['condo_fees']}
 			placeholder="510"
+			type="number"
+			min={0}
+			required
 		/>
 	</div>
 	<div class="col-span-2">
 		<Input
-			label="Taxes"
-			name={`properties[${id}][taxes]`}
+			label="Taxes*"
+			type="number"
+			name={`taxes`}
+			min={0}
 			bind:value={defaultValues['taxes']}
 			placeholder="90"
+			required
 		/>
 	</div>
 </div>
