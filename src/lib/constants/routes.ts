@@ -3,6 +3,7 @@ export enum Routes {
     landing = '/',
     createLandlords = '/landlords/create',
     properties = '/properties',
+    createProperty = '/properties/new',
     tenants = '/tenants',
     rentals = '/rentals',
 };
