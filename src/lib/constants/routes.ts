@@ -5,5 +5,6 @@ export enum Routes {
     properties = '/properties',
     createProperty = '/properties/new',
     tenants = '/tenants',
+    createTenant = '/tenants/new',
     rentals = '/rentals',
 };
