@@ -21,8 +21,8 @@
 			type="text"
 			id={name}
 			class={$$slots.CustomIcon
-				? 'w-full pl-1 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-400'
-				: 'placeholder:font-hind font-hind border text-sm rounded-lg focus:placeholder:text-indigo-500 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5'}
+				? 'w-full pl-1 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-400 appearance-none'
+				: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none placeholder:font-hind font-hind border text-sm rounded-lg focus:placeholder:text-indigo-500 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5'}
 			{name}
 			{...$$restProps}
 		/>
