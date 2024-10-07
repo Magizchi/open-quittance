@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import Input from '$lib/components/atoms/Input.svelte';
 	export let defaultValues: any | null = {
 		name: '',
