@@ -37,7 +37,9 @@
 	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
 			<Td>
-				{row.name}
+				<a href={Routes.tenants + '/' + row.id} class="underline">
+					{row.name}
+				</a>
 			</Td>
 			<Td>
 				{row.siret}
