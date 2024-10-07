@@ -23,19 +23,19 @@
 					<li class="w-full space-y-2">
 						<Clickable
 							href={Routes.properties}
-							aria-current={$page.url.pathname === `${Routes.properties}`}>Propriétés</Clickable
+							aria-current={$page.url.pathname.includes(Routes.properties)}>Propriétés</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
 							href={Routes.tenants}
-							aria-current={$page.url.pathname === `${Routes.tenants}`}>Locataires</Clickable
+							aria-current={$page.url.pathname.includes(`${Routes.tenants}`)}>Locataires</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
 							href={Routes.rentals}
-							aria-current={$page.url.pathname === `${Routes.rentals}`}>Locations</Clickable
+							aria-current={$page.url.pathname.includes(`${Routes.rentals}`)}>Locations</Clickable
 						>
 					</li>
 				</ul>

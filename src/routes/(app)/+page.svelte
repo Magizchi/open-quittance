@@ -1,16 +1,15 @@
 <script lang="ts">
+	import { landlordsColumns } from '$lib/components/features/landing/landlords_columns.js';
 	import { saveAs } from 'file-saver';
-	import dayjs from 'dayjs';
-	import 'dayjs/locale/fr';
-	dayjs.locale('fr');
-
+	import { formatDate, getMonth } from '$lib/utils/date';
 	import { PdfIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
+
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 
 	export let data;
-
+	console.log('data', data);
 	let pdfBuffer: any;
 	let showModalPaymentDate: boolean = false;
 	let loading: boolean = false;
@@ -44,51 +43,21 @@
 
 		saveAs(blob, `quittance-${documentName}.pdf`);
 	}
-
-	const columns = [
-		{
-			header: 'Bailleur',
-			dataIndex: 'landlord'
-		},
-		{
-			header: 'Locataire',
-			dataIndex: 'tenant'
-		},
-		{
-			header: 'Adresse du local',
-			dataIndex: 'address'
-		},
-		{
-			header: 'Statut',
-			dataIndex: 'startDate'
-		},
-		{
-			header: 'Date de paiement',
-			dataIndex: 'paymentDate'
-		},
-		{
-			header: 'Total',
-			dataIndex: 'total'
-		},
-
-		{
-			header: 'Option',
-			dataIndex: ''
-		}
-	];
 </script>
 
 <section class="relative px-10 space-y-5 bg-slate-100">
-	<h1 class="text-2xl font-bold">Tableau de bord</h1>
-
+	<h1 class="text-2xl font-bold font-hind text-slate-700">Tableau de bord</h1>
 	<div class="space-y-2">
-		<h2 class="font-semibold">
-			Quittance du mois {dayjs().locale('fr').format('MMMM').toUpperCase()}
+		<h2 class="font-semibold font-hind text-slate-700">
+			Quittance du mois {getMonth()}
 		</h2>
-		<Table {columns} rows={data.receiptList} let:row>
+		<Table columns={landlordsColumns} rows={data.receiptList} let:row>
 			<Tr>
 				{#if typeof row === 'string'}
-					<td colspan={columns.length} class="font-bold text-gray-600 bg-gray-300">{row}</td>
+					<td
+						colspan={landlordsColumns.length}
+						class="font-bold bg-gray-300 text-slate-700 font-hind">{row}</td
+					>
 				{:else}
 					<Td>
 						<p class="flex flex-col">
@@ -114,7 +83,7 @@
 					</Td>
 					<Td>
 						{#if row.paymentDate}
-							<p>{dayjs(row.paymentDate).format('DD/MM/YYYY')}</p>
+							<p>{formatDate(row.paymentDate)}</p>
 						{:else}
 							<p>/</p>
 						{/if}
@@ -156,32 +125,11 @@
 	</div>
 </section>
 
-<Modal bind:showModal={showModalPaymentDate}>
+<!-- <Modal bind:showModal={data.openModal}>
 	<form id="AddPaymentDate" method="POST" action="?/paymentDate">
-		<div class="px-10 space-y-5">
-			<h3 class="text-2xl font-bold text-slate-700">Confirmer le paiement</h3>
-			<p class="underline">Le locataire :</p>
-			<span class="font-bold">{selectedReceipts.tenant_fullName}</span>
-			<p class="underline">Le Bailleur :</p>
-			<span class="font-bold">{selectedReceipts.landlord_fullName}</span>
-			<p class="underline">Periode de :</p>
-			<span class="font-bold"
-				>{dayjs(selectedReceipts.startDate).locale('fr').format('MMMM').toUpperCase()}</span
-			>
-			<p>
-				Veuillez saisir la date de paiement de <span class="underline"
-					>{selectedReceipts.tenant_fullName}</span
-				>
-			</p>
-			<input name="receiptID" value={selectedReceipts.id} hidden />
-			<input name="paymentDate" type="date" />
-			<label for="checkbox" class="flex items-center justify-start">
-				<input id="checkbox" class="mr-2" name="changeCreateDate" type="checkbox" checked />
-				Modifier la date de création de la quittance
-			</label>
-		</div>
+		<Register />
 	</form>
 	<div class="flex justify-end px-10 py-3">
 		<Clickable form="AddPaymentDate" type="submit">Sauvegarder</Clickable>
 	</div>
-</Modal>
+</Modal> -->
