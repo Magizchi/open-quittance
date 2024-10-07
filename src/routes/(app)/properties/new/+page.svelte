@@ -1,6 +1,7 @@
 <script>
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import CreateProperty from '$lib/components/organisms/Forms/createProperty.svelte';
+	import { Routes } from '$lib/constants/routes';
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -14,7 +15,10 @@
 		<div class="p-5">
 			<form id="landlord" method="POST" class="space-y-5">
 				<CreateProperty />
-				<Clickable primary type="submit">Ajouter</Clickable>
+				<div class="flex space-x-5">
+					<Clickable secondary likeButton href={Routes.properties}>Annuler</Clickable>
+					<Clickable primary type="submit">Ajouter</Clickable>
+				</div>
 			</form>
 		</div>
 	</div>
