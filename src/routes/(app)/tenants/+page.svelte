@@ -1,12 +1,9 @@
-<script>
-	import Modal from '$lib/components/atoms/Modal.svelte';
-	import FormForUser from '$lib/components/organisms/Forms/createUser.svelte';
+<script lang="ts">
+	import { Routes } from '$lib/constants/routes.js';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 
 	export let data;
-
-	let showModal = false;
 
 	const columns = [
 		{
@@ -33,13 +30,9 @@
 </script>
 
 <section class="px-10 space-y-3">
-	<div class="flex">
-		<div class="w-11/12">
-			<h1 class="text-2xl font-bold">Locataires</h1>
-		</div>
-		<div class="w-1/12">
-			<Clickable on:click={() => (showModal = true)}>Ajouter</Clickable>
-		</div>
+	<div class="flex justify-between">
+		<h1 class="text-2xl font-bold font-hind text-slate-700">Locataires</h1>
+		<Clickable primary href={Routes.createTenant}>Ajouter</Clickable>
 	</div>
 	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
@@ -61,12 +54,3 @@
 		</Tr>
 	</Table>
 </section>
-<Modal bind:showModal>
-	<form method="POST" class="px-10 space-y-10" action="?/create">
-		<h2 class="text-2xl font-bold">Locataire</h2>
-		<FormForUser />
-		<div class="flex justify-end">
-			<Clickable type="submit">Sauvegarder</Clickable>
-		</div>
-	</form>
-</Modal>
