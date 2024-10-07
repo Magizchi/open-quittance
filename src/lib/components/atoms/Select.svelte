@@ -6,8 +6,8 @@
 </script>
 
 <div class="flex flex-col space-y-2">
-	<label for={'select' + name}>{label}</label>
-	<select {name} bind:value {...$$restProps}>
+	<label class="text-slate-700 font-hind" for={'select' + name}>{label}</label>
+	<select {name} bind:value {...$$restProps} class="text-slate-700 font-hind">
 		<option value="" selected> choisir... </option>
 		{#each options as option}
 			<option value={option.value} disabled={option.description ? true : false}>
