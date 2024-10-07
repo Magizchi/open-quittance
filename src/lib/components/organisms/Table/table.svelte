@@ -14,7 +14,7 @@
 		<thead class="w-full bg-white">
 			<tr>
 				{#each columns as column}
-					<th class="p-3">
+					<th class="p-3 text-slate-600 font-hind">
 						{column.header}
 					</th>
 				{/each}
@@ -26,7 +26,9 @@
 					<slot {row} {index} />
 				{/each}
 			{:else}
-				<td colspan={columns.length} class="p-2 text-center">No Data</td>
+				<td colspan={columns.length} class="p-2 italic text-center font-hind text-slate-700"
+					>No Data</td
+				>
 			{/if}
 		</tbody>
 	</table>
