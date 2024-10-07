@@ -11,10 +11,10 @@
 
 	if (success) {
 		className =
-			'absolute top-0 right-0 p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px] bg-green-500';
+			'absolute top-0 right-0 p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px] bg-teal-500';
 	} else {
 		className =
-			'absolute top-0 right-0 p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px] bg-red-500';
+			'absolute top-0 right-0 p-5 shadow-md rounded-2xl scroll-m-10 min-w-[476px] bg-rose-500';
 	}
 
 	$: if (showModal) {

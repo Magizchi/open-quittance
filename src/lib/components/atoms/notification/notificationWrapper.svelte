@@ -4,9 +4,9 @@
 	let eventNotificationClass: string;
 
 	if (notification.success) {
-		eventNotificationClass = defaultClassNotification + ' ' + 'bg-green-500';
+		eventNotificationClass = defaultClassNotification + ' ' + 'bg-teal-500';
 	} else {
-		eventNotificationClass = defaultClassNotification + ' ' + 'bg-red-500';
+		eventNotificationClass = defaultClassNotification + ' ' + 'bg-rose-500';
 	}
 </script>
 
