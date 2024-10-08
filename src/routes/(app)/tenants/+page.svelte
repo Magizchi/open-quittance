@@ -17,14 +17,6 @@
 		{
 			header: 'Adresse',
 			dataIndex: 'address'
-		},
-		{
-			header: 'Ville',
-			dataIndex: 'city'
-		},
-		{
-			header: 'Code Postal',
-			dataIndex: 'postalCode'
 		}
 	];
 </script>
@@ -46,12 +38,10 @@
 			</Td>
 			<Td>
 				{row.address}
-			</Td>
-			<Td>
-				{row.city}
-			</Td>
-			<Td>
-				{row.postalCode}
+				<span class="flex space-x-3">
+					{row.city}
+					{row.postalCode}
+				</span>
 			</Td>
 		</Tr>
 	</Table>
