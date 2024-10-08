@@ -1,9 +1,5 @@
 export const columns = [
     {
-        header: 'Bailleur',
-        dataIndex: 'landlord'
-    },
-    {
         header: 'Locataire',
         dataIndex: 'tenant'
     },

@@ -22,11 +22,6 @@
 	</div>
 	<Table {columns} rows={data.rentals} let:row>
 		<Tr>
-			<Td>
-				<p class="flex flex-col">
-					{row.landlord.name}
-				</p>
-			</Td>
 			<Td>{row.tenant.name}</Td>
 			<Td>{row.property.name}</Td>
 			<Td>{row.property.city}</Td>
