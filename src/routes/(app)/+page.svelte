@@ -4,12 +4,13 @@
 	import { formatDate, getMonth } from '$lib/utils/date';
 	import { PdfIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
-
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
+	import ValideReceipt from '$lib/components/organisms/Forms/valideReceipt.svelte';
+	import Pins from '$lib/components/atoms/Pins.svelte';
 
 	export let data;
-	console.log('data', data);
+
 	let pdfBuffer: any;
 	let showModalPaymentDate: boolean = false;
 	let loading: boolean = false;
@@ -59,11 +60,6 @@
 						class="font-bold bg-gray-300 text-slate-700 font-hind">{row}</td
 					>
 				{:else}
-					<Td>
-						<p class="flex flex-col">
-							{row.landlord_fullName}
-						</p>
-					</Td>
 					<Td>{row.tenant_fullName}</Td>
 					<Td>
 						<p class="flex flex-col">
@@ -76,9 +72,9 @@
 					</Td>
 					<Td>
 						{#if row.paymentDate}
-							<p class="font-bold text-green-400">Payé</p>
+							<Pins valide>Payé</Pins>
 						{:else}
-							<p>Brouillon</p>
+							<Pins error>Reste à payé</Pins>
 						{/if}
 					</Td>
 					<Td>
@@ -92,30 +88,29 @@
 						{row.rent + row.condo_fees + row.taxes}
 					</Td>
 					<Td>
-						<div class="flex items-center space-x-5">
-							<button
-								class="flex items-center space-x-2 hover:scale-110 hover:transition-all hover:duration-300"
+						<div class="flex items-center justify-between w-full space-x-5">
+							<Clickable
+								secondary
 								on:click={() => {
 									loading = true;
 									getPdf(row.id);
 								}}
 							>
-								<PdfIcon width="25" /> PDF
-							</button>
+								<div class="flex flex-row items-center justify-center">
+									<PdfIcon class="text-base" height="20" />
+									<span class="text-white font-hind">PDF</span>
+								</div>
+							</Clickable>
 							{#if !row.paymentDate}
-								<button
-									class="text-green-400"
+								<Clickable
+									border
 									on:click={() => {
 										showModalPaymentDate = true;
 										selectedReceipts = row;
 									}}
 								>
-									<div
-										class="flex items-center space-x-2 font-semibold hover:scale-110 hover:transition-all hover:duration-300"
-									>
-										Valider
-									</div>
-								</button>
+									Valider
+								</Clickable>
 							{/if}
 						</div>
 					</Td>
@@ -125,11 +120,11 @@
 	</div>
 </section>
 
-<!-- <Modal bind:showModal={data.openModal}>
+<Modal bind:showModal={showModalPaymentDate}>
 	<form id="AddPaymentDate" method="POST" action="?/paymentDate">
-		<Register />
+		<ValideReceipt {selectedReceipts} />
 	</form>
 	<div class="flex justify-end px-10 py-3">
-		<Clickable form="AddPaymentDate" type="submit">Sauvegarder</Clickable>
+		<Clickable primary form="AddPaymentDate" type="submit">Sauvegarder</Clickable>
 	</div>
-</Modal> -->
+</Modal>
