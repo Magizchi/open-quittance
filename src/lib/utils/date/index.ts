@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/fr';
 dayjs.locale('fr');
 
@@ -6,8 +6,8 @@ dayjs.locale('fr');
  * Fonction return month
  * @returns Months [Janvier, févriér, etc...]
  */
-export const getMonth = () => {
-    return dayjs().locale('fr').format('MMMM').toUpperCase();
+export const getMonth = (date: string | Date | Dayjs = dayjs()) => {
+    return dayjs(date).locale('fr').format('MMMM').toUpperCase();
 };
 
 /**
