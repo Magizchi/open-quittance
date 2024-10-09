@@ -11,7 +11,7 @@
 
 <div class="overflow-hidden border border-gray-200 rounded-lg shadow">
 	<table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
-		<thead class="w-full bg-white">
+		<thead class="w-full bg-slate-200">
 			<tr>
 				{#each columns as column}
 					<th class="p-3 text-slate-600 font-hind">
