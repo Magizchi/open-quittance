@@ -1,19 +1,11 @@
 export const columns = [
     {
-        header: 'Local',
-        dataIndex: 'name'
-    },
-    {
         header: 'Adresse',
         dataIndex: 'address'
     },
     {
-        header: 'Ville',
-        dataIndex: 'city'
-    },
-    {
-        header: 'Code Postal',
-        dataIndex: 'postalCode'
+        header: 'Description',
+        dataIndex: 'name'
     },
     {
         header: 'Loyer',
@@ -27,4 +19,8 @@ export const columns = [
         header: 'Taxe',
         dataIndex: 'taxes'
     },
+    {
+        header: '',
+        dataIndex: ''
+    }
 ];

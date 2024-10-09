@@ -3,6 +3,7 @@
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import { columns } from './columns.js';
 	import { Routes } from '$lib/constants/routes.js';
+	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
 
 	export let data;
 </script>
@@ -15,18 +16,14 @@
 	<Table {columns} rows={data.properties} let:row>
 		<Tr>
 			<Td>
-				<a href={Routes.properties + '/' + row.id} class="underline">
-					{row.name}
-				</a>
-			</Td>
-			<Td>
 				{row.address}
+				<span class="flex space-x-3">
+					{row.city}
+					{row.postalCode}
+				</span>
 			</Td>
 			<Td>
-				{row.city}
-			</Td>
-			<Td>
-				{row.postalCode}
+				{row.name}
 			</Td>
 			<Td>
 				{row.rent}
@@ -36,6 +33,15 @@
 			</Td>
 			<Td>
 				{row.taxes}
+			</Td>
+			<Td>
+				<div class="flex items-center justify-end w-full">
+					<Clickable border href={Routes.properties + '/' + row.id}>
+						<div class="flex flex-row items-center justify-center">
+							<EditIcon class="mr-1 text-base" height="20" /> Modifier
+						</div>
+					</Clickable>
+				</div>
 			</Td>
 		</Tr>
 	</Table>
