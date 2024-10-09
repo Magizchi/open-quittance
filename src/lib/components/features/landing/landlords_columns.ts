@@ -1,10 +1,6 @@
 
 export const landlordsColumns: { header: string, dataIndex: string; }[] = [
     {
-        header: 'Bailleur',
-        dataIndex: 'landlord'
-    },
-    {
         header: 'Locataire',
         dataIndex: 'tenant'
     },
@@ -26,7 +22,7 @@ export const landlordsColumns: { header: string, dataIndex: string; }[] = [
     },
 
     {
-        header: 'Option',
+        header: '',
         dataIndex: ''
     }
 ];
