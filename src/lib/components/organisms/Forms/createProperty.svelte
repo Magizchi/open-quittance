@@ -14,15 +14,6 @@
 <div class="grid grid-cols-2 gap-2">
 	<div class="col-span-2">
 		<Input
-			label="Local"
-			name={`name`}
-			bind:value={defaultValues['name']}
-			placeholder="denomination du local"
-			required
-		/>
-	</div>
-	<div class="col-span-2">
-		<Input
 			label="Adresse*"
 			name={`address`}
 			bind:value={defaultValues['address']}
@@ -30,6 +21,7 @@
 			required
 		/>
 	</div>
+
 	<Input name={`city`} bind:value={defaultValues['city']} placeholder="Ville" required />
 	<Input
 		name={`postalCode`}
@@ -38,6 +30,15 @@
 		type="number"
 		required
 	/>
+	<div class="col-span-2">
+		<Input
+			label="Description"
+			name={`name`}
+			bind:value={defaultValues['name']}
+			placeholder="Description"
+			required
+		/>
+	</div>
 	<div class="col-span-2">
 		<Input
 			label="Loyer*"
