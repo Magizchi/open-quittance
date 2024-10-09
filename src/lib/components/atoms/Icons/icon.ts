@@ -5,3 +5,4 @@ export { default as PenIcon } from "./PenIcon.svelte";
 export { default as BenIcon } from "./BenIcon.svelte";
 export { default as BuildingIcon } from './BuildingIcon.svelte';
 export { default as PdfIcon } from "./PdfIcon.svelte";
+export { default as EditIcon } from "./EditIcon.svelte";
