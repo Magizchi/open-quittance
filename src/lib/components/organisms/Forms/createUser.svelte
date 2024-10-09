@@ -1,6 +1,12 @@
-<script>
+<script lang="ts">
 	import Input from '$lib/components/atoms/Input.svelte';
-	export let defaultValues = {
+	export let defaultValues: {
+		name: string;
+		address: string;
+		city: string;
+		siret: string | null;
+		postalCode: number | string;
+	} = {
 		name: '',
 		address: '',
 		city: '',

@@ -2,6 +2,7 @@
 	import { Routes } from '$lib/constants/routes.js';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
+	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
 
 	export let data;
 
@@ -17,6 +18,10 @@
 		{
 			header: 'Adresse',
 			dataIndex: 'address'
+		},
+		{
+			header: '',
+			dataIndex: ''
 		}
 	];
 </script>
@@ -29,9 +34,7 @@
 	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
 			<Td>
-				<a href={Routes.tenants + '/' + row.id} class="underline">
-					{row.name}
-				</a>
+				{row.name}
 			</Td>
 			<Td>
 				{row.siret}
@@ -42,6 +45,15 @@
 					{row.city}
 					{row.postalCode}
 				</span>
+			</Td>
+			<Td>
+				<div class="flex items-center justify-end w-full">
+					<Clickable border href={Routes.tenants + '/' + row.id}>
+						<div class="flex flex-row items-center justify-center">
+							<EditIcon class="mr-1 text-base" height="20" /> Modifier
+						</div>
+					</Clickable>
+				</div>
 			</Td>
 		</Tr>
 	</Table>
