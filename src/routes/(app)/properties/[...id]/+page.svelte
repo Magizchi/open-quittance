@@ -19,7 +19,7 @@
 				<input name="id" value={data.property.id} hidden />
 				<div class="flex space-x-5">
 					<Clickable secondary likeButton href={Routes.properties}>Annuler</Clickable>
-					<Clickable primary type="submit">Ajouter</Clickable>
+					<Clickable primary type="submit">Modifier</Clickable>
 				</div>
 			</form>
 		</div>
