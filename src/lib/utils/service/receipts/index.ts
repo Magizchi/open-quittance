@@ -2,7 +2,7 @@ import FormDataToJson from '$lib/utils/FormDataToJson';
 import db from '$lib/server/database.js';
 import { landlordsTable, propertiesTable, receiptsTable, rentalsTable, tenantsTable } from '$lib/server/schema';
 import dayjs from 'dayjs';
-import { and, eq, isNull, notInArray, sql } from 'drizzle-orm';
+import { and, desc, eq, isNull, notInArray, sql } from 'drizzle-orm';
 import { RentalModel } from '$lib/models';
 
 /**
@@ -98,4 +98,14 @@ export const CreateReceipts = async (rental: RentalModel, startDate: string, end
         createAt: dayjs(dayjs().format('YYYY/MM/DD')).toDate()
     };
     return await db.insert(receiptsTable).values(newReceipts);
+};
+
+/**
+ * Function get receipts
+ * @param page default: 1
+ * @param show default: 12
+ * @returns 
+ */
+export const GetReceipts = async (page: number = 1, show: number = 12) => {
+    return db.select().from(receiptsTable).limit(show).offset(show * (page - 1)).orderBy(desc(receiptsTable.startDate));
 };
