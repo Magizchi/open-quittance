@@ -6,3 +6,5 @@ export { default as BenIcon } from "./BenIcon.svelte";
 export { default as BuildingIcon } from './BuildingIcon.svelte';
 export { default as PdfIcon } from "./PdfIcon.svelte";
 export { default as EditIcon } from "./EditIcon.svelte";
+export { default as ArrowLeftIcon } from './ArrowLeftIcon.svelte';
+export { default as ArrowRightIcon } from './ArrowRightIcon.svelte';
