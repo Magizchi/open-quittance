@@ -1,8 +1,7 @@
-import db from '$lib/server/database';
-import { tenantsTable } from '$lib/server/schema.js';
+import { GetTenants } from '$lib/utils/service/tenants/index.js';
 
 export const load = async ({ parent }) => {
     await parent();
-    const tenants = await db.select().from(tenantsTable);
+    const tenants = await GetTenants();
     return { tenants };
 };

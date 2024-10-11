@@ -3,10 +3,13 @@ import { redirect } from "@sveltejs/kit";
 import db from "$lib/server/database";
 import { propertiesTable, rentalsTable, tenantsTable } from "$lib/server/schema.js";
 import dayjs from "dayjs";
+import { eq } from "drizzle-orm";
 
 export const load = async ({ parent }) => {
     await parent();
-    const propertiesOptions = (await db.select().from(propertiesTable)).map(element => ({ label: element.name, value: element.id }));
+    const propertiesOptions = (await db.select().from(propertiesTable)
+        .leftJoin(rentalsTable, eq(propertiesTable.id, rentalsTable.property_id)))
+        .map(element => ({ label: element.properties.name, value: element.properties.id }));
     const tenantsOptions = (await db.select().from(tenantsTable)).map(element => ({ label: element.name, value: element.id }));
 
     return { propertiesOptions, tenantsOptions };

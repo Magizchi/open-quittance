@@ -6,6 +6,13 @@
 	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
 
 	export let data;
+
+	async function filterPage(page: number = 1, show: number = 12) {
+		const response = await fetch(`/api/properties?page=${page}&show=${show}`).then((data) =>
+			data.json()
+		);
+		data.properties = response;
+	}
 </script>
 
 <section class="px-10 space-y-3">
@@ -13,7 +20,7 @@
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Propriété</h1>
 		<Clickable primary href={Routes.createProperty}>Créer Propriétaire</Clickable>
 	</div>
-	<Table {columns} rows={data.properties} let:row>
+	<Table {filterPage} {columns} rows={data.properties} let:row>
 		<Tr>
 			<Td>
 				<div class="flex flex-col items-end text-justify">

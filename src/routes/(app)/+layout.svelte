@@ -43,7 +43,7 @@
 		{/if}
 	</aside>
 	<div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
-		<main class="relative mt-3">
+		<main class="relative mt-5">
 			<Balise />
 			<slot class="z-0" />
 		</main>
