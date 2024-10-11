@@ -40,11 +40,13 @@
 				{row.siret}
 			</Td>
 			<Td>
-				{row.address}
-				<span class="flex space-x-3">
-					{row.city}
-					{row.postalCode}
-				</span>
+				<div class="flex flex-col items-end text-justify">
+					{row.address}
+					<span class="flex space-x-3">
+						{row.city}
+						{row.postalCode}
+					</span>
+				</div>
 			</Td>
 			<Td>
 				<div class="flex items-center justify-end w-full">
