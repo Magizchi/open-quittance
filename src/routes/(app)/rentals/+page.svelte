@@ -25,19 +25,29 @@
 	<Table {columns} rows={data.rentals} let:row>
 		<Tr>
 			<Td>{row.tenant.name}</Td>
-			<Td>{row.property.name}</Td>
-			<Td>{row.property.city}</Td>
-			<Td>{formatDate(row.startDate)}</Td>
-			<Td>{row.endDate ? formatDate(row.endDate) : '/'}</Td>
 			<Td>
-				<Clickable
-					secondary
-					disabled={row.endDate ? true : false}
-					on:click={() => {
-						showModalEndRentals = true;
-						rental = row;
-					}}>Fin de location</Clickable
-				>
+				<div class="flex flex-col items-end text-justify">
+					{row.property.address}
+					<span class="flex space-x-3">
+						{row.property.city}
+						{row.property.postalCode}
+					</span>
+				</div>
+			</Td>
+			<Td>{row.property.name}</Td>
+			<Td>{formatDate(row.startDate)}</Td>
+			<Td>
+				<div class="flex justify-end">
+					<div class="w-1/2">
+						<Clickable
+							border
+							on:click={() => {
+								showModalEndRentals = true;
+								rental = row;
+							}}>Fin de location</Clickable
+						>
+					</div>
+				</div>
 			</Td>
 		</Tr>
 	</Table>

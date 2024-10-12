@@ -9,7 +9,6 @@ export const load = async () => {
             tenant: {
                 id: tenantsTable.id,
                 name: tenantsTable.name,
-
             },
             landlord: {
                 id: landlordsTable.id,
@@ -17,6 +16,8 @@ export const load = async () => {
             },
             property: {
                 id: propertiesTable.id,
+                address: propertiesTable.address,
+                postalCode: propertiesTable.postalCode,
                 name: propertiesTable.name,
                 city: propertiesTable.city
             },

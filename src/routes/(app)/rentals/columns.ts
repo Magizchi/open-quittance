@@ -8,19 +8,15 @@ export const columns = [
         dataIndex: 'property'
     },
     {
-        header: 'Ville',
-        dataIndex: 'city'
+        header: 'Description propriété ',
+        dataIndex: 'name'
     },
     {
         header: 'Début de location',
         dataIndex: 'startDate'
     },
     {
-        header: 'Fin de location',
-        dataIndex: 'endDate'
-    },
-    {
-        header: 'Options',
+        header: '',
         dataIndex: 'options'
     }
 ];
