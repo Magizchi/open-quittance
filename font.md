@@ -1,1 +1,1 @@
-https://www.fontshare.com/fonts/jet-brains-mono
+https://www.fontshare.com/fonts/hind

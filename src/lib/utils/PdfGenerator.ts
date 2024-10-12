@@ -7,11 +7,10 @@ import type { BufferOptions, TDocumentDefinitions } from "pdfmake/interfaces";
 const GeneratePdf = (docDefinition: TDocumentDefinitions, options?: BufferOptions): Promise<Blob> => {
 
     const fonts = {
-        Roboto: {
-            normal: 'src/lib/fonts/Roboto/Roboto-Regular.ttf',
-            italics: 'src/lib/fonts/Roboto/Roboto-Italic.ttf',
-            bold: 'src/lib/fonts/Roboto/Roboto-Bold.ttf'
-        }
+        Roboto: { // Only Roboto work? I used "Hind"
+            normal: 'src/lib/assets/fonts/Hind/OTF/Hind-Regular.otf',
+            bold: 'src/lib/assets/fonts/Hind/OTF/Hind-Bold.otf'
+        },
     };
 
     const printer = new PdfPrinter(fonts);
