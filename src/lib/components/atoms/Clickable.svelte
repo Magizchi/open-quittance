@@ -16,7 +16,7 @@
 {#if href}
 	<a
 		{...$$restProps}
-		class="flex px-4 py-2 text-white rounded font-hind aria-[current=true]:bg-teal-500 aria-[current=true]:hover:bg-teal-600"
+		class="flex px-4 py-2 text-white rounded font-hind aria-[current=true]:bg-teal-500 aria-[current=true]:hover:bg-teal-600 hover:bg-teal-500"
 		class:primaryClass={primary}
 		class:secondaryClass={secondary}
 		class:successClass={current || success}
