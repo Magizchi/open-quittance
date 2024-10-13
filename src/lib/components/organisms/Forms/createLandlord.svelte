@@ -23,6 +23,6 @@
 		<Input placeholder="Ville" name="city" required="required" />
 	</div>
 	<div class="flex justify-end">
-		<Clickable success type="submit">Enregistrer</Clickable>
+		<Clickable primary type="submit">Enregistrer</Clickable>
 	</div>
 </div>
