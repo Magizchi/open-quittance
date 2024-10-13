@@ -34,7 +34,7 @@
 							on:change={() => setMessage()}
 							label="Mot de passe"
 						/>
-						<p class="">
+						<p class="font-hind text-rose-500">
 							{#if form}{form.message}{/if}
 						</p>
 
