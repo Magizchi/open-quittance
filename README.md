@@ -38,9 +38,16 @@ Créer un fichier `.env` à la racine:
 
     bientôt...
 
-### Développement
+### Développement AVEC DOCKER ET DEV CONTAINER
 
 1- Lancer `Docker`, avec DevContainer de VS Code
+
+
+1.5 Installer les packages
+
+```bash
+    npm run install
+```
 
 2- Lancer la migration qui va créer un dossier drizzle
 
