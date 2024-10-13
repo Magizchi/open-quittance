@@ -10,6 +10,10 @@ De plus, le projet offre un système d'affichage des quittances ainsi qu'un hist
 
 ### Préambule
 
+Package utiliser
+- Nodejs Version 22
+- Mysql  Version 9.0.1
+
 Télécharger le code
 
 ```bash
@@ -19,8 +23,6 @@ Télécharger le code
 Créer un fichier `.env` à la racine:
 
 ```bash
-    #listen Port
-    PORT='{your port}'
     ## Database Config
     DB_HOST=db
     DB_PORT=3306
@@ -32,16 +34,15 @@ Créer un fichier `.env` à la racine:
     ## JWT
     JWT_SECRET_TOKEN='{your token}'
 ```
+### Production
 
- Pas de production pour le moment, c'est en cours d'installation
+    bientôt...
 
 ### Développement
 
 1- Lancer `Docker`, avec DevContainer de VS Code
 
-1.1 - Si vous n'avez pas DevContainer avec VS CODE, faut debugger le docker-compose
-
-2- Lancer la migration qui va créer un dossier drizzle avec les fichiers migrations
+2- Lancer la migration qui va créer un dossier drizzle
 
 ```bash
     npm run migration
@@ -53,53 +54,17 @@ Créer un fichier `.env` à la racine:
     npm run dev -- --host
 ```
 
-4- Dans le localhost:8080 (le phpmyadmin) ajouter dans user, un compte
+4- connectez vous au mysql et ajouter l'utilisateur par default
+
+```sql
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
+```
 
 5- Vous pouvez acceder à l'application
 
-## Annexe
-
-### create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-### Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
+    http://localhost:5173
+    
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+    email:'admin@gmail.com'
+    password:'password'
 ```
-
-### Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-### Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-#### Puppeteer
-
-    https://keestalkstech.com/2022/08/jupyter-notebooks-vscode-dev-container-with-puppeteer-support/
-#### Add chromium
-    https://stackoverflow.com/questions/58997430/how-to-install-chromium-in-docker-based-on-ubuntu-19-10-and-20-04
