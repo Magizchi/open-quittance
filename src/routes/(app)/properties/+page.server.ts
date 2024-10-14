@@ -1,4 +1,5 @@
-import { getProperties } from '$lib/utils/service/properties/index.js';
+import db from '$lib/server/database';
+import { propertiesTable } from '$lib/server/schema.js';
 
 export const load = async ({ parent, url }) => {
 	await parent();
@@ -6,7 +7,10 @@ export const load = async ({ parent, url }) => {
 	const page = url.searchParams.get('page') ? Number(url.searchParams.get('page')) : 1;
 	const show = url.searchParams.get('show') ? Number(url.searchParams.get('show')) : 12;
 
-	const properties = await getProperties(page, show);
+	const properties = await db.select()
+		.from(propertiesTable)
+		.limit(show)
+		.offset(show * (page - 1));
 
 	return { properties };
 };
