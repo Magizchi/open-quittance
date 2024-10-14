@@ -1,15 +1,41 @@
 <script lang="ts">
-	import { landlordsColumns } from '$lib/components/features/landing/landlords_columns.js';
 	import { saveAs } from 'file-saver';
-	import { formatDate, getMonth } from '$lib/utils/date';
+	import { formatDate } from '$lib/utils/date.js';
 	import { PdfIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import ValideReceipt from '$lib/components/organisms/Forms/valideReceipt.svelte';
-	import Pins from '$lib/components/atoms/Pins.svelte';
+	import Pins from '$lib/components/atoms/Badge.svelte';
 
 	export let data;
+
+	const receiptsColumns: { header: string; dataIndex: string }[] = [
+		{
+			header: 'Locataire',
+			dataIndex: 'tenant'
+		},
+		{
+			header: 'Adresse du local',
+			dataIndex: 'address'
+		},
+		{
+			header: 'Statut',
+			dataIndex: 'startDate'
+		},
+		{
+			header: 'Date de paiement',
+			dataIndex: 'paymentDate'
+		},
+		{
+			header: 'Total',
+			dataIndex: 'total'
+		},
+		{
+			header: '',
+			dataIndex: ''
+		}
+	];
 
 	let pdfBuffer: any;
 	let showModalPaymentDate: boolean = false;
@@ -56,10 +82,10 @@
 <section class="relative px-10 space-y-5 bg-slate-100">
 	<h1 class="text-2xl font-bold font-hind text-slate-700">Tableau de bord</h1>
 
-	<Table scalpe {filterPage} columns={landlordsColumns} rows={data.receiptList} let:row>
+	<Table scalpe columns={receiptsColumns} rows={data.receiptList} let:row>
 		<Tr>
 			{#if typeof row === 'string'}
-				<td colspan={landlordsColumns.length} class="font-bold bg-gray-300 text-slate-700 font-hind"
+				<td colspan={receiptsColumns.length} class="font-bold bg-gray-300 text-slate-700 font-hind"
 					>{row}</td
 				>
 			{:else}
