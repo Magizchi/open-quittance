@@ -5,7 +5,7 @@
 </script>
 
 <span
-	class="p-1 px-3 border rounded-full select-none font-hind"
+	class="p-1 px-3 border rounded-full font-hind"
 	class:defaultClass={normal}
 	class:valideClass={valide}
 	class:errorClass={error}
