@@ -14,7 +14,7 @@ export const actions = {
 
         try {
             await db.insert(propertiesTable).values({
-                landlord_id: 3,
+                landlord_id: 1,
                 name,
                 address,
                 city,
@@ -25,7 +25,7 @@ export const actions = {
             });
         } catch (err) {
             return {
-                message: 'eerr' + err,
+                message: 'err' + err,
                 success: false,
                 status: 400
             };
