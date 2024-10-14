@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
-	import CreateProperty from '$lib/components/organisms/Forms/createProperty.svelte';
+	import PropertyForm from '../propertyForm.svelte';
 	import { Routes } from '$lib/constants/routes.js';
 	export let data;
 </script>
@@ -15,7 +15,7 @@
 		</div>
 		<div class="p-5">
 			<form id="landlord" method="POST" class="space-y-5">
-				<CreateProperty defaultValues={data.property} />
+				<PropertyForm defaultValues={data.property} />
 				<input name="id" value={data.property.id} hidden />
 				<div class="flex space-x-5">
 					<Clickable secondary likeButton href={Routes.properties}>Annuler</Clickable>

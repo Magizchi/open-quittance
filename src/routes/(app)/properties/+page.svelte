@@ -1,26 +1,45 @@
 <script lang="ts">
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
-	import { columns } from './columns.js';
 	import { Routes } from '$lib/constants/routes.js';
 	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
 
 	export let data;
 
-	async function filterPage(page: number = 1, show: number = 12) {
-		const response = await fetch(`/api/properties?page=${page}&show=${show}`).then((data) =>
-			data.json()
-		);
-		data.properties = response;
-	}
+	export const columns = [
+		{
+			header: 'Adresse',
+			dataIndex: 'address'
+		},
+		{
+			header: 'Description',
+			dataIndex: 'name'
+		},
+		{
+			header: 'Loyer',
+			dataIndex: 'rent'
+		},
+		{
+			header: 'Charges',
+			dataIndex: 'condo_fees'
+		},
+		{
+			header: 'Taxe',
+			dataIndex: 'taxes'
+		},
+		{
+			header: '',
+			dataIndex: ''
+		}
+	];
 </script>
 
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
-		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Propriété</h1>
-		<Clickable primary href={Routes.createProperty}>Créer Propriétaire</Clickable>
+		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Propriétés</h1>
+		<Clickable primary href={Routes.createProperty}>Créer une propriété</Clickable>
 	</div>
-	<Table {filterPage} {columns} rows={data.properties} let:row>
+	<Table {columns} rows={data.properties} let:row>
 		<Tr>
 			<Td>
 				<div class="flex flex-col items-end text-justify">

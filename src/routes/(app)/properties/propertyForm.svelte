@@ -1,17 +1,25 @@
 <script lang="ts">
 	import Input from '$lib/components/atoms/Input.svelte';
-	export let defaultValues: any | null = {
+	export let defaultValues: {
+		name: string;
+		address: string;
+		city: string;
+		postalCode: string;
+		rent: number | null;
+		condo_fees: number | null;
+		taxes: number | null;
+	} = {
 		name: '',
 		address: '',
 		city: '',
-		postalCode: 0,
-		rent: 0,
-		condo_fees: 0,
-		taxes: 0
+		postalCode: '',
+		rent: null,
+		condo_fees: null,
+		taxes: null
 	};
 </script>
 
-<div class="grid grid-cols-2 gap-2">
+<div class="grid grid-cols-2 gap-3">
 	<div class="col-span-2">
 		<Input
 			label="Adresse*"
@@ -22,8 +30,15 @@
 		/>
 	</div>
 
-	<Input name={`city`} bind:value={defaultValues['city']} placeholder="Ville" required />
 	<Input
+		label="Ville*"
+		name={`city`}
+		bind:value={defaultValues['city']}
+		placeholder="Ville"
+		required
+	/>
+	<Input
+		label="Code postal*"
 		name={`postalCode`}
 		bind:value={defaultValues['postalCode']}
 		placeholder="Code postal"
@@ -36,12 +51,12 @@
 			name={`name`}
 			bind:value={defaultValues['name']}
 			placeholder="Description"
-			required
 		/>
 	</div>
 	<div class="col-span-2">
 		<Input
 			label="Loyer*"
+			icon
 			name={`rent`}
 			type="number"
 			bind:value={defaultValues['rent']}
@@ -53,9 +68,10 @@
 	<div class="col-span-2">
 		<Input
 			label="Charges*"
+			icon
 			name={`condo_fees`}
 			bind:value={defaultValues['condo_fees']}
-			placeholder="510"
+			placeholder="250"
 			type="number"
 			min={0}
 			required
@@ -64,11 +80,12 @@
 	<div class="col-span-2">
 		<Input
 			label="Taxes*"
+			icon
 			type="number"
 			name={`taxes`}
 			min={0}
 			bind:value={defaultValues['taxes']}
-			placeholder="90"
+			placeholder="100"
 			required
 		/>
 	</div>
