@@ -6,7 +6,7 @@
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import ValideReceipt from '$lib/components/organisms/Forms/valideReceipt.svelte';
-	import Pins from '$lib/components/atoms/Badge.svelte';
+	import Badge from '$lib/components/atoms/Badge.svelte';
 
 	export let data;
 
@@ -70,18 +70,10 @@
 
 		saveAs(blob, `quittance-${documentName}.pdf`);
 	}
-
-	async function filterPage(page: number = 1, show: number = 12) {
-		const response = await fetch(`/api/landing?page=${page}&show=${show}`).then((data) =>
-			data.json()
-		);
-		data.receiptList = response;
-	}
 </script>
 
 <section class="relative px-10 space-y-5 bg-slate-100">
 	<h1 class="text-2xl font-bold font-hind text-slate-700">Tableau de bord</h1>
-
 	<Table scalpe columns={receiptsColumns} rows={data.receiptList} let:row>
 		<Tr>
 			{#if typeof row === 'string'}
@@ -101,9 +93,9 @@
 				</Td>
 				<Td>
 					{#if row.paymentDate}
-						<Pins valide>Payé</Pins>
+						<Badge valide>Payé</Badge>
 					{:else}
-						<Pins error>Reste à payé</Pins>
+						<Badge error>Reste à payer</Badge>
 					{/if}
 				</Td>
 				<Td>
