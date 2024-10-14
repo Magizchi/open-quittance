@@ -5,13 +5,13 @@
 		address: string;
 		city: string;
 		siret: string | null;
-		postalCode: number | string;
+		postalCode: string;
 	} = {
 		name: '',
 		address: '',
 		city: '',
 		siret: '',
-		postalCode: 0
+		postalCode: ''
 	};
 </script>
 
@@ -26,7 +26,7 @@
 	<Input label="Siret" placeholder="Siret" name="siret" bind:value={defaultValues['siret']} />
 	<div class="col-span-2">
 		<Input
-			label="Adresse* "
+			label="Addresse* "
 			placeholder="address"
 			name="address"
 			required="required"
@@ -44,7 +44,7 @@
 	<Input
 		name="city"
 		label="Ville*"
-		placeholder="city"
+		placeholder="ville"
 		required="required"
 		bind:value={defaultValues['city']}
 	/>

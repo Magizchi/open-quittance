@@ -1,6 +1,6 @@
 <script>
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
-	import FormForUser from '$lib/components/organisms/Forms/createUser.svelte';
+	import TenantForm from '../tenantForm.svelte';
 	import { Routes } from '$lib/constants/routes';
 </script>
 
@@ -14,7 +14,7 @@
 		</div>
 		<div class="p-5">
 			<form id="landlord" method="POST" class="space-y-5">
-				<FormForUser />
+				<TenantForm />
 				<div class="flex space-x-5">
 					<Clickable secondary likeButton href={Routes.tenants}>Annuler</Clickable>
 					<Clickable primary type="submit">Ajouter</Clickable>

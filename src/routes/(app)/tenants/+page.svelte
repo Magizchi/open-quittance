@@ -24,13 +24,6 @@
 			dataIndex: ''
 		}
 	];
-
-	async function filterPage(page: number = 1, show: number = 12) {
-		const response = await fetch(`/api/tenants?page=${page}&show=${show}`).then((data) =>
-			data.json()
-		);
-		data.tenants = response;
-	}
 </script>
 
 <section class="px-10 space-y-3">
@@ -38,7 +31,7 @@
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Locataires</h1>
 		<Clickable primary href={Routes.createTenant}>Ajouter</Clickable>
 	</div>
-	<Table {filterPage} {columns} rows={data.tenants} let:row>
+	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
 			<Td>
 				{row.name}
