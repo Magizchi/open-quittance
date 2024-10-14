@@ -37,7 +37,7 @@
 			]
 		}
 	},
-"postCreateCommand": "npm run dev -- --host"
+"postCreateCommand": "npm install && npm install && npm run dev -- --host"
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
