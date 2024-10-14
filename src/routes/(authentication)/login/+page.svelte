@@ -3,6 +3,7 @@
 	import Input from '$lib/components/atoms/Input.svelte';
 	import logo from '$lib/assets/image/machine_quittance.jpg';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
+
 	const setMessage = () => {
 		form = { message: '', incorrect: false };
 	};
@@ -21,7 +22,9 @@
 					<h1 class="text-2xl font-bold text-indigo-500 md:text-3xl font-hind">
 						OPEN <span class="text-amber-500">QUITTANCE</span>
 					</h1>
-					<p class="text-slate-700">Création et suivi des quittances</p>
+					<p class="text-slate-700">
+						Simplifiez la gestion et la génération de vos quittances de loyer en quelques clics.
+					</p>
 				</div>
 				<form class="w-1/2" method="post">
 					<div class="space-y-5">
