@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'hind';
-    src: url('./lib/assets/fonts/hind/Hind-Variable.ttf');
+	font-family: 'hind';
+	src: url('./lib/assets/fonts/hind/Hind-Variable.ttf');
 }
