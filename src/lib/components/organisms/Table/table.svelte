@@ -4,13 +4,16 @@
 	import { ArrowLeftIcon, ArrowRightIcon } from '$lib/components/atoms/Icons/icon';
 	import dayjs from 'dayjs';
 
+	type T = $$Generic<Record>;
+
 	interface ColumnsProps {
 		header: string;
 		dataIndex: string;
 	}
 
 	export let columns: ColumnsProps[];
-	export let rows: any[] = [];
+	export let rows: Array<T> = [];
+
 	export const index: number = 0;
 	export let scalpe: boolean = false;
 
