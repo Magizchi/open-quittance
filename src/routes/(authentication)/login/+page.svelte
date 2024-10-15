@@ -22,7 +22,7 @@
 					<h1 class="text-2xl font-bold text-indigo-500 md:text-3xl font-hind">
 						OPEN <span class="text-amber-500">QUITTANCE</span>
 					</h1>
-					<p class="text-slate-700">
+					<p class="text-sm text-center text-slate-700 md:text-base">
 						Simplifiez la gestion et la génération de vos quittances de loyer en quelques clics.
 					</p>
 				</div>
@@ -37,7 +37,7 @@
 							on:change={() => setMessage()}
 							label="Mot de passe"
 						/>
-						<p class="font-hind text-rose-500">
+						<p class="text-sm font-hind text-rose-500 md:text-base">
 							{#if form}{form.message}{/if}
 						</p>
 

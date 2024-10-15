@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { redirect, fail } from '@sveltejs/kit';
-import db from '$lib/server/database';
-import { usersTable } from '$lib/server/schema';
+import db from '$lib/db/drizzle';
+import { usersTable } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { createCookie } from '$lib/utils/remember_me.js';
 import { Routes } from '$lib/constants/routes.js';
