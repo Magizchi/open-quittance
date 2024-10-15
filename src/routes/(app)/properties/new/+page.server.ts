@@ -1,7 +1,7 @@
 import FormDataToJson from '$lib/utils/FormDataToJson.js';
 import { redirect } from '@sveltejs/kit';
-import db from '$lib/server/database';
-import { propertiesTable } from '$lib/server/schema.js';
+import db from '$lib/db/drizzle';
+import { propertiesTable } from '$lib/db/schema.js';
 import { Routes } from '$lib/constants/routes.js';
 
 export const load = async ({ parent }) => {

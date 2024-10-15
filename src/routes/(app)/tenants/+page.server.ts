@@ -1,5 +1,5 @@
-import db from '$lib/server/database';
-import { tenantsTable } from '$lib/server/schema.js';
+import db from '$lib/db/drizzle';
+import { tenantsTable } from '$lib/db/schema.js';
 
 export const load = async ({ parent, url }) => {
 	await parent();

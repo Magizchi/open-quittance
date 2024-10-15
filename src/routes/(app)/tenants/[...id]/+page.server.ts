@@ -1,7 +1,7 @@
 import FormDataToJson from '$lib/utils/FormDataToJson.js';
 import { redirect } from '@sveltejs/kit';
-import db from '$lib/server/database';
-import { tenantsTable } from '$lib/server/schema.js';
+import db from '$lib/db/drizzle';
+import { tenantsTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
 import { Routes } from '$lib/constants/routes';
 import { createNotification } from '$lib/stores/notification/store.js';
