@@ -13,14 +13,14 @@
 				required="required"
 			/>
 			<p class="text-sm italic text-slate-600 font-hind">
-				Nom et prénom si vous ête un particulier sinon le nom de l'entreprise
+				Nom et prénom si vous êtes un particulier sinon le nom de l'entreprise
 			</p>
 		</div>
-		<div class="col-span-2">
+		<div class="col-span-2 mt-2">
 			<Input label="Adresse*" placeholder="Address" name="address" required="required" />
 		</div>
-		<Input placeholder="Code postal" name="postalCode" required="required" />
-		<Input placeholder="Ville" name="city" required="required" />
+		<Input label="Code Postal*" placeholder="Code postal" name="postalCode" required="required" />
+		<Input label="Ville*" placeholder="Ville" name="city" required="required" />
 	</div>
 	<div class="flex justify-end">
 		<Clickable primary type="submit">Enregistrer</Clickable>

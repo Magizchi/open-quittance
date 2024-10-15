@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormCreateLandlord from '$lib/components/organisms/Forms/createLandlord.svelte';
+	import LandlordForm from '../landlordForm.svelte';
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -12,7 +12,7 @@
 		</div>
 		<div class="pl-5">
 			<form id="landlord" method="POST">
-				<FormCreateLandlord />
+				<LandlordForm />
 			</form>
 		</div>
 	</div>
