@@ -1,0 +1,1 @@
+[type variable to a generic Svelte component?](https://stackoverflow.com/questions/75394828/how-to-pass-type-variable-to-a-generic-svelte-component)
