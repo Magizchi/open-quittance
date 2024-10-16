@@ -14,30 +14,50 @@
 			</a>
 		</h1>
 		{#if !data.needCreateLandlords}
-			<nav>
-				<ul class="space-y-3">
+			<nav class="flex flex-col justify-between h-5/6">
+				<ul class="space-y-3 grow">
 					<li class="w-full">
 						<Clickable
+							variant="menu"
 							href={Routes.landing}
 							aria-current={$page.url.pathname === `${Routes.landing}`}>Quittances</Clickable
 						>
 					</li>
 					<li class="w-full space-y-2">
 						<Clickable
+							variant="menu"
 							href={Routes.properties}
 							aria-current={$page.url.pathname.includes(Routes.properties)}>Propriétés</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
+							variant="menu"
 							href={Routes.tenants}
 							aria-current={$page.url.pathname.includes(`${Routes.tenants}`)}>Locataires</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
+							variant="menu"
 							href={Routes.rentals}
 							aria-current={$page.url.pathname.includes(`${Routes.rentals}`)}>Locations</Clickable
+						>
+					</li>
+				</ul>
+				<ul class="space-y-3">
+					<li>
+						<Clickable
+							variant="menu"
+							href={Routes.SETTINGS}
+							aria-current={$page.url.pathname.includes(`${Routes.SETTINGS}`)}>Paramètre</Clickable
+						>
+					</li>
+					<li>
+						<Clickable
+							variant="menu"
+							href={Routes.LOGOUT}
+							aria-current={$page.url.pathname.includes(`${Routes.LOGOUT}`)}>Déconnexion</Clickable
 						>
 					</li>
 				</ul>
