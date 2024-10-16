@@ -13,7 +13,7 @@
 	<slot />
 </span>
 
-<style>
+<style lang="postcss">
 	.defaultClass {
 		@apply text-slate-700 bg-slate-200 border-slate-500;
 	}
