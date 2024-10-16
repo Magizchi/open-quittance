@@ -23,6 +23,7 @@
 		class:successClass={variant === 'success'}
 		class:warningClass={variant === 'warning'}
 		class:errorClass={variant === 'error'}
+		class:borderClass={variant === 'border'}
 		{href}
 	>
 		<slot />
