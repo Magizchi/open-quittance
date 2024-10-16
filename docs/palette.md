@@ -1,4 +1,4 @@
-# Palette 
+# Palette
 
 Voici comment tu peux attribuer les couleurs de la palette à différents composants d'une interface utilisateur (UI) pour obtenir un design harmonieux et fonctionnel avec **TailwindCSS**. Je vais te proposer une répartition logique des couleurs pour divers éléments clés de l'interface.
 
