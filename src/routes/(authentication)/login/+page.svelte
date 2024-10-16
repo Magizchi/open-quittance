@@ -42,7 +42,7 @@
 						</p>
 
 						<div class="w-full md:flex md:justify-end">
-							<Clickable primary type="submit">Connection</Clickable>
+							<Clickable variant="primary" type="submit">Connection</Clickable>
 						</div>
 					</div>
 				</form>

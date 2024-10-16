@@ -16,8 +16,10 @@
 			<form id="landlord" method="POST" class="space-y-5">
 				<TenantForm />
 				<div class="flex space-x-5">
-					<Clickable secondary likeButton href={Routes.tenants}>Annuler</Clickable>
-					<Clickable primary type="submit">Ajouter</Clickable>
+					<Clickable variant="secondary" className="w-full justify-center" href={Routes.tenants}
+						>Annuler</Clickable
+					>
+					<Clickable variant="primary" type="submit">Ajouter</Clickable>
 				</div>
 			</form>
 		</div>

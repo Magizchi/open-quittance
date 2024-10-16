@@ -18,8 +18,10 @@
 				<PropertyForm defaultValues={data.property} />
 				<input name="id" value={data.property.id} hidden />
 				<div class="flex space-x-5">
-					<Clickable secondary likeButton href={Routes.properties}>Annuler</Clickable>
-					<Clickable primary type="submit">Modifier</Clickable>
+					<Clickable variant="secondary" className="w-full justify-center" href={Routes.properties}
+						>Annuler</Clickable
+					>
+					<Clickable variant="primary" type="submit">Modifier</Clickable>
 				</div>
 			</form>
 		</div>

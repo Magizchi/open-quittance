@@ -27,14 +27,14 @@ export const actions = {
 		}
 
 		// Check user email
-		const [user] = (await db
+		const [user] = await db
 			.select({
 				id: usersTable.id,
 				email: usersTable.email,
 				hash: usersTable.password
 			})
 			.from(usersTable)
-			.where(eq(usersTable.email, login.toString())));
+			.where(eq(usersTable.email, login.toString()));
 
 		if (!user) {
 			return fail(404, {

@@ -37,7 +37,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Propriétés</h1>
-		<Clickable primary href={Routes.createProperty}>Créer une propriété</Clickable>
+		<Clickable variant="primary" href={Routes.createProperty}>Créer une propriété</Clickable>
 	</div>
 	<Table {columns} rows={data.properties} let:row>
 		<Tr>

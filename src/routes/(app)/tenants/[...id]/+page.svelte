@@ -20,8 +20,13 @@
 				<TenantForm defaultValues={data.tenant} />
 				<input name="id" value={data.tenant.id} hidden />
 				<div class="flex space-x-5">
-					<Clickable secondary likeButton href={Routes.tenants}>Annuler</Clickable>
-					<Clickable primary type="submit">Modifier</Clickable>
+					<Clickable
+						variant="secondary"
+						className="w-full justify-center"
+						likeButton
+						href={Routes.tenants}>Annuler</Clickable
+					>
+					<Clickable variant="primary" type="submit">Modifier</Clickable>
 				</div>
 			</form>
 		</div>

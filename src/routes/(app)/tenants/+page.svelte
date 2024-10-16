@@ -29,7 +29,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Locataires</h1>
-		<Clickable primary href={Routes.createTenant}>Ajouter</Clickable>
+		<Clickable variant="primary" href={Routes.createTenant}>Ajouter</Clickable>
 	</div>
 	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
