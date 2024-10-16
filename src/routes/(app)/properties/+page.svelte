@@ -64,7 +64,7 @@
 			</Td>
 			<Td>
 				<div class="flex items-center justify-end w-full">
-					<Clickable border href={Routes.properties + '/' + row.id}>
+					<Clickable variant="border" href={Routes.properties + '/' + row.id}>
 						<div class="flex flex-row items-center justify-center">
 							<EditIcon class="mr-1 text-base" height="20" /> Modifier
 						</div>

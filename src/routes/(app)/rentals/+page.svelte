@@ -63,7 +63,7 @@
 				<div class="flex justify-end">
 					<div class="w-1/2">
 						<Clickable
-							border
+							variant="border"
 							on:click={() => {
 								showModalEndRentals = true;
 								selectedRental = row;
