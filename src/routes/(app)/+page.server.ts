@@ -1,4 +1,3 @@
-import ReceiptsModel from '$lib/models/receipts.model.js';
 import { generateNewReceipts, getReceipts, addPaymentDate } from '$lib/utils/service/receipts';
 
 export const load = async ({ parent, url }) => {
@@ -9,7 +8,7 @@ export const load = async ({ parent, url }) => {
 	const page = url.searchParams.get('page') ? Number(url.searchParams.get('page')) : 1;
 	const show = url.searchParams.get('show') ? Number(url.searchParams.get('show')) : 12;
 
-	const receiptList: ReceiptsModel[] = await getReceipts(page, show);
+	const receiptList = await getReceipts(page, show);
 
 	return { receiptList };
 };
