@@ -7,5 +7,8 @@ export enum Routes {
 	tenants = '/tenants',
 	createTenant = '/tenants/new',
 	rentals = '/rentals',
-	createRental = '/rentals/new'
+	createRental = '/rentals/new',
+	SETTINGS = '/settings',
+	LOGOUT = '/logout'
+
 }
