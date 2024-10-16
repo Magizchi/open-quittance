@@ -1,5 +1,5 @@
-import type { tenantsTable } from "$lib/server/schema";
+import type { tenantsTable } from '$lib/db/schema';
 
 type tenantType = typeof tenantsTable.$inferSelect;
 
-export default interface TenantModel extends tenantType { }
+export default interface TenantModel extends tenantType {}
