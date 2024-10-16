@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { saveAs } from 'file-saver';
-	import { formatDate } from '$lib/utils/date.js';
+	import { formatDate, toDay } from '$lib/utils/date.js';
 	import { PdfIcon } from '$lib/components/atoms/Icons/icon.js';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import Modal from '$lib/components/atoms/Modal.svelte';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import ValideReceipt from '$lib/components/organisms/Forms/valideReceipt.svelte';
 	import Badge from '$lib/components/atoms/Badge.svelte';
+	import type { ReceiptsModel } from '$lib/models';
 
 	export let data;
 
@@ -39,18 +40,10 @@
 
 	let pdfBuffer: any;
 	let showModalPaymentDate: boolean = false;
-	let loading: boolean = false;
-	let selectedReceipts: {
-		tenant_fullName: string;
-		landlord_fullName: string;
-		startDate: string;
-		id: number | string;
-	} = {
-		tenant_fullName: '',
-		landlord_fullName: '',
-		startDate: '',
-		id: ''
-	};
+	let selectedReceipts: ReceiptsModel = {
+		startDate: toDay(),
+		id: 0
+	} as ReceiptsModel;
 
 	let documentName: string;
 	async function getPdf(receiptId: number) {
@@ -111,9 +104,8 @@
 				<Td>
 					<div class="flex items-center justify-between w-full space-x-5">
 						<Clickable
-							secondary
+							variant="secondary"
 							on:click={() => {
-								loading = true;
 								getPdf(row.id);
 							}}
 						>
@@ -124,7 +116,7 @@
 						</Clickable>
 						{#if !row.paymentDate}
 							<Clickable
-								border
+								variant="border"
 								on:click={() => {
 									showModalPaymentDate = true;
 									selectedReceipts = row;

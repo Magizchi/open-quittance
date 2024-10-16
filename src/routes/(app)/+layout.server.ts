@@ -2,11 +2,11 @@ import { redirect } from '@sveltejs/kit';
 import db from '$lib/db/drizzle.js';
 import { landlordsTable, usersTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
-import CheckCookie from '$lib/utils/CheckCookie';
+import R from '$lib/utils/remember_me.js';
 import { Routes } from '$lib/constants/routes';
 
 export const load = async ({ cookies, url }) => {
-	const cookieInfo = CheckCookie(cookies);
+	const cookieInfo = R(cookies);
 
 	if (!cookieInfo) {
 		cookies.delete('remember_me');
