@@ -1,64 +1,94 @@
-# Développement SANS DOCKER
+# Développement SANS Docker
 
 ## Environnement
 
- Installer les packages suivants:
+1. **Installer les dépendances nécessaires** :
 
-- Nodejs Version 22
-- Mysql Version 9.0.1
+   Assurez-vous d'installer les versions requises des logiciels suivants :
 
-Télécharger le code
+   - **Node.js** : Version 22
+   - **MySQL** : Version 9.0.1
 
-```bash
-    git clone https://github.com/Magizchi/openQuittance.git
-```
+2. **Télécharger le code source** :
 
-Créer un fichier `.env` à la racine:
+   Clonez le dépôt Git du projet avec la commande suivante :
 
-```bash
-    ## Database Config
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_PASSWORD=password
-    DB_USER=user
-    DB_DATABASE=pdfman
-    DB_LIMIT=5
-    DB_SYNCHRO=true
-    ## JWT
-    JWT_SECRET_TOKEN='{your token}'
-```
+   ```bash
+   git clone https://github.com/Magizchi/openQuittance.git
+   ```
+
+3. **Créer le fichier `.env`** :
+
+   À la racine du projet, créez un fichier `.env` contenant les informations de configuration suivantes :
+
+   ```bash
+   ## Configuration de la base de données
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_PASSWORD=password
+   DB_USER=root
+   DB_DATABASE=pdfman
+   DB_LIMIT=5
+   DB_SYNCHRO=true
+
+   ## JWT
+   JWT_SECRET_TOKEN='{votre token JWT ici}'
+   ```
+
+   Remplacez `'{votre token JWT ici}'` par un token JWT généré (vous pouvez utiliser un outil comme [Generate-random](https://generate-random.org/api-token-generator?count=1&length=256&type=mixed-numbers-symbols&prefix=)).
 
 ## Lancer le projet
 
-Installer les packages
+1. **Installation des dépendances** :
+
+   Dans le répertoire du projet, installez les packages requis en exécutant :
+
+   ```bash
+   npm install
+   ```
+
+2. **Exécuter la migration de la base de données** :
+
+   Cette commande crée un dossier `drizzle` et effectue les migrations nécessaires pour la base de données :
+
+   ```bash
+   npm run migration
+   ```
+
+3. **Lancer l'application** :
+
+   Démarrez le projet avec la commande suivante :
+
+   ```bash
+   npm run dev
+   ```
+
+## Configuration de l'utilisateur par défaut
+
+1. **Ajouter l'utilisateur administrateur** :
+
+   Une fois le projet en cours d'exécution, connectez-vous à MySQL et ajoutez un utilisateur administrateur par défaut. Vous pouvez le faire via la ligne de commande MySQL :
+
+   ```bash
+   mysql -uroot -ppassword pdfman
+   ```
+
+   Ensuite, exécutez cette requête SQL pour ajouter l'utilisateur :
+
+   ```sql
+   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) 
+   VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
+   ```
+
+## Accéder à l'application
+
+Une fois le projet démarré, accédez à l'application en ouvrant le lien suivant dans votre navigateur :
 
 ```bash
-    npm run install
+http://localhost:5173
 ```
 
-Lancer la migration qui va créer un dossier drizzle
+**Identifiants de connexion** :
 
-```bash
-    npm run migration
-```
-
-Lancer le projet
-
-```bash
-    npm run dev
-```
-
-Connectez-vous à mysql et ajouter l'utilisateur par default
-
-```sql
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
-```
-
-Vous pouvez acceder à l'application
-
-```bash
-    http://localhost:5173
-
-    email:'admin@gmail.com'
-    password:'password'
-```
+- **Email** : `admin@gmail.com`
+- **Mot de passe** : `password`
