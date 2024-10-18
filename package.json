@@ -9,14 +9,15 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"eslint": "eslint .",
+		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"migration": "npx drizzle-kit generate:mysql --schema=./src/lib/server/schema.ts"
+		"migrations": "npx drizzle-kit generate --config=drizzle.config.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.30.4",
-		"@tailwindcss/forms": "^0.5.7",
+		"@tailwindcss/forms": "^0.5.9",
 		"@types/bcrypt": "^5.0.1",
 		"@types/blob-stream": "^0.1.33",
 		"@types/cookie": "^0.5.1",
@@ -26,8 +27,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
-		"daisyui": "^3.9.2",
-		"drizzle-kit": "^0.19.13",
+		"drizzle-kit": "^0.25.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -38,6 +38,7 @@
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.3",
 		"tslib": "^2.4.1",
+		"tsx": "^4.19.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2",
 		"vitest": "^0.34.0"
@@ -48,12 +49,13 @@
 		"blob-stream": "^0.1.3",
 		"classnames": "^2.5.1",
 		"convertir-nombre-lettre": "^1.0.2",
-		"dayjs": "^1.11.10",
-		"drizzle-orm": "^0.28.6",
+		"dayjs": "^1.11.13",
+		"dotenv": "^16.4.5",
+		"drizzle-orm": "^0.34.1",
 		"file-saver": "^2.0.5",
 		"jsonwebtoken": "^9.0.2",
 		"mysql": "^2.18.1",
-		"mysql2": "^3.6.2",
+		"mysql2": "^3.11.3",
 		"pdf-lib": "^1.17.1",
 		"pdfmake": "^0.2.8"
 	}
