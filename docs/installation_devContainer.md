@@ -2,24 +2,33 @@
 
 ### Prérequis
 
-- **VSCode** : Assurez-vous d'avoir [VSCode](https://code.visualstudio.com/) installé.
-- **Extension DevContainers** : Installez l'extension [DevContainers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) dans VSCode.
-- **Docker** : Veillez à ce que Docker soit installé et en cours d'exécution sur votre machine.
+- **VSCode** : Assurez-vous d'avoir [VSCode](https://code.visualstudio.com/)
+  installé.
+- **Extension DevContainers** : Installez l'extension
+  [DevContainers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+  dans VSCode.
+- **Docker** : Veillez à ce que Docker soit installé et en cours d'exécution sur
+  votre machine.
 
 ### Configuration des DevContainers
 
 1. **Lancement de Docker**  
    Démarrez Docker sur votre machine.
 2. **Création des containers**  
-   Suivez les [instructions officielles](https://code.visualstudio.com/docs/devcontainers/create-dev-container#_use-docker-compose) pour créer les containers avec `docker-compose`.
+   Suivez les
+   [instructions officielles](https://code.visualstudio.com/docs/devcontainers/create-dev-container#_use-docker-compose)
+   pour créer les containers avec `docker-compose`.
 
 ### Ajout des fichiers `.env`
 
 1. **Générer un token JWT**  
-   Utilisez cet outil [Generate-random](https://generate-random.org/api-token-generator?count=1&length=256&type=mixed-numbers-symbols&prefix=) pour générer un token aléatoire.
+   Utilisez cet outil
+   [Generate-random](https://generate-random.org/api-token-generator?count=1&length=256&type=mixed-numbers-symbols&prefix=)
+   pour générer un token aléatoire.
 
 2. **Créer le fichier `.env`**  
-   Ajoutez un fichier `.env` à la racine du projet avec la configuration suivante :
+   Ajoutez un fichier `.env` à la racine du projet avec la configuration
+   suivante :
 
 ```bash
 ## Configuration de la base de données
@@ -44,7 +53,8 @@ npm install
 
 ### Migration de la base de données
 
-Exécutez la migration pour créer un dossier `migrations` et initialiser la base de données :
+Exécutez la migration pour créer un dossier `migrations` et initialiser la base
+de données :
 
 ```bash
 npm run migrations
@@ -53,7 +63,8 @@ npm run migrations
 ### Configuration de l'utilisateur par défaut
 
 1. **Connexion à la base de données**  
-   Connectez-vous à la base de données `pdfman` pour créer l'utilisateur administrateur. Vous avez deux options :
+   Connectez-vous à la base de données `pdfman` pour créer l'utilisateur
+   administrateur. Vous avez deux options :
 
    - Via la ligne de commande MySQL :
 
@@ -82,7 +93,8 @@ npm run migrations
 
 ### Accès à l'application
 
-Une fois le projet démarré, vous pouvez accéder à l'application à l'adresse suivante :
+Une fois le projet démarré, vous pouvez accéder à l'application à l'adresse
+suivante :
 
 ```bash
 http://localhost:5173
