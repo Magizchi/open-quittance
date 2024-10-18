@@ -67,7 +67,7 @@
   "lint-staged": {
     "src/**/*": "prettier --write",
     "src/**/*.{svelte,ts}": "eslint",
-    "src/**/*.{svelte}": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "src/**/*.svelte": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "config": {
     "commitizen": {
