@@ -10,7 +10,6 @@
 
 1. **Lancement de Docker**  
    Démarrez Docker sur votre machine.
-   
 2. **Création des containers**  
    Suivez les [instructions officielles](https://code.visualstudio.com/docs/devcontainers/create-dev-container#_use-docker-compose) pour créer les containers avec `docker-compose`.
 
@@ -48,18 +47,10 @@ npm install
 
 ### Migration de la base de données
 
-Lancez la migration de la base de données, ce qui va créer un dossier `migrations` :
+Exécutez la migration pour créer un dossier `migrations` et initialiser la base de données :
 
 ```bash
-npm run migration
-```
-
-### Lancement du projet
-
-Lancez le projet avec la commande suivante :
-
-```bash
-npm run dev -- --host
+npm run migrations
 ```
 
 ### Configuration de l'utilisateur par défaut
@@ -80,6 +71,7 @@ npm run dev -- --host
    ```
 
    **Identifiants phpMyAdmin** :
+
    - Utilisateur : `root`
    - Mot de passe : `password`
 
@@ -87,7 +79,7 @@ npm run dev -- --host
    Exécutez la requête SQL suivante pour ajouter un utilisateur administrateur :
 
    ```sql
-   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) 
+   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`)
    VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
    ```
 
@@ -100,5 +92,6 @@ http://localhost:5173
 ```
 
 **Identifiants de connexion :**
+
 - **Email** : `admin@gmail.com`
 - **Mot de passe** : `password`

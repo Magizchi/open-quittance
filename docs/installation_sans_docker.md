@@ -49,18 +49,10 @@
 
 2. **Exécuter la migration de la base de données** :
 
-   Cette commande crée un dossier `drizzle` et effectue les migrations nécessaires pour la base de données :
+   Cette commande crée un dossier `migrations` et effectue les migrations nécessaires pour la base de données :
 
    ```bash
-   npm run migration
-   ```
-
-3. **Lancer l'application** :
-
-   Démarrez le projet avec la commande suivante :
-
-   ```bash
-   npm run dev
+   npm run migrations
    ```
 
 ## Configuration de l'utilisateur par défaut
@@ -76,12 +68,21 @@
    Ensuite, exécutez cette requête SQL pour ajouter l'utilisateur :
 
    ```sql
-   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) 
+   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`)
    VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
    ```
 
 ## Accéder à l'application
 
+1. **Démarrer le projet**
+
+   Démarrez l'application :
+
+   ```bash
+   npm run dev
+   ```
+
+2. **Accéder à l'application**
 Une fois le projet démarré, accédez à l'application en ouvrant le lien suivant dans votre navigateur :
 
 ```bash

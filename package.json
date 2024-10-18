@@ -12,7 +12,7 @@
 		"eslint": "eslint .",
 		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"migrations": "npx drizzle-kit generate --config=drizzle.config.ts",
+		"migrations": "npx drizzle-kit generate --config=drizzle.config.ts && npx drizzle-kit push --config=drizzle.config.ts",
 		"prepare": "husky"
 	},
 	"devDependencies": {
@@ -64,6 +64,7 @@
 	},
 	"lint-staged": {
 		"src/**/*": "prettier --write",
-		"src/**/*.{svelte,ts}": "eslint"
+		"src/**/*.{svelte,ts}": "eslint",
+		"src/**/*.{svelte}": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
 	}
 }

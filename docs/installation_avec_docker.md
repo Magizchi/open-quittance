@@ -73,13 +73,44 @@
 
 2. **Migration de la base de données**
 
-   Exécutez la migration pour créer un dossier `drizzle` et initialiser la base de données :
+   Exécutez la migration pour créer un dossier `migrations` et initialiser la base de données :
 
    ```bash
-   npm run migration
+   npm run migrations
    ```
 
-3. **Démarrer le projet**
+### Configuration de l'utilisateur par défaut
+
+1. **Connexion à la base de données**  
+   Connectez-vous à la base de données `pdfman` pour créer l'utilisateur administrateur. Vous avez deux options :
+
+   - Via la ligne de commande **MySQL** :
+
+   ```bash
+   mysql -uroot -ppassword pdfman
+   ```
+
+   - Ou via **phpMyAdmin** en accédant à l'URL suivante :
+
+   ```bash
+   http://localhost:8080
+   ```
+
+   **Identifiants phpMyAdmin** :
+
+   - Utilisateur : `root`
+   - Mot de passe : `password`
+
+2. **Création de l'utilisateur par défaut**  
+   Exécutez la requête SQL suivante pour ajouter un utilisateur administrateur :
+
+   ```sql
+   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`)
+   VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
+
+## Accéder à l'application
+
+1. **Démarrer le projet**
 
    Démarrez l'application :
 
@@ -87,17 +118,7 @@
    npm run dev
    ```
 
-## Configuration de l'utilisateur par défaut
-
-1. **Ajouter l'utilisateur administrateur**  
-   Connectez-vous à MySQL et ajoutez l'utilisateur administrateur par défaut à l'aide de la requête SQL suivante :
-
-   ```sql
-   INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`) 
-   VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
-   ```
-
-## Accéder à l'application
+2. **Accéder à l'application**
 
 Une fois le projet démarré, vous pouvez accéder à l'application via le lien suivant :
 
@@ -106,5 +127,6 @@ http://localhost:5173
 ```
 
 **Identifiants de connexion :**
+
 - **Email** : `admin@gmail.com`
 - **Mot de passe** : `password`
