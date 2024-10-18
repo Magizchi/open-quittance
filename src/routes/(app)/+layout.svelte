@@ -2,7 +2,8 @@
 	import { page } from '$app/stores';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import Balise from '$lib/components/atoms/notification/balise.svelte';
-	import { Routes } from '$lib/constants/routes';
+	import { ROUTES } from '$lib/constants/routes';
+	import Toast from '$lib/components/atoms/notification/toast.svelte';
 	export let data;
 </script>
 
@@ -19,29 +20,29 @@
 					<li class="w-full">
 						<Clickable
 							variant="menu"
-							href={Routes.landing}
-							aria-current={$page.url.pathname === `${Routes.landing}`}>Quittances</Clickable
+							href={ROUTES.landing}
+							aria-current={$page.url.pathname === `${ROUTES.landing}`}>Quittances</Clickable
 						>
 					</li>
 					<li class="w-full space-y-2">
 						<Clickable
 							variant="menu"
-							href={Routes.properties}
-							aria-current={$page.url.pathname.includes(Routes.properties)}>Propriétés</Clickable
+							href={ROUTES.properties}
+							aria-current={$page.url.pathname.includes(ROUTES.properties)}>Propriétés</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
 							variant="menu"
-							href={Routes.tenants}
-							aria-current={$page.url.pathname.includes(`${Routes.tenants}`)}>Locataires</Clickable
+							href={ROUTES.tenants}
+							aria-current={$page.url.pathname.includes(`${ROUTES.tenants}`)}>Locataires</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
 							variant="menu"
-							href={Routes.rentals}
-							aria-current={$page.url.pathname.includes(`${Routes.rentals}`)}>Locations</Clickable
+							href={ROUTES.rentals}
+							aria-current={$page.url.pathname.includes(`${ROUTES.rentals}`)}>Locations</Clickable
 						>
 					</li>
 				</ul>
@@ -49,15 +50,15 @@
 					<li>
 						<Clickable
 							variant="menu"
-							href={Routes.SETTINGS}
-							aria-current={$page.url.pathname.includes(`${Routes.SETTINGS}`)}>Paramètre</Clickable
+							href={ROUTES.settings}
+							aria-current={$page.url.pathname.includes(`${ROUTES.settings}`)}>Paramètre</Clickable
 						>
 					</li>
 					<li>
 						<Clickable
 							variant="menu"
-							href={Routes.LOGOUT}
-							aria-current={$page.url.pathname.includes(`${Routes.LOGOUT}`)}>Déconnexion</Clickable
+							href={ROUTES.logout}
+							aria-current={$page.url.pathname.includes(`${ROUTES.logout}`)}>Déconnexion</Clickable
 						>
 					</li>
 				</ul>
@@ -67,6 +68,7 @@
 	<div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
 		<main class="relative mt-5">
 			<Balise />
+			<Toast />
 			<slot class="z-0" />
 		</main>
 	</div>

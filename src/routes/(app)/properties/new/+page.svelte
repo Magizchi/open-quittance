@@ -1,7 +1,7 @@
 <script>
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import PropertyForm from '../propertyForm.svelte';
-	import { Routes } from '$lib/constants/routes';
+	import { ROUTES } from '$lib/constants/routes';
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -16,7 +16,7 @@
 			<form id="landlord" method="POST" class="space-y-5">
 				<PropertyForm />
 				<div class="flex space-x-5">
-					<Clickable variant="secondary" className="w-full justify-center" href={Routes.properties}
+					<Clickable variant="secondary" className="w-full justify-center" href={ROUTES.properties}
 						>Annuler</Clickable
 					>
 					<Clickable variant="primary" type="submit">Ajouter</Clickable>

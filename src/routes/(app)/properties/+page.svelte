@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
-	import { Routes } from '$lib/constants/routes.js';
+	import { ROUTES } from '$lib/constants/routes.js';
 	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
 
 	export let data;
@@ -37,7 +37,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Propriétés</h1>
-		<Clickable variant="primary" href={Routes.createProperty}>Créer une propriété</Clickable>
+		<Clickable variant="primary" href={ROUTES.createProperty}>Créer une propriété</Clickable>
 	</div>
 	<Table {columns} rows={data.properties} let:row>
 		<Tr>
@@ -64,7 +64,7 @@
 			</Td>
 			<Td>
 				<div class="flex items-center justify-end w-full">
-					<Clickable variant="border" href={Routes.properties + '/' + row.id}>
+					<Clickable variant="border" href={ROUTES.property.replace('{id]', row.id.toString())}>
 						<div class="flex flex-row items-center justify-center">
 							<EditIcon class="mr-1 text-base" height="20" /> Modifier
 						</div>

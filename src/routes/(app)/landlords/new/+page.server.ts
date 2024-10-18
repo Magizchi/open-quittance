@@ -4,7 +4,7 @@ import db from '$lib/db/drizzle';
 import { landlordsTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
 import { createNotification } from '$lib/stores/notification/store.js';
-import { Routes } from '$lib/constants/routes.js';
+import { ROUTES } from '$lib/constants/routes.js';
 
 export const actions = {
 	default: async ({ request }) => {
@@ -31,6 +31,6 @@ export const actions = {
 			name: landlordName
 		});
 
-		throw redirect(303, Routes.landing);
+		throw redirect(303, ROUTES.landing);
 	}
 };

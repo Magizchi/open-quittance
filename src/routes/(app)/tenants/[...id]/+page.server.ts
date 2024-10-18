@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import db from '$lib/db/drizzle';
 import { tenantsTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
-import { Routes } from '$lib/constants/routes';
+import { ROUTES } from '$lib/constants/routes';
 import { createNotification } from '$lib/stores/notification/store.js';
 
 export const load = async ({ parent, params }) => {
@@ -12,7 +12,7 @@ export const load = async ({ parent, params }) => {
 	const [tenant] = await db.select().from(tenantsTable).where(eq(tenantsTable.id, +params.id));
 
 	if (!tenant) {
-		throw redirect(303, Routes.tenants);
+		throw redirect(303, ROUTES.tenants);
 	}
 
 	return { tenant };
@@ -41,6 +41,6 @@ export const actions = {
 			};
 		}
 		createNotification({ message: `Locataire ${name} a bien été modifié`, success: true });
-		throw redirect(303, Routes.tenants);
+		throw redirect(303, ROUTES.tenants);
 	}
 };

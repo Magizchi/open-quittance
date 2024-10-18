@@ -3,7 +3,7 @@
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import type { RentalModel } from '$lib/models';
-	import { Routes } from '$lib/constants/routes.js';
+	import { ROUTES } from '$lib/constants/routes.js';
 	import { formatDate } from '$lib/utils/date.js';
 	import EndRentals from './endRentals.svelte';
 
@@ -43,7 +43,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Liste des Locations en cours</h1>
-		<Clickable variant="primary" href={Routes.createRental}>Ajouter</Clickable>
+		<Clickable variant="primary" href={ROUTES.createRental}>Ajouter</Clickable>
 	</div>
 	<Table {columns} rows={data.rentals} let:row>
 		<Tr>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import PropertyForm from '../propertyForm.svelte';
-	import { Routes } from '$lib/constants/routes.js';
+	import { ROUTES } from '$lib/constants/routes.js';
 	export let data;
 </script>
 
@@ -18,7 +18,7 @@
 				<PropertyForm defaultValues={data.property} />
 				<input name="id" value={data.property.id} hidden />
 				<div class="flex space-x-5">
-					<Clickable variant="secondary" className="w-full justify-center" href={Routes.properties}
+					<Clickable variant="secondary" className="w-full justify-center" href={ROUTES.properties}
 						>Annuler</Clickable
 					>
 					<Clickable variant="primary" type="submit">Modifier</Clickable>

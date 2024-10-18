@@ -1,6 +1,6 @@
 <script>
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
-	import { Routes } from '$lib/constants/routes';
+	import { ROUTES } from '$lib/constants/routes';
 	import FormRental from '../rentalForm.svelte';
 
 	export let data;
@@ -18,7 +18,7 @@
 			<form id="landlord" method="POST" class="space-y-5">
 				<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
 				<div class="flex space-x-5">
-					<Clickable variant="secondary" className="w-full justify-center" href={Routes.rentals}
+					<Clickable variant="secondary" className="w-full justify-center" href={ROUTES.rentals}
 						>Annuler</Clickable
 					>
 					<Clickable variant="primary" type="submit">Ajouter</Clickable>

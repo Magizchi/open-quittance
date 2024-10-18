@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import db from '$lib/db/drizzle';
 import { tenantsTable } from '$lib/db/schema.js';
 import { createNotification } from '$lib/stores/notification/store.js';
-import { Routes } from '$lib/constants/routes.js';
+import { ROUTES } from '$lib/constants/routes.js';
 
 export const load = async ({ parent }) => {
 	await parent();
@@ -39,6 +39,6 @@ export const actions = {
 		}
 
 		createNotification({ message: 'Locataire créé', status: 200, success: true });
-		throw redirect(303, Routes.tenants);
+		throw redirect(303, ROUTES.tenants);
 	}
 };

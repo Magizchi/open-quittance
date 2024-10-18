@@ -3,14 +3,14 @@ import db from '$lib/db/drizzle.js';
 import { landlordsTable, usersTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
 import R from '$lib/utils/remember_me.js';
-import { Routes } from '$lib/constants/routes';
+import { ROUTES } from '$lib/constants/routes';
 
 export const load = async ({ cookies, url }) => {
 	const cookieInfo = R(cookies);
 
 	if (!cookieInfo) {
 		cookies.delete('remember_me');
-		throw redirect(303, Routes.login);
+		throw redirect(303, ROUTES.login);
 	}
 
 	const [user] = await db
@@ -26,12 +26,12 @@ export const load = async ({ cookies, url }) => {
 
 	if (!user) {
 		cookies.delete('remember_me');
-		throw redirect(303, Routes.login);
+		throw redirect(303, ROUTES.login);
 	}
 
 	if (user.loginToken !== cookieInfo.loginToken) {
 		cookies.delete('remember_me');
-		throw redirect(303, Routes.login);
+		throw redirect(303, ROUTES.login);
 	}
 
 	const landlords = await db.select().from(landlordsTable);
@@ -41,8 +41,8 @@ export const load = async ({ cookies, url }) => {
 		needCreateLandlords = true;
 	}
 
-	if (!landlords.length && Routes.createLandlords !== url.pathname) {
-		throw redirect(303, Routes.createLandlords);
+	if (!landlords.length && ROUTES.createLandlords !== url.pathname) {
+		throw redirect(303, ROUTES.createLandlords);
 	}
 
 	return { ...user, needCreateLandlords };

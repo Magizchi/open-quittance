@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import db from '$lib/db/drizzle';
 import { propertiesTable } from '$lib/db/schema.js';
 import { eq } from 'drizzle-orm';
-import { Routes } from '$lib/constants/routes';
+import { ROUTES } from '$lib/constants/routes';
 
 export const load = async ({ parent, params }) => {
 	await parent();
@@ -14,7 +14,7 @@ export const load = async ({ parent, params }) => {
 		.where(eq(propertiesTable.id, +params.id));
 
 	if (!property) {
-		throw redirect(303, Routes.properties);
+		throw redirect(303, ROUTES.properties);
 	}
 
 	return { property };
@@ -46,6 +46,6 @@ export const actions = {
 			};
 		}
 
-		throw redirect(303, Routes.properties);
+		throw redirect(303, ROUTES.properties);
 	}
 };

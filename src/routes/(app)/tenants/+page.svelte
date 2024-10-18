@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Routes } from '$lib/constants/routes.js';
+	import { ROUTES } from '$lib/constants/routes.js';
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import { Table, Tr, Td } from '$lib/components/organisms/Table';
 	import EditIcon from '$lib/components/atoms/Icons/EditIcon.svelte';
@@ -29,7 +29,7 @@
 <section class="px-10 space-y-3">
 	<div class="flex justify-between">
 		<h1 class="text-2xl font-bold font-hind text-slate-700">Locataires</h1>
-		<Clickable variant="primary" href={Routes.createTenant}>Ajouter</Clickable>
+		<Clickable variant="primary" href={ROUTES.createTenant}>Ajouter</Clickable>
 	</div>
 	<Table {columns} rows={data.tenants} let:row>
 		<Tr>
@@ -50,7 +50,7 @@
 			</Td>
 			<Td>
 				<div class="flex items-center justify-end w-full">
-					<Clickable variant="border" href={Routes.tenants + '/' + row.id}>
+					<Clickable variant="border" href={ROUTES.tenants + '/' + row.id}>
 						<div class="flex flex-row items-center justify-center">
 							<EditIcon class="mr-1 text-base" height="20" /> Modifier
 						</div>

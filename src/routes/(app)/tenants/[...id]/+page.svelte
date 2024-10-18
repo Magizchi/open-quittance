@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Clickable from '$lib/components/atoms/Clickable.svelte';
 	import TenantForm from '../tenantForm.svelte';
-	import { Routes } from '$lib/constants/routes.js';
+	import { ROUTES } from '$lib/constants/routes.js';
 	export let data;
 </script>
 
@@ -24,7 +24,7 @@
 						variant="secondary"
 						className="w-full justify-center"
 						likeButton
-						href={Routes.tenants}>Annuler</Clickable
+						href={ROUTES.tenants}>Annuler</Clickable
 					>
 					<Clickable variant="primary" type="submit">Modifier</Clickable>
 				</div>
