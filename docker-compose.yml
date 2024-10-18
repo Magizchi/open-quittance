@@ -5,9 +5,7 @@ networks:
 
 services:
   node:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
+    image: node:22
     container_name: Svelte_container
     ports:
       - '3000:3000'
