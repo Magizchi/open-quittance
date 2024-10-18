@@ -12,7 +12,8 @@
 		"eslint": "eslint .",
 		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"migrations": "npx drizzle-kit generate --config=drizzle.config.ts"
+		"migrations": "npx drizzle-kit generate --config=drizzle.config.ts",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -31,6 +32,8 @@
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
 		"postcss": "^8.4.31",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
@@ -58,5 +61,9 @@
 		"mysql2": "^3.11.3",
 		"pdf-lib": "^1.17.1",
 		"pdfmake": "^0.2.8"
+	},
+	"lint-staged": {
+		"src/**/*": "prettier --write",
+		"src/**/*.{svelte,ts}": "eslint"
 	}
 }
