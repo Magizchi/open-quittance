@@ -1,5 +1,4 @@
-
-import type { landlordsTable, propertiesTable, rentalsTable, tenantsTable } from "$lib/db/schema";
+import type { landlordsTable, propertiesTable, rentalsTable, tenantsTable } from '$lib/db/schema';
 
 type rentalType = typeof rentalsTable.$inferSelect;
 type tenantsType = typeof tenantsTable.$inferSelect;
