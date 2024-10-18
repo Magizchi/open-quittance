@@ -22,7 +22,8 @@
       "editor.formatOnSave": true,
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "prettier.resolveGlobalModules": true,
-      "cSpell.language": "en,fr"
+      "cSpell.language": "en-BG,fr-FR",
+      "cSpell.enableFiletypes": ["markdown"]
     },
     "vscode": {
       "extensions": [
