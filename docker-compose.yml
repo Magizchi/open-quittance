@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
   svelte_network:
@@ -8,7 +8,7 @@ services:
     image: node:22
     container_name: Svelte_container
     ports:
-      - '3000:3000'
+      - "3000:3000"
     networks:
       - svelte_network
 
@@ -20,7 +20,7 @@ services:
       MYSQL_DATABASE: pdfman
       MYSQL_PASSWORD: password
     ports:
-      - '3306:3306'
+      - "3306:3306"
     networks:
       - svelte_network
 
@@ -31,7 +31,7 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
     ports:
-      - '8080:80'
+      - "8080:80"
     depends_on:
       - db
     networks:
