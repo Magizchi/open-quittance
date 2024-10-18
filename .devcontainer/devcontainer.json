@@ -21,14 +21,14 @@
 		"settings": {
 			"editor.formatOnSave": true,
 			"editor.defaultFormatter": "esbenp.prettier-vscode",
-			"prettier.resolveGlobalModules": true
+			"prettier.resolveGlobalModules": true,
+			"cSpell.language": "en,fr-FR,fr"
 		},
 		"vscode": {
 			"extensions": [
 				"svelte.svelte-vscode",
 				"formulahendry.auto-rename-tag",
 				"formulahendry.auto-close-tag",
-				"MS-CEINTL.vscode-language-pack-fr",
 				"dbaeumer.vscode-eslint",
 				"rvest.vs-code-prettier-eslint",
 				"streetsidesoftware.code-spell-checker",
@@ -36,11 +36,12 @@
 				"heybourn.headwind",
 				"bradlc.vscode-tailwindcss",
 				"streetsidesoftware.code-spell-checker-british-english",
-				"pflannery.vscode-versionlens"
+				"pflannery.vscode-versionlens",
+				"esbenp.prettier-vscode"
 			]
 		}
 	},
-	"postCreateCommand": "npm install && npm install && npm run dev -- --host"
+	"postCreateCommand": "npm install && npm run dev -- --host"
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
