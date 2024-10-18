@@ -28,9 +28,6 @@
    DB_PASSWORD=password
    DB_USER=root
    DB_DATABASE=pdfman
-   DB_LIMIT=5
-   DB_SYNCHRO=true
-
    ## JWT
    JWT_SECRET_TOKEN='{votre token JWT ici}'
    ```
@@ -83,7 +80,7 @@
    ```
 
 2. **Accéder à l'application**
-Une fois le projet démarré, accédez à l'application en ouvrant le lien suivant dans votre navigateur :
+   Une fois le projet démarré, accédez à l'application en ouvrant le lien suivant dans votre navigateur :
 
 ```bash
 http://localhost:5173

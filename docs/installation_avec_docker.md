@@ -21,9 +21,6 @@
    DB_PASSWORD=password
    DB_USER=root
    DB_DATABASE=pdfman
-   DB_LIMIT=5
-   DB_SYNCHRO=true
-
    ## JWT
    JWT_SECRET_TOKEN='{votre token JWT ici}'
    ```
@@ -107,6 +104,7 @@
    ```sql
    INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `loginToken`)
    VALUES (1, '', '', 'admin@gmail.com', '$2b$10$.vAQ4ipd3dh1da3gjZ/w7e9Y23mEOz2rqMzPOC3SfJkCfAIkY/Qpy', NULL);
+   ```
 
 ## Accéder à l'application
 
