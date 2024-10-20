@@ -10,6 +10,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test": "vitest",
     "eslint": "eslint .",
+    "lint-staged": "lint-staged",
     "prettier": "prettier --plugin-search-dir . --check .",
     "prettier:fix": "prettier --plugin-search-dir . --write .",
     "migrate": "npx drizzle-kit generate --config=drizzle.config.ts && npx drizzle-kit push --config=drizzle.config.ts",
@@ -17,6 +18,9 @@
     "commit": "cz"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/types": "^19.5.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.30.4",
     "@tailwindcss/forms": "^0.5.9",
@@ -29,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.4.16",
+    "conventional-changelog-atom": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "drizzle-kit": "^0.25.0",
     "eslint": "^8.28.0",
@@ -66,8 +71,7 @@
   },
   "lint-staged": {
     "src/**/*": "prettier --write",
-    "src/**/*.{svelte,ts}": "eslint",
-    "src/**/*.svelte": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "src/**/*.{svelte,ts}": "eslint"
   },
   "config": {
     "commitizen": {
