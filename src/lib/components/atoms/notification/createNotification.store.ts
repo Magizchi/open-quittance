@@ -20,12 +20,12 @@ export interface Toast {
 export const notifications: Writable<Toast[]> = writable([]);
 
 const createNotification = () => {
-  const id = Math.floor(Math.random() * 10000);
   const send = (
     message: string,
     type: notificationType,
     timeout: number = 5000
   ) => {
+    const id = Math.floor(Math.random() * 10000);
     notifications.update(($notifications) => [
       { id, type, message, timeout },
       ...$notifications,
@@ -37,11 +37,14 @@ const createNotification = () => {
   };
 
   return {
-    default: (msg: string, timeout: number) => send(msg, "default", timeout),
-    success: (msg: string, timeout: number) => send(msg, "success", timeout),
-    warning: (msg: string, timeout: number) => send(msg, "warning", timeout),
-    alert: (msg: string, timeout: number) => send(msg, "alert", timeout),
-    info: (msg: string, timeout: number) => send(msg, "info", timeout),
+    default: (msg: string, timeout: number = 5000) =>
+      send(msg, "default", timeout),
+    success: (msg: string, timeout: number = 5000) =>
+      send(msg, "success", timeout),
+    warning: (msg: string, timeout: number = 5000) =>
+      send(msg, "warning", timeout),
+    alert: (msg: string, timeout: number = 5000) => send(msg, "alert", timeout),
+    info: (msg: string, timeout: number = 5000) => send(msg, "info", timeout),
   };
 };
 
