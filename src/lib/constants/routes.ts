@@ -9,6 +9,7 @@ export const ROUTES = {
   tenant: "/tenants/{id}",
   createTenant: "/tenants/new",
   rentals: "/rentals",
+  rental: "/rentals/{id}",
   createRental: "/rentals/new",
   settings: "/settings",
   logout: "/logout",
