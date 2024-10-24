@@ -9,7 +9,7 @@ import {
 } from "$lib/db/schema";
 import dayjs from "dayjs";
 import { and, desc, eq, isNull, notInArray, sql } from "drizzle-orm";
-import { RentalModel } from "$lib/models";
+import type { RentalModel } from "$lib/models";
 
 /**
  * Add payment date to receipt
