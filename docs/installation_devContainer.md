@@ -93,14 +93,24 @@ npm run migrations
 
 ### Accès à l'application
 
-Une fois le projet démarré, vous pouvez accéder à l'application à l'adresse
-suivante :
+1. **Démarrer le projet**
 
-```bash
-http://localhost:5173
-```
+   Démarrez l'application :
 
-**Identifiants de connexion :**
+   ```bash
+   npm run dev -- --host
+   ```
 
-- **Email** : `admin@gmail.com`
-- **Mot de passe** : `password`
+2. **Accéder à l'application**
+
+   Une fois le projet démarré, vous pouvez accéder à l'application à l'adresse
+   suivante :
+
+   ```bash
+   http://localhost:5173
+   ```
+
+   **Identifiants de connexion :**
+
+   - **Email** : `admin@gmail.com`
+   - **Mot de passe** : `password`
