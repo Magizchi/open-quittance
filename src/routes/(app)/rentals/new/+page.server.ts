@@ -55,7 +55,7 @@ export const actions = {
         message: "Location créé",
         success: true,
       };
-    } catch (err) {
+    } catch {
       return {
         message: "Une erreur c'est produite lors de création de la location",
         success: false,

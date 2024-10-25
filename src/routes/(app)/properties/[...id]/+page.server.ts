@@ -44,7 +44,7 @@ export const actions = {
         message: "La propriété à été modifier",
         success: true,
       };
-    } catch (err) {
+    } catch {
       return {
         message: "Une erreur c'est produite",
         success: false,

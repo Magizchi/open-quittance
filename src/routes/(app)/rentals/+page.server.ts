@@ -69,7 +69,7 @@ export const actions = {
         message: "Fin de location",
         success: true,
       };
-    } catch (err) {
+    } catch {
       return {
         message: "Une Erreur c'est produite",
         success: false,

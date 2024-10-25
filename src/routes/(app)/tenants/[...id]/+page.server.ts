@@ -48,7 +48,7 @@ export const actions = {
         message: "Locataire modifié",
         success: true,
       };
-    } catch (err) {
+    } catch {
       return {
         message: "Une erreur c'est produite",
         success: false,

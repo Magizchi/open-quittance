@@ -11,7 +11,7 @@ export async function DELETE({ params }) {
       { message: "Propriété supprimer", success: true, data: response },
       { status: 201 }
     );
-  } catch (err) {
+  } catch {
     return json(
       { message: "Propriété supprimer", success: false, data: [] },
       { status: 400 }

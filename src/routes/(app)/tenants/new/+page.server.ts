@@ -29,7 +29,7 @@ export const actions = {
         success: true,
         message: "Locataire créé",
       };
-    } catch (err) {
+    } catch {
       return {
         message: "Erreur c'est produite à la création du locataire",
         success: false,
