@@ -31,7 +31,7 @@
     "@types/jsonwebtoken": "^9.0.4",
     "@types/pdfmake": "^0.2.8",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/parser": "^8.11.0",
     "autoprefixer": "^10.4.16",
     "conventional-changelog-atom": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
