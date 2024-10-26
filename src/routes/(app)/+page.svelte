@@ -127,7 +127,7 @@
     <ValideReceipt {selectedReceipts} />
   </form>
   <div class="flex justify-end px-10 py-3">
-    <Clickable primary form="AddPaymentDate" type="submit"
+    <Clickable variant="primary" form="AddPaymentDate" type="submit"
       >Sauvegarder</Clickable
     >
   </div>
