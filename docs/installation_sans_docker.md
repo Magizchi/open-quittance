@@ -19,7 +19,8 @@
 
 3. **Créer le fichier `.env`** :
 
-   À la racine du projet, créez un fichier `.env` contenant les informations de configuration suivantes :
+   À la racine du projet, créez un fichier `.env` contenant les informations de
+   configuration suivantes :
 
    ```bash
    ## Configuration de la base de données
@@ -32,7 +33,9 @@
    JWT_SECRET_TOKEN='{votre token JWT ici}'
    ```
 
-   Remplacez `'{votre token JWT ici}'` par un token JWT généré (vous pouvez utiliser un outil comme [Generate-random](https://generate-random.org/api-token-generator?count=1&length=256&type=mixed-numbers-symbols&prefix=)).
+   Remplacez `'{votre token JWT ici}'` par un token JWT généré (vous pouvez
+   utiliser un outil comme
+   [Generate-random](https://generate-random.org/api-token-generator?count=1&length=256&type=mixed-numbers-symbols&prefix=)).
 
 ## Lancer le projet
 
@@ -46,17 +49,20 @@
 
 2. **Exécuter la migration de la base de données** :
 
-   Cette commande crée un dossier `migrations` et effectue les migrations nécessaires pour la base de données :
+   Cette commande crée un dossier `migrations` et effectue les migrations
+   nécessaires pour la base de données :
 
    ```bash
-   npm run migrations
+   npm run migrate
    ```
 
 ## Configuration de l'utilisateur par défaut
 
 1. **Ajouter l'utilisateur administrateur** :
 
-   Une fois le projet en cours d'exécution, connectez-vous à MySQL et ajoutez un utilisateur administrateur par défaut. Vous pouvez le faire via la ligne de commande MySQL :
+   Une fois le projet en cours d'exécution, connectez-vous à MySQL et ajoutez un
+   utilisateur administrateur par défaut. Vous pouvez le faire via la ligne de
+   commande MySQL :
 
    ```bash
    mysql -uroot -ppassword pdfman
@@ -79,8 +85,8 @@
    npm run dev
    ```
 
-2. **Accéder à l'application**
-   Une fois le projet démarré, accédez à l'application en ouvrant le lien suivant dans votre navigateur :
+2. **Accéder à l'application** Une fois le projet démarré, accédez à
+   l'application en ouvrant le lien suivant dans votre navigateur :
 
 ```bash
 http://localhost:5173

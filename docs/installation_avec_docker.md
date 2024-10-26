@@ -79,7 +79,7 @@
    base de données :
 
    ```bash
-   npm run migrations
+   npm run migrate
    ```
 
 ### Configuration de l'utilisateur par défaut

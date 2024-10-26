@@ -57,7 +57,7 @@ Exécutez la migration pour créer un dossier `migrations` et initialiser la bas
 de données :
 
 ```bash
-npm run migrations
+npm run migrate
 ```
 
 ### Configuration de l'utilisateur par défaut
