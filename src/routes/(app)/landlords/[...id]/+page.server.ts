@@ -1,7 +1,8 @@
 import { ROUTES } from "$lib/constants/routes.js";
 import db from "$lib/db/drizzle.js";
 import { landlordsTable } from "$lib/db/schema";
-import { redirect } from "@sveltejs/kit";
+import FormDataToJson from "$lib/utils/FormDataToJson.js";
+import { fail, redirect } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 
 export const load = async ({ parent, params }) => {
@@ -17,4 +18,32 @@ export const load = async ({ parent, params }) => {
   }
 
   return { landlord };
+};
+
+export const actions = {
+  default: async ({ request }) => {
+    const data = await request.formData();
+    const { postalCode, address, city, landlordName } = FormDataToJson(data);
+
+    if (
+      address === "" ||
+      postalCode === "" ||
+      city === "" ||
+      landlordName === ""
+    ) {
+      return fail(403, {
+        message: "Erreur dans les données",
+        success: false,
+      });
+    }
+
+    await db.update(landlordsTable).set({
+      address,
+      postalCode,
+      city,
+      name: landlordName,
+    });
+
+    throw redirect(303, ROUTES.landing);
+  },
 };
