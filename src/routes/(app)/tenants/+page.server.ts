@@ -1,42 +1,17 @@
-import db from '$lib/server/database';
-import { tenantsTable } from '$lib/server/schema.js';
+import db from '$lib/db/drizzle';
+import { tenantsTable } from '$lib/db/schema.js';
 
-export const load = async ({ parent }) => {
-    await parent();
-    const tenants = await db.select().from(tenantsTable);
-    return { tenants };
-};
+export const load = async ({ parent, url }) => {
+	await parent();
 
-export const actions = {
-    create: async ({ request }) => {
-        const data = await request.formData();
+	const page = url.searchParams.get('page') ? Number(url.searchParams.get('page')) : 1;
+	const show = url.searchParams.get('show') ? Number(url.searchParams.get('show')) : 12;
 
-        if (
-            data.get('name') === '' ||
-            data.get('address') === '' ||
-            data.get('city') === '' ||
-            data.get('postalCode') === ''
-        ) {
-            return {
-                success: false,
-                status: 400,
-                message: "Erreur dans les données"
-            };
-        }
+	const tenants = await db
+		.select()
+		.from(tenantsTable)
+		.limit(show)
+		.offset(show * (page - 1));
 
-        try {
-            await db.insert(tenantsTable).values({
-                name: data.get('name')!.toString(),
-                address: data.get('address')!.toString(),
-                city: data.get('city')!.toString(),
-                postalCode: data.get('postalCode')!.toString(),
-            });
-        } catch (err) {
-            return {
-                success: false,
-                status: 400,
-                message: "Erreur:" + err
-            };
-        }
-    }
+	return { tenants };
 };

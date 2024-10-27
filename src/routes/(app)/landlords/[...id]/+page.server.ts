@@ -1,69 +1,49 @@
-import db from '$lib/server/database.js';
-import { landlordsTable, propertiesTable, rentalsTable, tenantsTable } from '$lib/server/schema.js';
-import FormatFormData from "$lib/utils/FormatFormData.js";
-import { eq } from 'drizzle-orm';
+import { ROUTES } from "$lib/constants/routes.js";
+import db from "$lib/db/drizzle.js";
+import { landlordsTable } from "$lib/db/schema";
+import FormDataToJson from "$lib/utils/FormDataToJson.js";
+import { fail, redirect } from "@sveltejs/kit";
+import { eq } from "drizzle-orm";
 
-export const load = async ({ params }) => {
-    const [landlord] = await db.select().from(landlordsTable).where(eq(landlordsTable.id, +params.id));
+export const load = async ({ parent, params }) => {
+  await parent();
 
-    const landlordProperties =
-        await db.select()
-            .from(propertiesTable)
-            .where(eq(propertiesTable.landlord_id, landlord.id));
+  const [landlord] = await db
+    .select()
+    .from(landlordsTable)
+    .where(eq(landlordsTable.id, +params.id));
 
-    const landlordRentals =
-        await db.select()
-            .from(rentalsTable)
-            .leftJoin(propertiesTable, eq(rentalsTable.property_id, propertiesTable.id))
-            .leftJoin(tenantsTable, eq(rentalsTable.tenant_id, tenantsTable.id))
-            .where(eq(propertiesTable.landlord_id, landlord.id));
+  if (!landlord) {
+    throw redirect(303, ROUTES.settings);
+  }
 
-    return { landlord, properties: landlordProperties, rentals: landlordRentals };
+  return { landlord };
 };
 
 export const actions = {
-    updateProperty: async ({ request }) => {
-        const data = await request.formData();
-        const { error, properties } = FormatFormData(data);
+  default: async ({ request }) => {
+    const data = await request.formData();
+    const { postalCode, address, city, landlordName } = FormDataToJson(data);
 
-        if (error.status) return error;
-
-        const { id, ...prop } = properties[0];
-
-        try {
-            await db.update(propertiesTable).set(prop).where(eq(propertiesTable.id, id!));
-            return {
-                success: true,
-                status: 201,
-                message: "Saved"
-            };
-        } catch (err) {
-            return {
-                success: false,
-                status: 400,
-                message: "Erreur:" + err
-            };
-        }
-    },
-    add: async ({ request }) => {
-        const data = await request.formData();
-
-        const { properties, error } = FormatFormData(data);
-        if (error.status) return error;
-
-        try {
-            await db.insert(propertiesTable).values(properties);
-            return {
-                success: true,
-                status: 201,
-                message: "Saved"
-            };
-        } catch (err) {
-            return {
-                success: false,
-                status: 400,
-                message: "Erreur:" + err
-            };
-        }
+    if (
+      address === "" ||
+      postalCode === "" ||
+      city === "" ||
+      landlordName === ""
+    ) {
+      return fail(403, {
+        message: "Erreur dans les données",
+        success: false,
+      });
     }
+
+    await db.update(landlordsTable).set({
+      address,
+      postalCode,
+      city,
+      name: landlordName,
+    });
+
+    throw redirect(303, ROUTES.landing);
+  },
 };

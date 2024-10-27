@@ -1,69 +1,79 @@
 <script lang="ts">
-	import Bread from '$lib/components/bread/+page.svelte';
-	import { page } from '$app/stores';
-	import Balise from '$lib/components/atoms/notification/balise.svelte';
-
-	// export let data;
+  import { page } from "$app/stores";
+  import Clickable from "$lib/components/atoms/Clickable.svelte";
+  import { ROUTES } from "$lib/constants/routes";
+  import Toast from "$lib/components/atoms/notification/toast.svelte";
+  export let data;
 </script>
 
-<div class="flex bg-slate-300">
-	<aside class="min-h-screen p-4 text-slate-600 w-60">
-		<div class="w-full px-2 py-4 mb-5">
-			<h1><a href="/">OpenQuittance</a></h1>
-		</div>
-		<nav>
-			<ul class="space-y-3">
-				<li class="w-full">
-					<a
-						href="/"
-						aria-current={$page.url.pathname === '/'}
-						class="flex p-2 hover:bg-slate-200 rounded-lg hover:text-slate-700 aria-[current=true]:bg-slate-200"
-						>Accueil</a
-					>
-				</li>
-				<li class="w-full space-y-2">
-					<a
-						href="/landlords"
-						aria-current={$page.url.pathname === '/landlords'}
-						class="flex p-2 hover:bg-slate-200 rounded-lg hover:text-slate-700 aria-[current=true]:bg-slate-200"
-						>Propriétaires</a
-					>
-				</li>
-				<li>
-					<a
-						aria-current={$page.url.pathname === '/tenants'}
-						href="/tenants"
-						class="flex p-2 hover:bg-slate-200 rounded-lg hover:text-slate-700 aria-[current=true]:bg-slate-200"
-						>Locataires</a
-					>
-				</li>
-
-				<li>
-					<a
-						href="/rentals"
-						aria-current={$page.url.pathname === '/rentals'}
-						class="flex p-2 hover:bg-slate-200 rounded-lg hover:text-slate-700 aria-[current=true]:bg-slate-200"
-						>Locations</a
-					>
-				</li>
-				<li>
-					<a
-						href="/receipts"
-						aria-current={$page.url.pathname === '/receipts'}
-						class="flex p-2 hover:bg-slate-200 rounded-lg hover:text-slate-700 aria-[current=true]:bg-slate-200"
-						>Quittances</a
-					>
-				</li>
-			</ul>
-		</nav>
-	</aside>
-	<div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
-		<header class="w-full h-16 p-5 text-gray-700 bg-slate-100 body-font rounded-t-xl">
-			<Bread />
-		</header>
-		<main class="relative">
-			<Balise />
-			<slot class="z-0" />
-		</main>
-	</div>
+<div class="flex bg-slate-800">
+  <aside class="min-h-screen p-4 space-y-8 font-hind w-60">
+    <h1 class="text-2xl font-bold text-teal-500 md:text-3xl font-hind">
+      <a href="/">
+        OPEN <span class="text-amber-500">QUITTANCE</span>
+      </a>
+    </h1>
+    {#if !data.needCreateLandlords}
+      <nav class="flex flex-col justify-between h-5/6">
+        <ul class="space-y-3 grow">
+          <li class="w-full">
+            <Clickable
+              variant="menu"
+              href={ROUTES.landing}
+              aria-current={$page.url.pathname === `${ROUTES.landing}`}
+              >Quittances</Clickable
+            >
+          </li>
+          <li class="w-full space-y-2">
+            <Clickable
+              variant="menu"
+              href={ROUTES.properties}
+              aria-current={$page.url.pathname.includes(ROUTES.properties)}
+              >Propriétés</Clickable
+            >
+          </li>
+          <li>
+            <Clickable
+              variant="menu"
+              href={ROUTES.tenants}
+              aria-current={$page.url.pathname.includes(`${ROUTES.tenants}`)}
+              >Locataires</Clickable
+            >
+          </li>
+          <li>
+            <Clickable
+              variant="menu"
+              href={ROUTES.rentals}
+              aria-current={$page.url.pathname.includes(`${ROUTES.rentals}`)}
+              >Locations</Clickable
+            >
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <li>
+            <Clickable
+              variant="menu"
+              href={ROUTES.settings}
+              aria-current={$page.url.pathname.includes(`${ROUTES.settings}`)}
+              >Paramètre</Clickable
+            >
+          </li>
+          <li>
+            <Clickable
+              variant="menu"
+              href={ROUTES.logout}
+              aria-current={$page.url.pathname.includes(`${ROUTES.logout}`)}
+              >Déconnexion</Clickable
+            >
+          </li>
+        </ul>
+      </nav>
+    {/if}
+  </aside>
+  <div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
+    <main class="relative mt-5">
+      <Toast />
+      <slot class="z-0" />
+    </main>
+  </div>
 </div>

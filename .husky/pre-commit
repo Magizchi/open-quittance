@@ -1,0 +1,2 @@
+npx svelte-kit sync && svelte-check --tsconfig ./tsconfig.json
+npx lint-staged

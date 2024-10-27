@@ -1,109 +1,93 @@
 <script lang="ts">
-	import Modal from '$lib/components/atoms/Modal.svelte';
-	import FormRental from '$lib/components/organisms/Forms/createRental.svelte';
-	import Clickable from '$lib/components/atoms/Clickable.svelte';
-	import { Table, Tr, Td } from '$lib/components/organisms/Table';
-	import dayjs from 'dayjs';
-	import Input from '$lib/components/atoms/Input.svelte';
-	import type RentalModel from '$lib/models/rental.model.js';
+  import Modal from "$lib/components/atoms/Modal.svelte";
+  import Clickable from "$lib/components/atoms/Clickable.svelte";
+  import { Table, Tr, Td } from "$lib/components/organisms/Table";
+  import type { RentalModel } from "$lib/models";
+  import { ROUTES } from "$lib/constants/routes.js";
+  import { formatDate } from "$lib/utils/date.js";
+  import EndRentals from "./endRentals.svelte";
 
-	export let data;
-	let showModal = false;
-	let showModalEndRentals = false;
-	const columns = [
-		{
-			header: 'Bailleur',
-			dataIndex: 'landlord'
-		},
-		{
-			header: 'Locataire',
-			dataIndex: 'tenant'
-		},
-		{
-			header: 'Propriété',
-			dataIndex: 'property'
-		},
-		{
-			header: 'Ville',
-			dataIndex: 'city'
-		},
-		{
-			header: 'Début de location',
-			dataIndex: 'startDate'
-		},
-		{
-			header: 'Fin de location',
-			dataIndex: 'endDate'
-		},
-		{
-			header: 'Options',
-			dataIndex: 'options'
-		}
-	];
+  export let data;
 
-	let rental = {} as RentalModel;
+  export const columns = [
+    {
+      header: "Locataire",
+      dataIndex: "tenant",
+    },
+    {
+      header: "Propriété",
+      dataIndex: "property",
+    },
+    {
+      header: "Description propriété ",
+      dataIndex: "name",
+    },
+    {
+      header: "Début de location",
+      dataIndex: "startDate",
+    },
+    {
+      header: "",
+      dataIndex: "options",
+    },
+  ];
+
+  let showModalEndRentals = false;
+  let selectedRental = {} as RentalModel;
+
+  function changeModal() {
+    return (showModalEndRentals = false);
+  }
 </script>
 
 <section class="px-10 space-y-3">
-	<div class="flex">
-		<div class="w-11/12">
-			<h1 class="text-2xl font-bold">Liste des Locations en cours</h1>
-		</div>
-		<div class="w-1/12">
-			<Clickable on:click={() => (showModal = true)}>Ajouter</Clickable>
-		</div>
-	</div>
-	<Table {columns} rows={data.rentals} let:row>
-		<Tr>
-			<Td>
-				<p class="flex flex-col">
-					{row.landlord.name}
-				</p>
-			</Td>
-			<Td>{row.tenant.name}</Td>
-			<Td>{row.property.name}</Td>
-			<Td>{row.property.city}</Td>
-			<Td>{dayjs(row.startDate).format('DD/MM/YYYY')}</Td>
-			<Td>{row.endDate ? dayjs(row.endDate).format('DD/MM/YYYY') : '/'}</Td>
-			<Td>
-				<div>
-					<Clickable
-						disabled={row.endDate ? true : false}
-						on:click={() => {
-							showModalEndRentals = true;
-							rental = row;
-						}}>Fin de location</Clickable
-					>
-				</div>
-			</Td>
-		</Tr>
-	</Table>
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-bold font-hind text-slate-700">
+      Liste des Locations en cours
+    </h1>
+    <Clickable variant="primary" href={ROUTES.createRental}>Ajouter</Clickable>
+  </div>
+  <Table {columns} rows={data.rentals} let:row>
+    <Tr>
+      <Td>{row.tenants.name}</Td>
+      <Td>
+        <div class="flex flex-col items-end text-justify">
+          {row.properties.address}
+          <span class="flex space-x-3">
+            {row.properties.city}
+            {row.properties.postalCode}
+          </span>
+        </div>
+      </Td>
+      <Td>{row.properties.name}</Td>
+      <Td>{formatDate(row.rentals.startedAt)}</Td>
+      <Td>
+        <div class="flex justify-end">
+          <div class="w-1/2">
+            <Clickable
+              variant="border"
+              on:click={() => {
+                showModalEndRentals = true;
+                selectedRental = row;
+              }}>Fin de location</Clickable
+            >
+          </div>
+        </div>
+      </Td>
+    </Tr>
+  </Table>
 </section>
-<Modal bind:showModal>
-	<form method="POST" class="px-10 space-y-10" action="?/create">
-		<h2 class="text-2xl font-bold">Location</h2>
-		<FormRental properties={data.propertiesOptions} tenants={data.tenantsOptions} />
-		<div class="flex justify-end">
-			<Clickable type="submit">Sauvegarder</Clickable>
-		</div>
-	</form>
-</Modal>
+
 <Modal bind:showModal={showModalEndRentals}>
-	<form method="POST" class="px-10 space-y-5" action="?/delete">
-		<h2 class="text-2xl font-bold">Fin de location</h2>
-		<div class="space-y-3">
-			<p class="font-bold">Bailleur : <span class="font-normal">{rental.landlord?.name}</span></p>
-			<p class="font-bold">Locataire : <span class="font-normal">{rental.tenant?.name}</span></p>
-			<p class="font-bold">
-				Propriété : <span class="font-normal"
-					>{rental.property?.name} - {rental.property?.city}</span
-				>
-			</p>
-			<Input name="endDate" type="date" />
-			<Input name="rentalId" value={rental.rentalId} type="hidden" />
-		</div>
-		<div class="flex justify-end">
-			<Clickable>Valider</Clickable>
-		</div>
-	</form>
+  <form method="POST" action="?/delete">
+    <EndRentals {selectedRental} />
+    <div class="flex justify-end px-10 py-3">
+      <div class="flex space-x-5">
+        <Clickable variant="secondary" type="button" on:click={changeModal}
+          >Annuler</Clickable
+        >
+        <Clickable variant="primary" type="submit">Valider</Clickable>
+      </div>
+    </div>
+  </form>
 </Modal>

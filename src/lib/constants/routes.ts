@@ -1,0 +1,17 @@
+export const ROUTES = {
+  login: "/login",
+  landing: "/",
+  createLandlords: "/landlords/new",
+  landlord: "/landlords/{id}",
+  properties: "/properties",
+  createProperty: "/properties/new",
+  property: "/properties/{id}",
+  tenants: "/tenants",
+  tenant: "/tenants/{id}",
+  createTenant: "/tenants/new",
+  rentals: "/rentals",
+  rental: "/rentals/{id}",
+  createRental: "/rentals/new",
+  settings: "/settings",
+  logout: "/logout",
+} as const;

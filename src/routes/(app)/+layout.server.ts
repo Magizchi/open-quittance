@@ -1,25 +1,49 @@
-import { redirect } from '@sveltejs/kit';
-import db from '$lib/server/database.js';
-import { usersTable } from '$lib/server/schema.js';
-import { eq } from 'drizzle-orm';
-import CheckToken from '$lib/utils/CheckToken';
+import { redirect } from "@sveltejs/kit";
+import db from "$lib/db/drizzle.js";
+import { landlordsTable, usersTable } from "$lib/db/schema.js";
+import { eq } from "drizzle-orm";
+import R from "$lib/utils/remember_me.js";
+import { ROUTES } from "$lib/constants/routes";
 
-export const load = async ({ cookies }) => {
-    const userInfo = CheckToken(cookies);
-    const [user] = await db.select({
-        firstName: usersTable.firstName,
-        lastName: usersTable.lastName,
-        email: usersTable.email,
-        loginToken: usersTable.loginToken
-    }).from(usersTable).where(eq(usersTable.email, userInfo.email));
+export const load = async ({ cookies, url }) => {
+  const cookieInfo = R(cookies);
 
-    if (!user) {
-        throw redirect(303, '/');
-    }
+  if (!cookieInfo) {
+    cookies.delete("remember_me", { path: "/" });
+    throw redirect(303, ROUTES.login);
+  }
 
-    if (user.loginToken !== userInfo.loginToken) {
-        throw redirect(303, '/');
-    }
+  const [user] = await db
+    .select({
+      id: usersTable.id,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
+      email: usersTable.email,
+      loginToken: usersTable.loginToken,
+    })
+    .from(usersTable)
+    .where(eq(usersTable.email, cookieInfo.email));
 
-    return { user };
+  if (!user) {
+    cookies.delete("remember_me", { path: "/" });
+    throw redirect(303, ROUTES.login);
+  }
+
+  if (user.loginToken !== cookieInfo.loginToken) {
+    cookies.delete("remember_me", { path: "/" });
+    throw redirect(303, ROUTES.login);
+  }
+
+  const landlords = await db.select().from(landlordsTable);
+  let needCreateLandlords = false;
+
+  if (!landlords.length) {
+    needCreateLandlords = true;
+  }
+
+  if (!landlords.length && ROUTES.createLandlords !== url.pathname) {
+    throw redirect(303, ROUTES.createLandlords);
+  }
+
+  return { ...user, needCreateLandlords };
 };

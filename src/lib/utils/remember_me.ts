@@ -1,23 +1,60 @@
 import bcrypt from "bcrypt";
-import { Cookies } from '@sveltejs/kit';
-import db from "$lib/server/database";
-import { usersTable } from "$lib/server/schema";
+import { fail } from "@sveltejs/kit";
+import type { Cookies } from "@sveltejs/kit";
+import db from "$lib/db/drizzle";
+import { usersTable } from "$lib/db/schema";
 import { eq } from "drizzle-orm";
-import jwt from 'jsonwebtoken';
-import { JWT_SECRET_TOKEN } from '$env/static/private';
+import jwt from "jsonwebtoken";
+import { JWT_SECRET_TOKEN } from "$env/static/private";
 
 interface UserInfo {
-    id: number;
-    email: string;
+  id: number;
+  email: string;
 }
 export const createCookie = async (user: UserInfo, cookies: Cookies) => {
-    const uuid = await bcrypt.genSalt();
+  const uuid = await bcrypt.genSalt();
 
-    // Update loginToken in bdd
-    await db.update(usersTable)
-        .set({ loginToken: uuid })
-        .where(eq(usersTable.email, user.email.toString()));
+  try {
+    await db
+      .update(usersTable)
+      .set({ loginToken: uuid })
+      .where(eq(usersTable.email, user.email.toString()));
+  } catch {
+    return fail(401, {
+      message: "Erreur lors de la connexion",
+      incorrect: true,
+    });
+  }
 
-    const jsonwt = jwt.sign({ ...user, loginToken: uuid }, JWT_SECRET_TOKEN);
-    cookies.set('remember_me', jsonwt, { httpOnly: true, maxAge: 60 * 60 * 24, sameSite: "strict", path: "/" });
+  const jsonwt = jwt.sign({ ...user, loginToken: uuid }, JWT_SECRET_TOKEN);
+
+  cookies.set("remember_me", jsonwt, {
+    httpOnly: true,
+    maxAge: 60 * 60 * 24,
+    sameSite: "strict",
+    path: "/",
+  });
 };
+
+interface UserToken {
+  id: number;
+  email: string;
+  loginToken: string;
+  landlordId?: string | number;
+  landlordName?: string;
+}
+
+const checkCookie = (cookies: Cookies) => {
+  const cookiesJwt = cookies.get("remember_me");
+  if (!cookiesJwt) {
+    return undefined;
+  }
+  try {
+    const userInfo = jwt.verify(cookiesJwt, JWT_SECRET_TOKEN) as UserToken;
+    return { ...userInfo, token: cookiesJwt };
+  } catch {
+    return undefined;
+  }
+};
+
+export default checkCookie;

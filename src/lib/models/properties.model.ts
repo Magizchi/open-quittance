@@ -1,5 +1,3 @@
-import type { propertiesTable } from "$lib/server/schema";
+import type { propertiesTable } from "$lib/db/schema";
 
-type propertyType = typeof propertiesTable.$inferSelect;
-
-export default interface PropertyModel extends propertyType { }
+export type PropertyModel = typeof propertiesTable.$inferSelect;

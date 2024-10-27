@@ -1,49 +1,29 @@
-# create-svelte
+# OpenQuittance
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Le projet OpenQuittance vise à simplifier la gestion des quittances de loyer
+grâce à une plateforme open source. Il utilise SvelteKit, un framework
+JavaScript moderne pour construire des applications web, et Drizzle
 
-## Creating a project
+À travers une interface intuitive, les utilisateurs peuvent effectuer des
+opérations CRUD (Create, Read, Update, Delete) pour gérer les informations
+relatives aux utilisateurs, aux propriétés et aux locataires. La fonctionnalité
+principale permet la création de quittances directement depuis la page
+d'accueil, offrant ainsi une expérience fluide et efficace
 
-If you're seeing this, you've probably already done this step. Congrats!
+De plus, le projet offre un système d'affichage des quittances ainsi qu'un
+historique détaillé pour chaque locataire, facilitant ainsi le suivi des
+paiements et la gestion des archives. En combinant la facilité d'utilisation de
+SvelteKit avec la puissance de Drizzle pour la gestion des données,
+OpenQuittance offre une solution complète et moderne pour la gestion des
+quittances de loyer.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Installation
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+1. [Installation SANS DOCKER](docs/installation_sans_docker.md)
+2. [Installation AVEC DOCKER](docs/installation_avec_docker.md)
+3. [Installation AVEC DevContainer(VS Code)](docs/installation_devContainer.md)
 
-## Developing
+## Annexe
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-### Puppeteer
-
-    https://keestalkstech.com/2022/08/jupyter-notebooks-vscode-dev-container-with-puppeteer-support/
-### Add chromium
-    https://stackoverflow.com/questions/58997430/how-to-install-chromium-in-docker-based-on-ubuntu-19-10-and-20-04
-
-
-# lancer projet local
-
-    npm run dev -- -host
+1. [Palette de couleur](docs/palette.md)
+2. [Debug](doc/debug.md)

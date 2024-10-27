@@ -1,4 +1,4 @@
-export type { default as LandlordModel } from "./landlord.model";
-export type { default as PropertyModel } from "./properties.model";
+export type { LandlordModel } from "./landlord.model";
+export type { PropertyModel } from "./properties.model";
 export type { default as RentalModel } from "./rental.model";
-export type { default as ReceiptsModel } from "./receipts.model";
+export type { ReceiptsModel } from "./receipts.model";

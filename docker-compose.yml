@@ -1,40 +1,37 @@
-version: '3'
+version: "3"
 
 networks:
   svelte_network:
 
 services:
   node:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
+    image: node:22
     container_name: Svelte_container
     ports:
-      - '3000:3000'
+      - "3000:3000"
     networks:
       - svelte_network
 
   db:
-    image: mysql:latest
+    image: mysql:9.0.1
     container_name: pdfman_mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: pdfman
-      MYSQL_USER: root
       MYSQL_PASSWORD: password
     ports:
-      - '3306:3306'
+      - "3306:3306"
     networks:
       - svelte_network
 
   phpmyadmin:
-    image: phpmyadmin:latest
+    image: phpmyadmin:5.2.1
     container_name: pdfman_phpmyadmin
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
     ports:
-      - '8080:80'
+      - "8080:80"
     depends_on:
       - db
     networks:
