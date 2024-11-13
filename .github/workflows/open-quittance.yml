@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Mysql
       - uses: mirromutth/mysql-action@v1.1
-          with:
+        with:
             host port: 3306
             mysql version: '9.1'
             mysql database: "openQuittance" # Optional, default value is "test". The specified database which will be create
