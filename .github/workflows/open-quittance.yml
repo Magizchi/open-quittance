@@ -8,6 +8,7 @@ env:
   DB_PORT: 3306
   DB_DATABASE: openQuittance
   DB_USER: root
+  JWT_SECRET_TOKEN: 2y10s94DQTxK1txQ73nqiYAl4sFNJPnpjGpd0qUPN3pxaiAJg4Ucde6
 
 jobs:
   build:
