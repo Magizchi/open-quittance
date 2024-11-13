@@ -2,6 +2,13 @@ name: deploy
 
 on: [push]
 
+env:
+  DB_HOST: "db"
+  DB_PASSWORD: "password"
+  DB_PORT: 3306
+  DB_DATABASE: openQuittance
+  DB_USER: root
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,16 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Docker compose
-        uses: hoverkraft-tech/compose-action@v2.0.1
-        with:
-          compose-file: "./docker-compose.yml"
-        env:
-          DB_HOST: "db"
-          DB_PASSWORD: "password"
-          DB_PORT: 3306
-          DB_DATABASE: openQuittance
-          DB_USER: root
+      - name: Install Node.js
+      - uses: actions/setup-node@v4
+          with:
+          node-version: 22
+
+      - name: Install Mysql
+      - uses: mirromutth/mysql-action@v1.1
+          with:
+            host port: 3306
+            mysql version: '9.1'
+            mysql database: "openQuittance" # Optional, default value is "test". The specified database which will be create
+            mysql root password: "password"
+            mysql user: "root"
 
       - name: Install Packages
         run: npm install
