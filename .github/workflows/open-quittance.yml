@@ -6,12 +6,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-   steps:
+    steps:
       - uses: actions/checkout@v4
 
       - name: Run Docker compose
         uses: hoverkraft-tech/compose-action@v2.0.1
-        with: 
+        with:
           compose-file: "./docker-compose.yml"
         env:
           DB_HOST: "db"
@@ -21,10 +21,13 @@ jobs:
           DB_USER: root
 
       - name: Install Packages
-        run: npm install --omit=dev
+        run: npm install
 
       - name: Build App
         run: npm run build
 
+      - name: Build App
+        run: rm -r node_modules && npm install --omit=dev
+
       - name: Checkout Build folder
-        run: ll 
+        run: ll
