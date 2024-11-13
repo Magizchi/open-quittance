@@ -15,20 +15,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Install Mysql
       - uses: mirromutth/mysql-action@v1.1
         with:
-            host port: 3306
-            mysql version: '9.1'
-            mysql database: "openQuittance" # Optional, default value is "test". The specified database which will be create
-            mysql root password: "password"
-            mysql user: "root"
+          host port: 3306
+          mysql version: "9.1"
+          mysql database: "openQuittance" # Optional, default value is "test". The specified database which will be create
+          mysql root password: "password"
+          mysql user: "root"
 
       - name: Install Packages
         run: npm install
