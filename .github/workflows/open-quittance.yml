@@ -37,4 +37,5 @@ jobs:
         run: rm -r node_modules && npm install --omit=dev
 
       - name: Checkout Build folder
-        run: ll
+        run: |
+          dir
