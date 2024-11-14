@@ -50,7 +50,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync Build
-        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" build ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/productions/open-quittance/build
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" build ${{ secrets.USER }}@${{ secrets.HOST }}:/productions/open-quittance/build
 
       - name: Deploy NodeModule
-        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" node_modules/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/productions/open-quittance/node_modules
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" node_modules/ ${{ secrets.USER }}@${{ secrets.HOST }}:/productions/open-quittance/node_modules
