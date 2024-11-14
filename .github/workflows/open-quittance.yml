@@ -39,3 +39,18 @@ jobs:
       - name: Checkout Build folder
         run: |
           dir
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy with rsync Build
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" build ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/open-quittance/build
+
+      - name: Deploy NodeModule
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" node_modules/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/open-quittance/node_modules
