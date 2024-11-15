@@ -49,6 +49,10 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
+      - name: Checkout SSH CO
+          ssh ${{ secrets.USER }}@${{ secrets.HOST }}
+          dir
+
       - name: Deploy with rsync Build
         run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" build/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/productions/open-quittance/build
 
