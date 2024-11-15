@@ -50,6 +50,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Checkout SSH CO
+        run: |
           ssh ${{ secrets.USER }}@${{ secrets.HOST }}
           dir
 
