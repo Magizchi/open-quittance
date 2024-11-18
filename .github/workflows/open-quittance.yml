@@ -1,0 +1,60 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  DB_USER: ${{ secrets.DB_USER }}
+  JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: "9.1"
+          mysql database: ${{ secrets.DB_DATABASE }}
+          mysql root password: ${{ secrets.DB_PASSWORD }}
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Build App
+        run: npm run build
+
+      - name: Install Package for production
+        run: rm -r node_modules && npm install --omit=dev
+
+      - name: Checkout Build folder
+        run: |
+          dir
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: unnecessary
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p ${{ secrets.PORT }} -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy with rsync Build
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" build/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/open-quittance/build
+
+      - name: Deploy NodeModule
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" node_modules/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/open-quittance/node_modules
+
+      - name: Deploy migrations files
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" migrations/ ${{ secrets.USER }}@${{ secrets.HOST }}:/etc/var/www/open-quittance/migrations
