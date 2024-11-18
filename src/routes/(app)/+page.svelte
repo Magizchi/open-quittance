@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { saveAs } from "file-saver";
+  import FileSaver from "file-saver";
   import { formatDate, toDay } from "$lib/utils/date.js";
   import { PdfIcon } from "$lib/components/atoms/Icons/icon.js";
   import { Table, Tr, Td } from "$lib/components/organisms/Table";
@@ -57,7 +57,7 @@
 
     const blob = new Blob([pdfBuffer], { type: "application/pdf" });
 
-    saveAs(blob, `quittance-${documentName}.pdf`);
+    FileSaver.saveAs(blob, `quittance-${documentName}.pdf`);
   }
 </script>
 
