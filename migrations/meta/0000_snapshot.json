@@ -1,0 +1,586 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "a3ec333d-f1f8-40f7-b524-ce6785fc6db6",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "landlords": {
+      "name": "landlords",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "siret": {
+          "name": "siret",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "postalCode": {
+          "name": "postalCode",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "landlords_id": {
+          "name": "landlords_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "properties": {
+      "name": "properties",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "landlord_id": {
+          "name": "landlord_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "postalCode": {
+          "name": "postalCode",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "rent": {
+          "name": "rent",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "condo_fees": {
+          "name": "condo_fees",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "taxes": {
+          "name": "taxes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_landlord_id_landlords_id_fk": {
+          "name": "properties_landlord_id_landlords_id_fk",
+          "tableFrom": "properties",
+          "tableTo": "landlords",
+          "columnsFrom": [
+            "landlord_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "properties_id": {
+          "name": "properties_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "receipts": {
+      "name": "receipts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "rental_id": {
+          "name": "rental_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "number": {
+          "name": "number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "landlord_id": {
+          "name": "landlord_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "landlord_fullName": {
+          "name": "landlord_fullName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "landlord_address": {
+          "name": "landlord_address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "landlord_city": {
+          "name": "landlord_city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "landlord_postalCode": {
+          "name": "landlord_postalCode",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tenant_id": {
+          "name": "tenant_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tenant_fullName": {
+          "name": "tenant_fullName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tenant_address": {
+          "name": "tenant_address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tenant_city": {
+          "name": "tenant_city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tenant_postalCode": {
+          "name": "tenant_postalCode",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "rent": {
+          "name": "rent",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "condo_fees": {
+          "name": "condo_fees",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "taxes": {
+          "name": "taxes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "property_address": {
+          "name": "property_address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "property_city": {
+          "name": "property_city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "property_postalCode": {
+          "name": "property_postalCode",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "paymentDate": {
+          "name": "paymentDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "startDate": {
+          "name": "startDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "endDate": {
+          "name": "endDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createAt": {
+          "name": "createAt",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "receipts_rental_id_rentals_id_fk": {
+          "name": "receipts_rental_id_rentals_id_fk",
+          "tableFrom": "receipts",
+          "tableTo": "rentals",
+          "columnsFrom": [
+            "rental_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "receipts_landlord_id_landlords_id_fk": {
+          "name": "receipts_landlord_id_landlords_id_fk",
+          "tableFrom": "receipts",
+          "tableTo": "landlords",
+          "columnsFrom": [
+            "landlord_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "receipts_tenant_id_tenants_id_fk": {
+          "name": "receipts_tenant_id_tenants_id_fk",
+          "tableFrom": "receipts",
+          "tableTo": "tenants",
+          "columnsFrom": [
+            "tenant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "receipts_id": {
+          "name": "receipts_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "rentals": {
+      "name": "rentals",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "startedAt": {
+          "name": "startedAt",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "endDate": {
+          "name": "endDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tenant_id": {
+          "name": "tenant_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "rentals_tenant_id_tenants_id_fk": {
+          "name": "rentals_tenant_id_tenants_id_fk",
+          "tableFrom": "rentals",
+          "tableTo": "tenants",
+          "columnsFrom": [
+            "tenant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "rentals_property_id_properties_id_fk": {
+          "name": "rentals_property_id_properties_id_fk",
+          "tableFrom": "rentals",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "property_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "rentals_id": {
+          "name": "rentals_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "tenants": {
+      "name": "tenants",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "siret": {
+          "name": "siret",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "postalCode": {
+          "name": "postalCode",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "tenants_id": {
+          "name": "tenants_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "firstName": {
+          "name": "firstName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lastName": {
+          "name": "lastName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "loginToken": {
+          "name": "loginToken",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "users_id": {
+          "name": "users_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}
