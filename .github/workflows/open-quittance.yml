@@ -15,7 +15,7 @@ jobs:
         with:
           mysql version: "9.1"
           mysql root password: ${{ secrets.DB_PASSWORD}}
-          mysql user: ${{ secrets.DB_HOST}}
+          mysql user: ${{ secrets.DB_USER}}
 
       - name: Install Packages
         run: npm install
