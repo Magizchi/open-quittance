@@ -1,6 +1,9 @@
 name: deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 env:
   DB_HOST: ${{ secrets.DB_HOST }}
