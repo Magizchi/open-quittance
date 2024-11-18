@@ -13,6 +13,7 @@ jobs:
           node-version: 22
       - uses: mirromutth/mysql-action@v1.1
         with:
+          host port: ${{ secrets.DB_PORT }}
           mysql version: "9.1"
           mysql root password: ${{ secrets.DB_PASSWORD}}
           mysql user: ${{ secrets.DB_USER}}
