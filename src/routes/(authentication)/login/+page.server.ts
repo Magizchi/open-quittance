@@ -3,17 +3,16 @@ import { redirect, fail } from "@sveltejs/kit";
 import db from "$lib/db/drizzle";
 import { usersTable } from "$lib/db/schema";
 import { eq } from "drizzle-orm";
+import "dotenv/config";
 import { createCookie } from "$lib/utils/remember_me.js";
 import { ROUTES } from "$lib/constants/routes.js";
-import { WEB_DEMO } from "$env/static/private";
 
 export const load = ({ cookies }) => {
   const cookiesJwt = cookies.get("remember_me");
   if (cookiesJwt) {
     throw redirect(303, ROUTES.landing);
   }
-
-  const webDemo = WEB_DEMO === "true";
+  const webDemo = process.env.WEB_DEMO === "true";
   return { webDemo };
 };
 
