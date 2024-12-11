@@ -5,12 +5,13 @@ import { fail } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import checkCookie, { createCookie } from "$lib/utils/remember_me.js";
+import { WEB_DEMO } from "$env/static/private";
 
 export const load = async ({ parent }) => {
   await parent();
 
   const [landlord] = await db.select().from(landlordsTable);
-  return { landlord };
+  return { landlord, webDemo: WEB_DEMO === "true" };
 };
 
 export const actions = {

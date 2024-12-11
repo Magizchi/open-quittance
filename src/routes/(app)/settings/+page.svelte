@@ -17,30 +17,37 @@
       required
       type="text"
       placeholder="Votre email"
+      disabled={data.webDemo}
     />
-
     <Input
       label="Mot de passe actuel"
       name="currentPassword"
       required
       type="password"
       placeholder="Votre mots de passe actuel"
+      disabled={data.webDemo}
     />
     <Input
       label="Nouveau mots de passe"
       name="newPassword"
       type="password"
       placeholder="Nouveau mot de passe"
+      disabled={data.webDemo}
     />
     <Input
       label="Confirmer votre mot de passe"
       name="confirmPassword"
       type="password"
       placeholder="Confirmer votre nouveau mot de passe"
+      disabled={data.webDemo}
     />
-    <Clickable className="w-96" type="submit" variant="primary"
-      >Mettre à jour</Clickable
-    >
+    <Clickable
+      className="w-96"
+      type="submit"
+      variant="primary"
+      disabled={data.webDemo}
+      >Mettre à jour
+    </Clickable>
   </form>
 </section>
 <section class="max-w-lg mb-10 ml-10 space-y-5">

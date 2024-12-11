@@ -27,3 +27,6 @@ quittances de loyer.
 
 1. [Palette de couleur](docs/palette.md)
 2. [Debug](doc/debug.md)
+3. GithubActions
+   - Installation de [node.js](https://github.com/actions/setup-node)
+   - Installation de [mysql](https://github.com/marketplace/actions/setup-mysql)
