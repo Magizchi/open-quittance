@@ -9,6 +9,7 @@
 
   export let form;
   export let data;
+  console.log("data", data);
 </script>
 
 <section
@@ -33,33 +34,62 @@
             quelques clics.
           </p>
         </div>
-        <form class="w-1/2" method="post">
-          <div class="space-y-5">
-            <Input
-              id="username"
-              name="username"
-              placeholder="Email ou identifiant"
-              value={data.webDemo ? "lesVisiteurs@visiteur.fr" : ""}
-              label="Email"
-            />
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Mots de passe"
-              value={data.webDemo ? "password" : ""}
-              on:change={() => setMessage()}
-              label="Mot de passe"
-            />
-            <p class="text-sm font-hind text-rose-500 md:text-base">
-              {#if form}{form.message}{/if}
-            </p>
+        {#if data.webDemo}
+          <form class="w-1/2" method="post">
+            <div class="space-y-5">
+              <Input
+                id="username"
+                name="username"
+                placeholder="Email ou identifiant"
+                value="lesVisiteurs@visiteur.fr"
+                label="Email Demo"
+              />
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Mots de passe"
+                value="password"
+                on:change={() => setMessage()}
+                label="Mot de passe"
+              />
+              <p class="text-sm font-hind text-rose-500 md:text-base">
+                {#if form}{form.message}{/if}
+              </p>
 
-            <div class="w-full md:flex md:justify-end">
-              <Clickable variant="primary" type="submit">Connection</Clickable>
+              <div class="w-full md:flex md:justify-end">
+                <Clickable variant="primary" type="submit">Connection</Clickable
+                >
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        {:else}
+          <form class="w-1/2" method="post">
+            <div class="space-y-5">
+              <Input
+                id="username"
+                name="username"
+                placeholder="Email ou identifiant"
+                label="Email"
+              />
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Mots de passe"
+                on:change={() => setMessage()}
+                label="Mot de passe"
+              />
+              <p class="text-sm font-hind text-rose-500 md:text-base">
+                {#if form}{form.message}{/if}
+              </p>
+              <div class="w-full md:flex md:justify-end">
+                <Clickable variant="primary" type="submit">Connection</Clickable
+                >
+              </div>
+            </div>
+          </form>
+        {/if}
       </div>
     </div>
     <div class="hidden w-1/2 rounded-r-xl md:block">
