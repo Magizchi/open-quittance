@@ -27,12 +27,21 @@ export async function GET({ url }) {
   const pdfData = docDefinition(receipt); // template + receipt data
   const pdfBlob = await GeneratePdf(pdfData); // blob from this template
 
+  let documentName: string = "";
+
+  if (receipt.paymentDate === null) {
+    documentName =
+      receipt.tenant_fullName.replaceAll(" ", "-") + "-" + "reste-a-payer";
+  } else {
+    documentName = `${receipt.tenant_fullName.replaceAll(" ", "-")}-${dayjs(
+      receipt.paymentDate
+    ).format("MMMM")}-${dayjs(receipt.paymentDate).get("year")}`;
+  }
+
   return new Response(pdfBlob, {
     status: 200,
     headers: {
-      "document-name": `${receipt.tenant_fullName.replaceAll(" ", "-")}-${dayjs(
-        receipt.paymentDate
-      ).format("MMMM")}-${dayjs(receipt.paymentDate).get("year")}`,
+      "document-name": documentName,
     },
   });
 }
