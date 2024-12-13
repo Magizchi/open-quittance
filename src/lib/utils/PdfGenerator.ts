@@ -11,11 +11,11 @@ const GeneratePdf = (docDefinition: TDocumentDefinitions): Promise<Blob> => {
       bold: "src/lib/assets/fonts/Roboto/Roboto-Medium.ttf",
     },
     // Custom fonts
-    // Hind: {
-    //   // Only Roboto work? I used "Hind"
-    //   normal: "src/lib/assets/fonts/hind/Hind-Regular.otf",
-    //   bold: "src/lib/assets/fonts/hind/Hind-Bold.ttf",
-    // },
+    Hind: {
+      // Only Roboto work? I used "Hind"
+      normal: "src/lib/assets/fonts/hind/Hind-Regular.otf",
+      bold: "src/lib/assets/fonts/hind/Hind-Bold.ttf",
+    },
   };
 
   const printer = new PdfPrinter(fonts);
