@@ -13,8 +13,8 @@ const GeneratePdf = (docDefinition: TDocumentDefinitions): Promise<Blob> => {
     // Custom fonts
     Hind: {
       // Only Roboto work? I used "Hind"
-      normal: "src/lib/assets/fonts/hind/OTF/Hind-Regular.otf",
-      bold: "src/lib/assets/fonts/hind/OTF/Hind-Bold.otf",
+      normal: "src/lib/assets/fonts/hind/Hind-Regular.otf",
+      bold: "src/lib/assets/fonts/hind/Hind-Bold.ttf",
     },
   };
 
