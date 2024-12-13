@@ -14,7 +14,7 @@ const Space = (spaceSize: number) => ({
 const Text = (text: string, decoration?: Style) => ({
   text,
   lineHeight: 1.3,
-  // font: "Hind",
+  font: "Hind",
   bold: false,
   ...decoration,
 });
@@ -58,7 +58,7 @@ const docDefinition = (info: {
 }): TDocumentDefinitions => ({
   watermark: {
     text: "",
-    // font: "Hind",
+    font: "Hind",
   },
   content: [
     Text(
@@ -132,6 +132,7 @@ const docDefinition = (info: {
       ],
       alignment: "justify",
       lineHeight: 1.3,
+      font: "Hind",
     },
     Space(3),
     Text("Détail du règlement :", { decoration: "underline", bold: true }),
@@ -203,15 +204,16 @@ const docDefinition = (info: {
         fontSize: 8,
         lineHeight: 1,
         alignment: "left",
+        font: "Hind",
       }
     ),
   ],
-  // styles: {
-  //   Hind: {
-  //     font: "Hind",
-  //     bold: false
-  //   },
-  // },
+  styles: {
+    Hind: {
+      font: "Hind",
+      bold: false,
+    },
+  },
 });
 
 export default docDefinition;
