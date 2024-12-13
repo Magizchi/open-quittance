@@ -14,6 +14,7 @@ const Space = (spaceSize: number) => ({
 const Text = (text: string, decoration?: Style) => ({
   text,
   lineHeight: 1.3,
+  font: "Hind",
   ...decoration,
 });
 
@@ -54,6 +55,10 @@ const docDefinition = (info: {
   paymentDate: Date | null;
   createAt: Date | null;
 }): TDocumentDefinitions => ({
+  watermark: {
+    text: "",
+    font: "Hind",
+  },
   content: [
     Text(
       `Quittance de loyer du mois de ${dayjs(info.startDate).locale("fr").format("MMMM").toUpperCase()}`,
@@ -126,6 +131,7 @@ const docDefinition = (info: {
       ],
       alignment: "justify",
       lineHeight: 1.3,
+      font: "Hind",
     },
     Space(3),
     Text("Détail du règlement :", { decoration: "underline", bold: true }),
@@ -197,9 +203,15 @@ const docDefinition = (info: {
         fontSize: 8,
         lineHeight: 1,
         alignment: "left",
+        font: "Hind",
       }
     ),
   ],
+  styles: {
+    Hind: {
+      font: "Hind",
+    },
+  },
 });
 
 export default docDefinition;
