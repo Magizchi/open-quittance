@@ -16,6 +16,9 @@ const connection = await mysql.createConnection({
   database: DB_DATABASE,
 });
 
+//Instantiate the connection
+await connection.connect();
+
 const db = drizzle(connection);
 
 export default db;
