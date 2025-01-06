@@ -14,6 +14,8 @@ const connection = await mysql.createConnection({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_DATABASE,
+  keepAliveInitialDelay: 10000, // 0 by default.
+  enableKeepAlive: true,
 });
 
 //Instantiate the connection
