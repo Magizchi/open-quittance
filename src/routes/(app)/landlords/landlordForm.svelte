@@ -1,16 +1,22 @@
 <script lang="ts">
   import Input from "$lib/components/atoms/Input.svelte";
-  export let defaultValues: {
-    name: string;
-    address: string;
-    city: string;
-    postalCode: string;
-  } = {
-    name: "",
-    address: "",
-    city: "",
-    postalCode: "",
-  };
+  interface LandlordFormProps {
+    defaultValues?: {
+      name: string;
+      address: string;
+      city: string;
+      postalCode: string;
+    };
+  }
+
+  let {
+    defaultValues = $bindable({
+      name: "",
+      address: "",
+      city: "",
+      postalCode: "",
+    }),
+  }: LandlordFormProps = $props();
 </script>
 
 <div class="grid gap-3 lg:grid-cols-2">
@@ -19,8 +25,8 @@
       label="Nom du Bailleur*"
       placeholder="Nom du bailleur"
       name="landlordName"
-      required="required"
-      bind:value={defaultValues.name}
+      required={true}
+      value={defaultValues.name}
     />
     <p class="text-sm italic text-slate-600 font-hind">
       Nom et prénom si vous êtes un particulier sinon le nom de l'entreprise
@@ -31,22 +37,22 @@
       label="Adresse*"
       placeholder="Address"
       name="address"
-      required="required"
-      bind:value={defaultValues.address}
+      required={true}
+      value={defaultValues.address}
     />
   </div>
   <Input
     label="Code Postal*"
     placeholder="Code postal"
     name="postalCode"
-    required="required"
-    bind:value={defaultValues.postalCode}
+    required={true}
+    value={defaultValues.postalCode}
   />
   <Input
     label="Ville*"
-    bind:value={defaultValues.city}
+    value={defaultValues.city}
     placeholder="Ville"
     name="city"
-    required="required"
+    required={true}
   />
 </div>
