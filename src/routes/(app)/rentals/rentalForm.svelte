@@ -1,11 +1,16 @@
 <script lang="ts">
   import Select from "$lib/components/atoms/Select.svelte";
-  export let properties: { label: string; value: number }[];
-  export let tenants: { label: string; value: number }[];
+  import { toDay } from "$lib/utils/date";
+  interface Props {
+    properties: { label: string; value: number }[];
+    tenants: { label: string; value: number }[];
+  }
 
-  let selectProperty: number;
-  let selectTenant: number;
-  let selectedDate: Date;
+  let { properties, tenants }: Props = $props();
+
+  let selectProperty: number = $state(0);
+  let selectTenant: number = $state(0);
+  let selectedDate: Date = $state(toDay());
 </script>
 
 <div class="space-y-5">

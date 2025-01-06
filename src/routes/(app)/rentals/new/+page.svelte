@@ -6,16 +6,17 @@
   import { ROUTES } from "$lib/constants/routes";
   import FormRental from "../rentalForm.svelte";
 
-  export let data;
-  export let form;
-  $: if (form) {
-    if (form.success) {
-      addToast.success(form.message, 5000);
-      goto(ROUTES.rentals);
-    } else {
-      addToast.alert(form.message, 5000);
+  let { data, form } = $props();
+  $effect(() => {
+    if (form) {
+      if (form.success) {
+        addToast.success(form.message, 5000);
+        goto(ROUTES.rentals);
+      } else {
+        addToast.alert(form.message, 5000);
+      }
     }
-  }
+  });
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -32,7 +33,6 @@
         id="landlord"
         method="POST"
         class="space-y-5"
-        on:submit|preventDefault
         use:enhance
         action={ROUTES.createRental}
       >

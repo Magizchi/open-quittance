@@ -2,7 +2,11 @@
   import Input from "$lib/components/atoms/Input.svelte";
   import type { RentalModel } from "$lib/models";
 
-  export let selectedRental: RentalModel;
+  interface Props {
+    selectedRental: RentalModel;
+  }
+
+  let { selectedRental }: Props = $props();
 </script>
 
 <div class="flex items-center w-full h-24 px-10 mb-5 bg-indigo-500 rounded-t">
