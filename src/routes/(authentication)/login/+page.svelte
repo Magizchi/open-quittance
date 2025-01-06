@@ -7,9 +7,7 @@
     form = { message: "", incorrect: false };
   };
 
-  export let form;
-  export let data;
-  console.log("data", data);
+  let { form, data } = $props();
 </script>
 
 <section
@@ -34,62 +32,34 @@
             quelques clics.
           </p>
         </div>
-        {#if data.webDemo}
-          <form class="w-1/2" method="post">
-            <div class="space-y-5">
-              <Input
-                id="username"
-                name="username"
-                placeholder="Email ou identifiant"
-                value="lesVisiteurs@visiteur.fr"
-                label="Email Demo"
-              />
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Mots de passe"
-                value="password"
-                on:change={() => setMessage()}
-                label="Mot de passe"
-              />
+        <form class="w-1/2" method="post">
+          <div class="space-y-5">
+            <Input
+              id="username"
+              name="username"
+              placeholder="Email ou identifiant"
+              value={data.webDemo ? "lesVisiteurs@visiteur.fr" : ""}
+              label="Email Demo"
+            />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Mots de passe"
+              value={data.webDemo ? "password" : ""}
+              onchange={() => setMessage()}
+              label="Mot de passe"
+            />
+            {#if form}
               <p class="text-sm font-hind text-rose-500 md:text-base">
-                {#if form}{form.message}{/if}
+                {form.message}
               </p>
-
-              <div class="w-full md:flex md:justify-end">
-                <Clickable variant="primary" type="submit">Connection</Clickable
-                >
-              </div>
+            {/if}
+            <div class="w-full md:flex md:justify-end">
+              <Clickable variant="primary" type="submit">Connection</Clickable>
             </div>
-          </form>
-        {:else}
-          <form class="w-1/2" method="post">
-            <div class="space-y-5">
-              <Input
-                id="username"
-                name="username"
-                placeholder="Email ou identifiant"
-                label="Email"
-              />
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Mots de passe"
-                on:change={() => setMessage()}
-                label="Mot de passe"
-              />
-              <p class="text-sm font-hind text-rose-500 md:text-base">
-                {#if form}{form.message}{/if}
-              </p>
-              <div class="w-full md:flex md:justify-end">
-                <Clickable variant="primary" type="submit">Connection</Clickable
-                >
-              </div>
-            </div>
-          </form>
-        {/if}
+          </div>
+        </form>
       </div>
     </div>
     <div class="hidden w-1/2 rounded-r-xl md:block">

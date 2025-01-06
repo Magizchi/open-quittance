@@ -9,7 +9,7 @@
   import Badge from "$lib/components/atoms/Badge.svelte";
   import type { ReceiptsModel } from "$lib/models";
 
-  export let data;
+  let { data } = $props();
 
   const receiptsColumns: { header: string; dataIndex: string }[] = [
     {
@@ -35,11 +35,11 @@
   ];
 
   let pdfBuffer: Blob;
-  let showModalPaymentDate: boolean = false;
-  let selectedReceipts: ReceiptsModel = {
+  let showModalPaymentDate: boolean = $state(false);
+  let selectedReceipts: ReceiptsModel = $state({
     startDate: toDay(),
     id: 0,
-  } as ReceiptsModel;
+  } as ReceiptsModel);
 
   let documentName: string;
   async function getPdf(receiptId: number) {
@@ -63,62 +63,67 @@
 
 <section class="relative px-10 space-y-5 bg-slate-100">
   <h1 class="text-2xl font-bold font-hind text-slate-700">Tableau de bord</h1>
-  <Table scalpe columns={receiptsColumns} rows={data.receiptList} let:row>
-    <Tr>
-      {#if typeof row === "string"}
-        <td
-          colspan={receiptsColumns.length}
-          class="font-bold bg-gray-300 text-slate-700 font-hind">{row}</td
-        >
-      {:else}
-        <Td>{row.tenant_fullName}</Td>
-        <Td>
-          <div class="flex flex-col items-end text-justify">
-            {row.property_address}
-            <span class="flex space-x-2">
-              {row.property_city}
-              {row.property_postalCode}
-            </span>
-          </div>
-        </Td>
-        <Td>
-          {#if row.paymentDate}
-            <Badge valide>Payé {formatDate(row.paymentDate)}</Badge>
-          {:else}
-            <Badge error>Reste à payer</Badge>
-          {/if}
-        </Td>
-        <Td>
-          {row.rent + row.condo_fees + row.taxes}
-        </Td>
-        <Td>
-          <div class="flex items-center justify-between w-full pl-10 space-x-5">
-            <Clickable
-              variant="secondary"
-              on:click={() => {
-                getPdf(row.id);
-              }}
+  <Table scalpe columns={receiptsColumns} rows={data.receiptList}>
+    {#snippet children({ row })}
+      <Tr>
+        {#if typeof row === "string"}
+          <td
+            colspan={receiptsColumns.length}
+            class="font-bold bg-gray-300 text-slate-700 font-hind">{row}</td
+          >
+        {:else}
+          <Td>{row.tenant_fullName}</Td>
+          <Td>
+            <div class="flex flex-col items-end text-justify">
+              {row.property_address}
+              <span class="flex space-x-2">
+                {row.property_city}
+                {row.property_postalCode}
+              </span>
+            </div>
+          </Td>
+          <Td>
+            {#if row.paymentDate}
+              <Badge valide>Payé {formatDate(row.paymentDate)}</Badge>
+            {:else}
+              <Badge error>Reste à payer</Badge>
+            {/if}
+          </Td>
+          <Td>
+            {row.rent + row.condo_fees + row.taxes}
+          </Td>
+          <Td>
+            <div
+              class="flex items-center justify-between w-full pl-10 space-x-5"
             >
-              <div class="flex flex-row items-center justify-center">
-                <PdfIcon class="text-base" height="20" />
-                <span class="text-white font-hind">PDF</span>
-              </div>
-            </Clickable>
-            {#if !row.paymentDate}
               <Clickable
-                variant="border"
-                on:click={() => {
-                  showModalPaymentDate = true;
-                  selectedReceipts = row;
+                href="/"
+                variant="secondary"
+                onclick={() => {
+                  getPdf(row.id);
                 }}
               >
-                Valider
+                <div class="flex flex-row items-center justify-center">
+                  <PdfIcon class="text-base" height="20" />
+                  <span class="text-white font-hind">PDF</span>
+                </div>
               </Clickable>
-            {/if}
-          </div>
-        </Td>
-      {/if}
-    </Tr>
+              {#if !row.paymentDate}
+                <Clickable
+                  variant="border"
+                  onclick={() => {
+                    showModalPaymentDate = true;
+                    selectedReceipts = row;
+                  }}
+                >
+                  Valider
+                </Clickable>
+              {/if}
+            </div>
+          </Td>
+        {/if}
+      </Tr>
+    {/snippet}
   </Table>
 </section>
 
