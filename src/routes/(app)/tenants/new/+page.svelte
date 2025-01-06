@@ -5,16 +5,18 @@
   import { addToast } from "$lib/components/atoms/notification/createNotification.store.js";
   import { goto } from "$app/navigation";
   import { enhance } from "$app/forms";
-  export let form;
+  let { form } = $props();
 
-  $: if (form) {
-    if (form.success) {
-      addToast.success(form.message);
-      goto(ROUTES.tenants);
-    } else {
-      addToast.alert(form.message);
+  $effect(() => {
+    if (form) {
+      if (form.success) {
+        addToast.success(form.message);
+        goto(ROUTES.tenants);
+      } else {
+        addToast.alert(form.message);
+      }
     }
-  }
+  });
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -31,7 +33,6 @@
         id="landlord"
         method="POST"
         class="space-y-5"
-        on:submit|preventDefault
         use:enhance
         action={ROUTES.createTenant}
       >

@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import Input from "$lib/components/atoms/Input.svelte";
   import { ROUTES } from "$lib/constants/routes";
-  export let data;
+  let { data } = $props();
 </script>
 
 <h1 class="mb-5 ml-10 text-2xl font-bold font-hind text-slate-700">

@@ -7,7 +7,7 @@
   import { formatDate } from "$lib/utils/date.js";
   import EndRentals from "./endRentals.svelte";
 
-  export let data;
+  let { data } = $props();
 
   export const columns = [
     {
@@ -32,8 +32,8 @@
     },
   ];
 
-  let showModalEndRentals = false;
-  let selectedRental = {} as RentalModel;
+  let showModalEndRentals = $state(false);
+  let selectedRental = $state({} as RentalModel);
 
   function changeModal() {
     return (showModalEndRentals = false);
@@ -47,34 +47,36 @@
     </h1>
     <Clickable variant="primary" href={ROUTES.createRental}>Ajouter</Clickable>
   </div>
-  <Table {columns} rows={data.rentals} let:row>
-    <Tr>
-      <Td>{row.tenants.name}</Td>
-      <Td>
-        <div class="flex flex-col items-end text-justify">
-          {row.properties.address}
-          <span class="flex space-x-3">
-            {row.properties.city}
-            {row.properties.postalCode}
-          </span>
-        </div>
-      </Td>
-      <Td>{row.properties.name}</Td>
-      <Td>{formatDate(row.rentals.startedAt)}</Td>
-      <Td>
-        <div class="flex justify-end">
-          <div class="w-1/2">
-            <Clickable
-              variant="border"
-              on:click={() => {
-                showModalEndRentals = true;
-                selectedRental = row;
-              }}>Fin de location</Clickable
-            >
+  <Table {columns} rows={data.rentals}>
+    {#snippet children({ row })}
+      <Tr>
+        <Td>{row.tenants.name}</Td>
+        <Td>
+          <div class="flex flex-col items-end text-justify">
+            {row.properties.address}
+            <span class="flex space-x-3">
+              {row.properties.city}
+              {row.properties.postalCode}
+            </span>
           </div>
-        </div>
-      </Td>
-    </Tr>
+        </Td>
+        <Td>{row.properties.name}</Td>
+        <Td>{formatDate(row.rentals.startedAt)}</Td>
+        <Td>
+          <div class="flex justify-end">
+            <div class="w-1/2">
+              <Clickable
+                variant="border"
+                onclick={() => {
+                  showModalEndRentals = true;
+                  selectedRental = row;
+                }}>Fin de location</Clickable
+              >
+            </div>
+          </div>
+        </Td>
+      </Tr>
+    {/snippet}
   </Table>
 </section>
 
@@ -83,7 +85,7 @@
     <EndRentals {selectedRental} />
     <div class="flex justify-end px-10 py-3">
       <div class="flex space-x-5">
-        <Clickable variant="secondary" type="button" on:click={changeModal}
+        <Clickable variant="secondary" type="button" onclick={changeModal}
           >Annuler</Clickable
         >
         <Clickable variant="primary" type="submit">Valider</Clickable>

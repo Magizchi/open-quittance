@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import { ROUTES } from "$lib/constants/routes";
   import Toast from "$lib/components/atoms/notification/toast.svelte";
-  export let data;
+  let { data, children } = $props();
 </script>
 
 <div class="flex bg-slate-800">
@@ -20,7 +20,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.landing}
-              aria-current={$page.url.pathname === `${ROUTES.landing}`}
+              aria-current={page.url.pathname === `${ROUTES.landing}`}
               >Quittances</Clickable
             >
           </li>
@@ -28,7 +28,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.properties}
-              aria-current={$page.url.pathname.includes(ROUTES.properties)}
+              aria-current={page.url.pathname.includes(ROUTES.properties)}
               >Propriétés</Clickable
             >
           </li>
@@ -36,7 +36,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.tenants}
-              aria-current={$page.url.pathname.includes(`${ROUTES.tenants}`)}
+              aria-current={page.url.pathname.includes(`${ROUTES.tenants}`)}
               >Locataires</Clickable
             >
           </li>
@@ -44,7 +44,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.rentals}
-              aria-current={$page.url.pathname.includes(`${ROUTES.rentals}`)}
+              aria-current={page.url.pathname.includes(`${ROUTES.rentals}`)}
               >Locations</Clickable
             >
           </li>
@@ -54,7 +54,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.settings}
-              aria-current={$page.url.pathname.includes(`${ROUTES.settings}`)}
+              aria-current={page.url.pathname.includes(`${ROUTES.settings}`)}
               >Paramètre</Clickable
             >
           </li>
@@ -62,7 +62,7 @@
             <Clickable
               variant="menu"
               href={ROUTES.logout}
-              aria-current={$page.url.pathname.includes(`${ROUTES.logout}`)}
+              aria-current={page.url.pathname.includes(`${ROUTES.logout}`)}
               >Déconnexion</Clickable
             >
           </li>
@@ -70,10 +70,10 @@
       </nav>
     {/if}
   </aside>
-  <div class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
-    <main class="relative mt-5">
+  <main class="flex flex-col w-full m-2 bg-slate-100 rounded-xl">
+    <div class="relative mt-5">
       <Toast />
-      <slot class="z-0" />
-    </main>
-  </div>
+      {@render children?.()}
+    </div>
+  </main>
 </div>

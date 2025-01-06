@@ -2,7 +2,7 @@
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import { ROUTES } from "$lib/constants/routes";
   import LandlordForm from "../landlordForm.svelte";
-  export let data;
+  let { data } = $props();
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
