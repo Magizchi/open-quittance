@@ -116,9 +116,9 @@ const docDefinition = (info: {
       text: [
         `Reçus de ${info.tenant_fullName} `,
         "la somme de ",
-        { text: info.rent + info.condo_fees, bold: true },
+        { text: info.rent + info.condo_fees + info.taxes, bold: true },
         ` euros (${NumberToLetter(
-          info.rent + info.condo_fees
+          info.rent + info.condo_fees + info.taxes
         )} euros), au titre du paiement du loyer et des charges du local au `,
         {
           text: `${info.property_address}, ${info.property_postalCode} ${info.property_city}`,
