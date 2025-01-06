@@ -1,21 +1,44 @@
 <script lang="ts">
-  export let href: string | null = null;
-  export let variant:
-    | "default"
-    | "menu"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "border"
-    | "error" = "default";
-  export let className: string | null = null;
-  export let disabled: boolean = false;
+  import type {
+    HTMLButtonAttributes,
+    HTMLAnchorAttributes,
+  } from "svelte/elements";
+
+  interface ClickableBaseProps {
+    href?: string | null;
+    variant?:
+      | "default"
+      | "menu"
+      | "primary"
+      | "secondary"
+      | "success"
+      | "warning"
+      | "border"
+      | "error";
+    className?: string | null;
+    disabled?: boolean;
+    children?: import("svelte").Snippet;
+  }
+
+  type ButtonClickableBaseProps = ClickableBaseProps & HTMLButtonAttributes;
+
+  type LinkClickableBaseProps = ClickableBaseProps & HTMLAnchorAttributes;
+
+  type ClickableProps = LinkClickableBaseProps | ButtonClickableBaseProps;
+
+  let {
+    href = null,
+    variant = "default",
+    className = null,
+    disabled = false,
+    children,
+    ...rest
+  }: ClickableProps = $props();
 </script>
 
 {#if href}
   <a
-    {...$$restProps}
+    {...rest as LinkClickableBaseProps}
     class="flex px-4 py-2 rounded font-hind {className}"
     class:defaultClass={variant === "default"}
     class:menuClass={variant === "menu"}
@@ -27,12 +50,11 @@
     class:borderClass={variant === "border"}
     {href}
   >
-    <slot />
+    {@render children?.()}
   </a>
 {:else}
   <button
-    {...$$restProps}
-    on:click
+    {...rest as ButtonClickableBaseProps}
     class="px-4 py-2 rounded font-hind w-full
     {disabled ? '!bg-gray-400 cursor-not-allowed' : ''}
       {className}"
@@ -45,7 +67,7 @@
     class:errorClass={variant === "error"}
     class:borderClass={variant === "border"}
   >
-    <slot />
+    {@render children?.()}
   </button>
 {/if}
 

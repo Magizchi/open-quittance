@@ -1,7 +1,17 @@
 <script lang="ts">
-  export let normal: boolean = false;
-  export let valide: boolean = false;
-  export let error: boolean = false;
+  interface BadgeProps {
+    normal?: boolean;
+    valide?: boolean;
+    error?: boolean;
+    children?: import("svelte").Snippet;
+  }
+
+  let {
+    normal = false,
+    valide = false,
+    error = false,
+    children,
+  }: BadgeProps = $props();
 </script>
 
 <span
@@ -10,7 +20,7 @@
   class:valideClass={valide}
   class:errorClass={error}
 >
-  <slot />
+  {@render children?.()}
 </span>
 
 <style lang="postcss">
