@@ -1,11 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import {
-    ArrowLeftIcon,
-    ArrowRightIcon,
-  } from "$lib/components/atoms/Icons/icon";
   import dayjs from "dayjs";
+  import Icon from "@iconify/svelte";
 
   type T = $$Generic<Record>;
 
@@ -111,8 +108,10 @@
         currentPage -= 1;
         pagePagination(currentPage, show);
         return currentPage;
-      }}><ArrowLeftIcon width="20" class="text-slate-700" /></button
+      }}
     >
+      <Icon class="text-slate-700 text-xl" icon="ri:arrow-left-line" />
+    </button>
     <input
       name="pageNumber"
       class="text-center bg-white border rounded font-hind text-slate-700 w-9 border-slate-300"
@@ -129,7 +128,7 @@
         pagePagination(currentPage, show);
       }}
     >
-      <ArrowRightIcon width="20" class="text-slate-700" />
+      <Icon class="text-slate-700 text-xl" icon="ri:arrow-right-line" />
     </button>
   </div>
   <select

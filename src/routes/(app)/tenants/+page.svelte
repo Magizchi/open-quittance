@@ -2,9 +2,8 @@
   import { ROUTES } from "$lib/constants/routes.js";
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import { Table, Tr, Td } from "$lib/components/organisms/Table";
-  import EditIcon from "$lib/components/atoms/Icons/EditIcon.svelte";
   import { addToast } from "$lib/components/atoms/notification/createNotification.store.js";
-  import BenIcon from "$lib/components/atoms/Icons/BenIcon.svelte";
+  import Icon from "@iconify/svelte";
 
   let { data = $bindable() } = $props();
 
@@ -58,7 +57,7 @@
               variant="border"
               href={ROUTES.tenant.replace("{id}", row.id.toString())}
             >
-              <EditIcon class="mr-1 text-base" height="20" /> Modifier
+              <Icon class="mr-1 text-xl" icon="ri:edit-box-fill" /> Modifier
             </Clickable>
             <Clickable
               variant="border"
@@ -74,7 +73,7 @@
               }}
             >
               <div class="flex flex-row items-center justify-center">
-                <BenIcon class="mr-1 text-base" height="20" /> Supprimer
+                <Icon class="mr-1 text-xl" icon="ri:delete-bin-2-fill" /> Supprimer
               </div>
             </Clickable>
           </div>

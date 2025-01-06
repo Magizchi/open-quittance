@@ -1,13 +1,13 @@
 <script lang="ts">
   import FileSaver from "file-saver";
   import { formatDate, toDay } from "$lib/utils/date.js";
-  import { PdfIcon } from "$lib/components/atoms/Icons/icon.js";
   import { Table, Tr, Td } from "$lib/components/organisms/Table";
   import Modal from "$lib/components/atoms/Modal.svelte";
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import ValideReceipt from "$lib/components/organisms/Forms/valideReceipt.svelte";
   import Badge from "$lib/components/atoms/Badge.svelte";
   import type { ReceiptsModel } from "$lib/models";
+  import Icon from "@iconify/svelte";
 
   let { data } = $props();
 
@@ -104,7 +104,7 @@
                 }}
               >
                 <div class="flex flex-row items-center justify-center">
-                  <PdfIcon class="text-base" height="20" />
+                  <Icon class="mr-1 text-xl" icon="ri:file-pdf-2-fill" />
                   <span class="text-white font-hind">PDF</span>
                 </div>
               </Clickable>
