@@ -6,7 +6,7 @@
   import { BenIcon } from "$lib/components/atoms/Icons/icon";
   import { addToast } from "$lib/components/atoms/notification/createNotification.store";
 
-  export let data;
+  let { data = $bindable() } = $props();
 
   export const columns = [
     {
@@ -45,59 +45,61 @@
       >Créer une propriété</Clickable
     >
   </div>
-  <Table {columns} rows={data.properties} let:row>
-    <Tr>
-      <Td>
-        <div class="flex flex-col items-end text-justify">
-          {row.address}
-          <span class="flex space-x-3">
-            {row.city}
-            {row.postalCode}
-          </span>
-        </div>
-      </Td>
-      <Td>
-        {row.name}
-      </Td>
-      <Td>
-        {row.rent}
-      </Td>
-      <Td>
-        {row.condo_fees}
-      </Td>
-      <Td>
-        {row.taxes}
-      </Td>
-      <Td>
-        <div class="flex items-center justify-between w-full pl-10 space-x-5">
-          <Clickable
-            variant="border"
-            className="w-full justify-center"
-            href={ROUTES.property.replace("{id}", row.id.toString())}
-          >
-            <div class="flex flex-row items-center justify-center">
-              <EditIcon class="mr-1 text-base" height="20" /> Modifier
-            </div>
-          </Clickable>
-          <Clickable
-            variant="border"
-            on:click={async () => {
-              const response = await fetch(`/api/properties/${row.id}`, {
-                method: "DELETE",
-              }).then((data) => data.json());
-              if (!response.success) {
-                return addToast.alert(response.message);
-              }
-              addToast.success(response.message);
-              data.properties = response.data;
-            }}
-          >
-            <div class="flex flex-row items-center justify-center">
-              <BenIcon class="mr-1 text-base" height="20" /> Supprimer
-            </div>
-          </Clickable>
-        </div>
-      </Td>
-    </Tr>
+  <Table {columns} rows={data.properties}>
+    {#snippet children({ row })}
+      <Tr>
+        <Td>
+          <div class="flex flex-col items-end text-justify">
+            {row.address}
+            <span class="flex space-x-3">
+              {row.city}
+              {row.postalCode}
+            </span>
+          </div>
+        </Td>
+        <Td>
+          {row.name}
+        </Td>
+        <Td>
+          {row.rent}
+        </Td>
+        <Td>
+          {row.condo_fees}
+        </Td>
+        <Td>
+          {row.taxes}
+        </Td>
+        <Td>
+          <div class="flex items-center justify-between w-full pl-10 space-x-5">
+            <Clickable
+              variant="border"
+              className="w-full justify-center"
+              href={ROUTES.property.replace("{id}", row.id.toString())}
+            >
+              <div class="flex flex-row items-center justify-center">
+                <EditIcon class="mr-1 text-base" height="20" /> Modifier
+              </div>
+            </Clickable>
+            <Clickable
+              variant="border"
+              onclick={async () => {
+                const response = await fetch(`/api/properties/${row.id}`, {
+                  method: "DELETE",
+                }).then((data) => data.json());
+                if (!response.success) {
+                  return addToast.alert(response.message);
+                }
+                addToast.success(response.message);
+                data.properties = response.data;
+              }}
+            >
+              <div class="flex flex-row items-center justify-center">
+                <BenIcon class="mr-1 text-base" height="20" /> Supprimer
+              </div>
+            </Clickable>
+          </div>
+        </Td>
+      </Tr>
+    {/snippet}
   </Table>
 </section>

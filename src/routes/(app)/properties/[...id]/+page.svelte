@@ -5,17 +5,18 @@
   import { enhance } from "$app/forms";
   import { goto } from "$app/navigation";
   import { addToast } from "$lib/components/atoms/notification/createNotification.store.js";
-  export let data;
-  export let form;
+  let { data, form } = $props();
 
-  $: if (form) {
-    if (form.success) {
-      addToast.success(form.message);
-      goto(ROUTES.properties);
-    } else {
-      addToast.alert(form.message);
+  $effect(() => {
+    if (form) {
+      if (form.success) {
+        addToast.success(form.message);
+        goto(ROUTES.properties);
+      } else {
+        addToast.alert(form.message);
+      }
     }
-  }
+  });
 </script>
 
 <section class="flex items-center justify-center w-full mt-10">
@@ -32,7 +33,6 @@
         id="landlord"
         method="POST"
         class="space-y-5"
-        on:submit|preventDefault
         use:enhance
         action={ROUTES.property.replace("{id}", data.property.id.toString())}
       >
