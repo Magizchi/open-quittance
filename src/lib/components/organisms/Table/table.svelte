@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import {
     ArrowLeftIcon,
     ArrowRightIcon,
@@ -14,18 +14,25 @@
     dataIndex: string;
   }
 
-  export let columns: ColumnsProps[];
-  export let rows: Array<T> = [];
+  interface Props {
+    columns: ColumnsProps[];
+    rows?: Array<T>;
+    scalpe?: boolean;
+    children?: import("svelte").Snippet<[{ row: T; index: number }]>;
+  }
 
-  export const index: number = 0;
-  export let scalpe: boolean = false;
+  let { columns, rows = [], scalpe = false, children }: Props = $props();
 
-  let currentPage: number = $page.url.searchParams.get("page")
-    ? Number($page.url.searchParams.get("page"))
-    : 1;
-  let show: number = $page.url.searchParams.get("show")
-    ? Number($page.url.searchParams.get("show"))
-    : 12;
+  let currentPage: number = $state(
+    page.url.searchParams.get("page")
+      ? Number(page.url.searchParams.get("page"))
+      : 1
+  );
+  let show: number = $state(
+    page.url.searchParams.get("show")
+      ? Number(page.url.searchParams.get("show"))
+      : 12
+  );
 
   let pagePagination: (currentPage: number, show: number) => void = (
     currentPage,
@@ -53,14 +60,16 @@
         {#each rows as row, index}
           {#if scalpe}
             {#if index === 0}
-              <td
-                colspan={columns.length}
-                class="pl-2 font-bold text-slate-700 bg-slate-300"
-              >
-                {dayjs().format("MMMM")}
-                {dayjs().format("YYYY")}
-              </td>
-              <slot {row} {index} />
+              <tr>
+                <td
+                  colspan={columns.length}
+                  class="pl-2 font-bold text-slate-700 bg-slate-300"
+                >
+                  {dayjs().format("MMMM")}
+                  {dayjs().format("YYYY")}
+                </td>
+              </tr>
+              {@render children?.({ row, index })}
             {:else if dayjs(row.startDate).format("MMMM") !== dayjs(rows[index - 1].startDate).format("MMMM")}
               <tr>
                 <td
@@ -71,19 +80,21 @@
                   {dayjs(row.startDate).format("YYYY")}
                 </td>
               </tr>
-              <slot {row} {index} />
+              {@render children?.({ row, index })}
             {:else}
-              <slot {row} {index} />
+              {@render children?.({ row, index })}
             {/if}
           {:else}
-            <slot {row} {index} />
+            {@render children?.({ row, index })}
           {/if}
         {/each}
       {:else}
-        <td
-          colspan={columns.length}
-          class="p-2 italic text-center font-hind text-slate-700">No Data</td
-        >
+        <tr>
+          <td
+            colspan={columns.length}
+            class="p-2 italic text-center font-hind text-slate-700">No Data</td
+          >
+        </tr>
       {/if}
     </tbody>
   </table>
@@ -93,7 +104,7 @@
     <button
       class="flex items-center justify-center p-1 text-4xl bg-white border rounded border-slate-300 hover:bg-slate-200 disabled:hover:bg-white"
       disabled={currentPage === 1}
-      on:click={() => {
+      onclick={() => {
         if (currentPage <= 1) {
           return (currentPage = 1);
         }
@@ -113,7 +124,7 @@
     <button
       class="flex items-center justify-center p-1 text-4xl bg-white border rounded border-slate-300 hover:bg-slate-200 disabled:hover:bg-white"
       disabled={rows.length < show}
-      on:click={() => {
+      onclick={() => {
         currentPage += 1;
         pagePagination(currentPage, show);
       }}
@@ -123,7 +134,7 @@
   </div>
   <select
     bind:value={show}
-    on:change={() => pagePagination(currentPage, show)}
+    onchange={() => pagePagination(currentPage, show)}
     class="bg-white border rounded border-slate-300 focus:ring-indigo-500 font-hind text-slate-700"
   >
     <option value={12} selected class="font-hind text-slate-700">12/page</option
