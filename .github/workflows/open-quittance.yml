@@ -11,6 +11,7 @@ env:
   DB_PORT: ${{ secrets.DB_PORT }}
   DB_DATABASE: ${{ secrets.DB_DATABASE }}
   DB_USER: ${{ secrets.DB_USER }}
+  DB_URL: ${{ secrets.DB_URL}}
   JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
 
 jobs:
@@ -37,10 +38,6 @@ jobs:
 
       - name: Install Package for production
         run: rm -r node_modules && npm install --omit=dev
-
-      - name: Checkout Build folder
-        run: |
-          dir
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
