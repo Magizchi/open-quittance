@@ -55,8 +55,8 @@
 {:else}
   <button
     {...rest as ButtonClickableBaseProps}
-    disabled
-    class="px-4 py-2 rounded font-hind w-full
+    {disabled}
+    class="px-4 py-2 rounded font-hind w-full cursor-pointer
     {disabled ? '!bg-gray-400 cursor-not-allowed' : ''}
       {className}"
     class:defaultClass={variant === "default"}
