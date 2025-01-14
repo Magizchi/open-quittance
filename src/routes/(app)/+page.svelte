@@ -74,7 +74,7 @@
         {:else}
           <Td>{row.tenant_fullName}</Td>
           <Td>
-            <div class="flex flex-col items-end text-justify">
+            <div class="flex flex-col text-justify">
               {row.property_address}
               <span class="flex space-x-2">
                 {row.property_city}
@@ -89,7 +89,7 @@
               <Badge error>Reste à payer</Badge>
             {/if}
           </Td>
-          <Td>
+          <Td className="text-end">
             {row.rent + row.condo_fees + row.taxes}
           </Td>
           <Td>

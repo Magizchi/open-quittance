@@ -55,8 +55,9 @@
 {:else}
   <button
     {...rest as ButtonClickableBaseProps}
-    class="px-4 py-2 rounded font-hind w-full
-    {disabled ? '!bg-gray-400 cursor-not-allowed' : ''}
+    {disabled}
+    class="px-4 py-2 rounded font-hind w-full cursor-pointer
+    {disabled ? '!bg-gray-400 !cursor-not-allowed' : ''}
       {className}"
     class:defaultClass={variant === "default"}
     class:menuClass={variant === "menu"}
@@ -94,6 +95,6 @@
     @apply text-white bg-rose-500 hover:bg-rose-600;
   }
   .borderClass {
-    @apply text-slate-400 border-2 border-slate-400 hover:border-slate-500 hover:text-slate-500 hover:bg-slate-100;
+    @apply text-slate-500 border-2 border-slate-500 hover:bg-slate-500 hover:text-white;
   }
 </style>

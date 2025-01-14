@@ -46,7 +46,12 @@
     <thead class="w-full bg-slate-200">
       <tr>
         {#each columns as column}
-          <th class="p-3 text-slate-600 font-hind text-end">
+          <th
+            class="p-3 text-slate-600 font-hind"
+            class:text-end={["total", "loyer", "charges", "taxe"].includes(
+              column.header.toLocaleLowerCase()
+            )}
+          >
             {column.header}
           </th>
         {/each}

@@ -48,7 +48,7 @@
     {#snippet children({ row })}
       <Tr>
         <Td>
-          <div class="flex flex-col items-end text-justify">
+          <div class="flex flex-col text-justify">
             {row.address}
             <span class="flex space-x-3">
               {row.city}
@@ -59,13 +59,13 @@
         <Td>
           {row.name}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.rent}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.condo_fees}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.taxes}
         </Td>
         <Td>

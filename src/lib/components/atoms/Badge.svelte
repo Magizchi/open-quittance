@@ -25,12 +25,12 @@
 
 <style lang="postcss">
   .defaultClass {
-    @apply text-slate-700 bg-slate-200 border-slate-500;
+    @apply text-slate-700 bg-slate-100 border-slate-700;
   }
   .valideClass {
-    @apply text-teal-700 bg-teal-200 border border-teal-500;
+    @apply text-teal-700 bg-teal-100 border border-teal-700;
   }
   .errorClass {
-    @apply text-rose-700 bg-rose-200 border border-rose-500;
+    @apply text-rose-700 bg-rose-100 border border-rose-700;
   }
 </style>

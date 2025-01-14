@@ -24,8 +24,13 @@
     >
       <div class="flex flex-col items-center w-full gap gap-8">
         <div class="flex flex-col items-center space-y-1">
-          <h1 class="text-2xl font-bold text-indigo-500 md:text-3xl font-hind">
+          <h1
+            class="relative text-2xl font-bold text-indigo-500 md:text-3xl font-hind"
+          >
             OPEN <span class="text-amber-500">QUITTANCE</span>
+            {#if data.webDemo}
+              <span class="absolute top-0 -right-11 text-sm">DEMO</span>
+            {/if}
           </h1>
           <p class="text-sm text-center text-slate-700 md:text-base">
             Simplifiez la gestion et la génération de vos quittances de loyer en
@@ -39,7 +44,7 @@
               name="username"
               placeholder="Email ou identifiant"
               value={data.webDemo ? "lesVisiteurs@visiteur.fr" : ""}
-              label="Email Demo"
+              label="Email"
             />
             <Input
               id="password"
