@@ -48,7 +48,9 @@
         {#each columns as column}
           <th
             class="p-3 text-slate-600 font-hind"
-            class:text-end={column.header.toLocaleLowerCase() === "total"}
+            class:text-end={["total", "loyer", "charges", "taxe"].includes(
+              column.header.toLocaleLowerCase()
+            )}
           >
             {column.header}
           </th>

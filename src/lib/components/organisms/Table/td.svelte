@@ -7,6 +7,6 @@
   let { children, className }: Props = $props();
 </script>
 
-<td class="p-2 text-slate-700 font-hind w-96 {className}">
+<td class="p-3 text-slate-700 font-hind w-96 {className}">
   {@render children?.()}
 </td>
