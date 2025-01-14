@@ -46,7 +46,10 @@
     <thead class="w-full bg-slate-200">
       <tr>
         {#each columns as column}
-          <th class="p-3 text-slate-600 font-hind text-end">
+          <th
+            class="p-3 text-slate-600 font-hind"
+            class:text-end={column.header.toLocaleLowerCase() === "total"}
+          >
             {column.header}
           </th>
         {/each}

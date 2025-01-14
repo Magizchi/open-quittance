@@ -1,11 +1,12 @@
 <script lang="ts">
   interface Props {
     children?: import("svelte").Snippet;
+    className?: string;
   }
 
-  let { children }: Props = $props();
+  let { children, className }: Props = $props();
 </script>
 
-<td class="p-2 text-slate-700 font-hind w-96 text-end">
+<td class="p-2 text-slate-700 font-hind w-96 {className}">
   {@render children?.()}
 </td>
