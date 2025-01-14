@@ -59,13 +59,13 @@
         <Td>
           {row.name}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.rent}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.condo_fees}
         </Td>
-        <Td>
+        <Td className="text-end">
           {row.taxes}
         </Td>
         <Td>
