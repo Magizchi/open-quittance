@@ -52,7 +52,7 @@
       <Tr>
         <Td>{row.tenants.name}</Td>
         <Td>
-          <div class="flex flex-col items-end text-justify">
+          <div class="flex flex-col text-justify">
             {row.properties.address}
             <span class="flex space-x-3">
               {row.properties.city}
