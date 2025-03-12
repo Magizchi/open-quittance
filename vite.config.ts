@@ -7,10 +7,10 @@ export default defineConfig({
     include: ["src/**/*.{test,spec}.{js,ts}"],
   },
   server: {
-    port: 5173,
     hmr: {
       port: 5173,
     },
+    host: true,
     watch: {
       usePolling: true,
     },
