@@ -23,9 +23,6 @@ export const landlordsTable = mysqlTable("landlords", {
   address: varchar("address", { length: 255 }).notNull(),
   city: varchar("city", { length: 255 }).notNull(),
   postalCode: varchar("postalCode", { length: 5 }).notNull(),
-  user_id: bigint("user_id", { mode: "number" })
-    .notNull()
-    .references(() => usersTable.id),
 });
 
 export const tenantsTable = mysqlTable("tenants", {
