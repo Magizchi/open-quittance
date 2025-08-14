@@ -2,35 +2,44 @@ import db from "$lib/db/drizzle.js";
 import { landlordsTable, usersTable } from "$lib/db/schema.js";
 import FormDataToJson from "$lib/utils/FormDataToJson.js";
 import { fail } from "@sveltejs/kit";
-import { eq } from "drizzle-orm";
-import "dotenv/config";
 import bcrypt from "bcrypt";
-import checkCookie, { createCookie } from "$lib/utils/remember_me.js";
+import "dotenv/config";
+import { eq } from "drizzle-orm";
 
-export const load = async ({ parent }) => {
+/**
+ * TODO:
+ *
+ * Use Locals to get email
+ * Send an email after change de email of user
+ */
+export const load = async ({ parent, locals }) => {
   await parent();
   const [landlord] = await db.select().from(landlordsTable);
-  return { landlord, webDemo: process.env.WEB_DEMO === "true" };
+  return {
+    landlord,
+    user: locals.user,
+    webDemo: process.env.WEB_DEMO === "true",
+  };
 };
 
 export const actions = {
-  default: async ({ request, cookies }) => {
+  default: async ({ request }) => {
     const data = await request.formData();
-    const userCookie = checkCookie(cookies);
+
     const { email, currentPassword, newPassword, confirmPassword } =
       FormDataToJson(data);
-
-    if (!userCookie) {
-      return fail(401, {
-        success: false,
-        message: "Vous devez être connecté",
-      });
-    }
 
     if (email === "" || currentPassword === "") {
       return fail(404, {
         success: false,
-        message: "Email ou Mot de passe doit être remplis",
+        message: "Email et Mot de passe doit être remplis",
+      });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return fail(404, {
+        message: "Le nouveau mot de passe ne correspond pas",
+        incorrect: true,
       });
     }
 
@@ -42,7 +51,7 @@ export const actions = {
         hash: usersTable.password,
       })
       .from(usersTable)
-      .where(eq(usersTable.loginToken, userCookie.loginToken));
+      .where(eq(usersTable.loginToken, "userCookie.loginToken"));
 
     if (!user) {
       return fail(404, {
@@ -61,14 +70,8 @@ export const actions = {
       });
     }
 
-    if (newPassword !== confirmPassword) {
-      return fail(404, {
-        message: "Le nouveau mot de passe ne correspond pas",
-        incorrect: true,
-      });
-    }
-
-    const hashedPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync());
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
     try {
       await db.update(usersTable).set({
@@ -76,8 +79,6 @@ export const actions = {
         email,
         password: newPassword ? hashedPassword : user.hash,
       });
-
-      await createCookie({ ...user, email }, cookies);
     } catch {
       return fail(404, {
         message: "Une erreur c'est produite",
