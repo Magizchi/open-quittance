@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm";
 export const load = async () => {};
 
 export const actions = {
-  default: async ({ request }) => {
+  default: async ({ request, locals }) => {
     const data = await request.formData();
     const { postalCode, address, city, landlordName } = FormDataToJson(data);
 
@@ -29,6 +29,7 @@ export const actions = {
       postalCode,
       city,
       name: landlordName,
+      user_id: locals.user!.id,
     });
 
     throw redirect(303, ROUTES.landing);
