@@ -1,1 +1,0 @@
-ALTER TABLE `session` MODIFY COLUMN `user_id` bigint NOT NULL;

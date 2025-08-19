@@ -5,6 +5,7 @@ CREATE TABLE `landlords` (
 	`address` varchar(255) NOT NULL,
 	`city` varchar(255) NOT NULL,
 	`postalCode` varchar(5) NOT NULL,
+	`user_id` bigint NOT NULL,
 	CONSTRAINT `landlords_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -57,6 +58,13 @@ CREATE TABLE `rentals` (
 	CONSTRAINT `rentals_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
+CREATE TABLE `session` (
+	`id` varchar(255) NOT NULL,
+	`user_id` bigint NOT NULL,
+	`expires_at` datetime NOT NULL,
+	CONSTRAINT `session_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
 CREATE TABLE `tenants` (
 	`id` bigint AUTO_INCREMENT NOT NULL,
 	`name` varchar(255) NOT NULL,
@@ -77,9 +85,11 @@ CREATE TABLE `users` (
 	CONSTRAINT `users_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
+ALTER TABLE `landlords` ADD CONSTRAINT `landlords_user_id_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `properties` ADD CONSTRAINT `properties_landlord_id_landlords_id_fk` FOREIGN KEY (`landlord_id`) REFERENCES `landlords`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `receipts` ADD CONSTRAINT `receipts_rental_id_rentals_id_fk` FOREIGN KEY (`rental_id`) REFERENCES `rentals`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `receipts` ADD CONSTRAINT `receipts_landlord_id_landlords_id_fk` FOREIGN KEY (`landlord_id`) REFERENCES `landlords`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `receipts` ADD CONSTRAINT `receipts_tenant_id_tenants_id_fk` FOREIGN KEY (`tenant_id`) REFERENCES `tenants`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `rentals` ADD CONSTRAINT `rentals_tenant_id_tenants_id_fk` FOREIGN KEY (`tenant_id`) REFERENCES `tenants`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `rentals` ADD CONSTRAINT `rentals_property_id_properties_id_fk` FOREIGN KEY (`property_id`) REFERENCES `properties`(`id`) ON DELETE no action ON UPDATE no action;
+ALTER TABLE `rentals` ADD CONSTRAINT `rentals_property_id_properties_id_fk` FOREIGN KEY (`property_id`) REFERENCES `properties`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `session` ADD CONSTRAINT `session_user_id_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;
