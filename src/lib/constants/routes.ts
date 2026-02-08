@@ -1,4 +1,5 @@
 export const ROUTES = {
+  setup: "/setup",
   login: "/login",
   landing: "/",
   createLandlords: "/landlords/new",

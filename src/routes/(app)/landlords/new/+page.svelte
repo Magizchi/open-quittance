@@ -15,7 +15,7 @@
       </p>
     </div>
     <div class="p-5">
-      <form id="landlord" method="POST" class="space-y-5">
+      <form method="POST" class="space-y-5">
         <LandlordForm />
         <div class="flex space-x-5">
           <Clickable

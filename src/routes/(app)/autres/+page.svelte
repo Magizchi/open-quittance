@@ -9,10 +9,6 @@
   import type { ReceiptsModel } from "$lib/models";
   import Icon from "@iconify/svelte";
     import { ROUTES } from "$lib/constants/routes";
-  import LandlordForm from "./landlords/landlordForm.svelte";
-    import Select from "$lib/components/atoms/Select.svelte";
-    import PropertyForm from "./properties/propertyForm.svelte";
-    import TenantForm from "./tenants/tenantForm.svelte";
 
   let { data } = $props();
 
@@ -41,8 +37,6 @@
 
   let pdfBuffer: Blob;
   let showModalPaymentDate: boolean = $state(false);
-  let plop:boolean = $state(data.addLandlord)
-  let addMore:boolean = $state(false)
   let selectedReceipts: ReceiptsModel = $state({
     startDate: toDay(),
     id: 0,
@@ -68,7 +62,7 @@
   }
 </script>
 <section class="flex flex-col px-10 m-auto max-w-7xl">
-  <h1 class="text-2xl font-bold font-hind text-slate-700">rapport du mois</h1>
+  <h1 class="text-2xl font-bold font-hind text-slate-700">ICI ton TITRe</h1>
   <div class="flex">
     <div class="w-4/5">
       plop
@@ -78,7 +72,6 @@
     <Clickable
       variant="primary"
       className="w-full justify-center"
-      onclick={() => addMore = true}
     >
       <div class="flex flex-row items-center justify-center">
         Ajouter 
@@ -162,48 +155,4 @@
       >Sauvegarder</Clickable
     >
   </div>
-</Modal>
-<Modal bind:showModal={plop}>
-  <section class="flex items-center justify-center w-full">
-    <div class="flex flex-col max-w-xl bg-white shadow-lg rounded-xl">
-      <div class="p-5 space-y-5 bg-indigo-500 rounded-t-xl">
-        <h2 class="text-3xl text-white font-hind">Création du Bailleur</h2>
-        <p class="text-base text-white font-hind">
-          Les informations ci-dessous seront nécessaires pour la génération des
-          quittances.
-        </p>
-      </div>
-      <div class="p-5">
-        <form id="landlord" method="POST" action="?/create" class="space-y-5">
-          <LandlordForm />
-          <div class="flex space-x-5">
-            <Clickable
-              variant="secondary"
-              className="w-full justify-center"
-              href={ROUTES.properties}>Annuler</Clickable
-            >
-            <Clickable variant="primary" type="submit">Ajouter</Clickable>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-</Modal>
-<Modal bind:showModal={addMore}>
-  <section class="flex items-center justify-center w-full">
- <div>
-     <!-- <Select name="propriete" value={0} label="ICI" >
-        
-    </Select> -->
-    <PropertyForm all={false} />
- </div>
- <div>
-     <!-- <Select name="propriete" value={0} label="ICI" >
-
-
-    </Select> -->
-    <TenantForm />
- </div>
-  </section>
-  
 </Modal>

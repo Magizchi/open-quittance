@@ -3,21 +3,15 @@ import db from "$lib/db/drizzle";
 import { usersTable } from "$lib/db/schema";
 import { redirect } from "@sveltejs/kit";
 
-export const load = async ({ locals }) => {
+export const load = async ({ url }) => {
   // Check any user
   const [userI]= await db
   .select()
   .from(usersTable)
-  console.log('user', userI)
-  console.log('locals',locals);
   
-  if (!userI) {
+  if (!userI && ROUTES.setup !== url.pathname)  {
     throw redirect(303, ROUTES.setup)
   }
 
-  if (!locals.session) {
-    throw redirect(303, ROUTES.login);
-  }
-
-  return { ...locals.user };
+  return
 };

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Input from "$lib/components/atoms/Input.svelte";
   interface Props {
+    all?: boolean,
     defaultValues?: {
       name: string;
       address: string;
@@ -22,7 +23,10 @@
       condo_fees: null,
       taxes: null,
     }),
+    all = true
   }: Props = $props();
+	let user = $state({ loggedIn: all });
+  console.log(user, "props all")
 </script>
 
 <div class="grid grid-cols-2 gap-3">
@@ -51,14 +55,16 @@
     type="number"
     required
   />
-  <div class="col-span-2">
-    <Input
-      label="Description"
-      name={`name`}
-      value={defaultValues["name"]}
-      placeholder="Description"
-    />
-  </div>
+  {#if all}
+    <div class="col-span-2">
+      <Input
+        label="Description"
+        name={`name`}
+        value={defaultValues["name"]}
+        placeholder="Description"
+      />
+    </div>
+  {/if}
   <div class="col-span-2">
     <Input
       label="Loyer*"
@@ -71,28 +77,30 @@
       required
     />
   </div>
-  <div class="col-span-2">
-    <Input
-      label="Charges*"
-      icon
-      name={`condo_fees`}
-      value={defaultValues["condo_fees"]}
-      placeholder="250"
-      type="number"
-      min={0}
-      required
-    />
-  </div>
-  <div class="col-span-2">
-    <Input
-      label="Taxes*"
-      icon
-      type="number"
-      name={`taxes`}
-      min={0}
-      value={defaultValues["taxes"]}
-      placeholder="100"
-      required
-    />
-  </div>
+  {#if all}
+    <div class="col-span-2">
+      <Input
+        label="Charges*"
+        icon
+        name={`condo_fees`}
+        value={defaultValues["condo_fees"]}
+        placeholder="250"
+        type="number"
+        min={0}
+        required
+      />
+    </div>
+    <div class="col-span-2">
+        <Input
+          label="Taxes*"
+          icon
+          type="number"
+          name={`taxes`}
+          min={0}
+          value={defaultValues["taxes"]}
+          placeholder="100"
+          required
+        />
+    </div>
+  {/if}
 </div>
