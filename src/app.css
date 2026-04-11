@@ -1,8 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@reference "tailwindcss";
 
 @font-face {
   font-family: "hind";
   src: url("/fonts/hind/Hind-Variable.ttf");
+}
+
+html {
+  font-family: "hind", "Roboto", system-ui, sans-serif;
 }
