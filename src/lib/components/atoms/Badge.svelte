@@ -23,7 +23,8 @@
   {@render children?.()}
 </span>
 
-<style lang="postcss">
+<style>
+  @reference "tailwindcss";
   .defaultClass {
     @apply text-slate-700 bg-slate-100 border-slate-700;
   }

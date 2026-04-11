@@ -22,7 +22,8 @@
   {/each}
 </div>
 
-<style lang="postcss">
+<style>
+  @reference "tailwindcss";
   .defaultClass {
     @apply bg-slate-500  border-slate-700;
   }

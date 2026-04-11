@@ -72,7 +72,8 @@
   </button>
 {/if}
 
-<style lang="postcss">
+<style>
+  @reference "tailwindcss";
   .defaultClass {
     @apply text-slate-400 border-slate-400 hover:border-slate-500 hover:text-slate-500 hover:bg-slate-100;
   }
