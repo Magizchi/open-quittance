@@ -172,10 +172,9 @@ const docDefinition = (info: {
           width: "*",
           stack: [
             Text(
-              `Date de paiement : ${
-                info.paymentDate
-                  ? dayjs(info.paymentDate).format("DD/MM/YYYY")
-                  : "Paiement non reçu"
+              `Date de paiement : ${info.paymentDate
+                ? dayjs(info.paymentDate).format("DD/MM/YYYY")
+                : "Paiement non reçu"
               }`
             ),
           ],
