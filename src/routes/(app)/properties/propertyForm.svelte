@@ -1,7 +1,8 @@
 <script lang="ts">
   import Input from "$lib/components/atoms/Input.svelte";
   interface Props {
-    all?: boolean,
+    all?: boolean;
+    namespace?: string;
     defaultValues?: {
       name: string;
       address: string;
@@ -23,17 +24,19 @@
       condo_fees: null,
       taxes: null,
     }),
-    all = true
+    all = true,
+    namespace = "",
   }: Props = $props();
-	let user = $state({ loggedIn: all });
-  console.log(user, "props all")
+
+  const getName = (field: string) =>
+    namespace ? `${namespace}[${field}]` : field;
 </script>
 
 <div class="grid grid-cols-2 gap-3">
   <div class="col-span-2">
     <Input
       label="Adresse*"
-      name={`address`}
+      name={getName(`address`)}
       value={defaultValues["address"]}
       placeholder="1, Avenue de paris"
       required
@@ -42,14 +45,14 @@
 
   <Input
     label="Ville*"
-    name={`city`}
+    name={getName(`city`)}
     value={defaultValues["city"]}
     placeholder="Ville"
     required
   />
   <Input
     label="Code postal*"
-    name={`postalCode`}
+    name={getName(`postalCode`)}
     value={defaultValues["postalCode"]}
     placeholder="Code postal"
     type="number"
@@ -59,7 +62,7 @@
     <div class="col-span-2">
       <Input
         label="Description"
-        name={`name`}
+        name={getName(`name`)}
         value={defaultValues["name"]}
         placeholder="Description"
       />
@@ -69,7 +72,7 @@
     <Input
       label="Loyer*"
       icon
-      name={`rent`}
+      name={getName(`rent`)}
       type="number"
       value={defaultValues["rent"]}
       placeholder="1100"
@@ -82,7 +85,7 @@
       <Input
         label="Charges*"
         icon
-        name={`condo_fees`}
+        name={getName(`condo_fees`)}
         value={defaultValues["condo_fees"]}
         placeholder="250"
         type="number"
@@ -91,16 +94,16 @@
       />
     </div>
     <div class="col-span-2">
-        <Input
-          label="Taxes*"
-          icon
-          type="number"
-          name={`taxes`}
-          min={0}
-          value={defaultValues["taxes"]}
-          placeholder="100"
-          required
-        />
+      <Input
+        label="Taxes*"
+        icon
+        type="number"
+        name={getName(`taxes`)}
+        min={0}
+        value={defaultValues["taxes"]}
+        placeholder="100"
+        required
+      />
     </div>
   {/if}
 </div>

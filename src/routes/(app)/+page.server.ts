@@ -1,6 +1,6 @@
 import { ROUTES } from "$lib/constants/routes";
 import db from "$lib/db/drizzle";
-import { landlordsTable, usersTable } from "$lib/db/schema";
+import { landlordsTable, propertiesTable, usersTable, tenantsTable } from "$lib/db/schema";
 import {
   generateNewReceipts,
   getReceipts,
@@ -22,11 +22,10 @@ export const load = async ({ locals, parent, url }) => {
     ? Number(url.searchParams.get("show"))
     : 12;
 
-  console.log('locals', locals);
-  
+
 
   const receiptList = await getReceipts(page, show);
-  let addLandlord:boolean = false
+  let addLandlord: boolean = false;
 
   // Check user email
   const [user] = await db
@@ -39,44 +38,65 @@ export const load = async ({ locals, parent, url }) => {
     .where(eq(usersTable.id, locals.user!.id));
 
   if (!user.landlords) {
-    addLandlord = true
+    addLandlord = true;
   }
-  
+
 
   return { receiptList, addLandlord };
 };
 
 export const actions = {
   create: async ({ request, locals }) => {
-      const data = await request.formData();
-      console.log('data', data);
-      
-      const { postalCode, address, city, landlordName } = FormDataToJson(data);
-  
-      const [landlord] = await db
-        .select()
-        .from(landlordsTable)
-        .where(eq(landlordsTable.name, landlordName));
-  
-      if (landlord) {
-        return fail(403, {
-          message: "Ce bailleur existe déjà",
-          incorrect: true,
-        });
-      }
-  
-      await db.insert(landlordsTable).values({
-        address,
-        postalCode,
-        city,
-        name: landlordName,
-        user_id: locals.user!.id,
+    const data = await request.formData();
+
+    const { postalCode, address, city, landlordName } = FormDataToJson(data);
+
+    const [landlord] = await db
+      .select()
+      .from(landlordsTable)
+      .where(eq(landlordsTable.name, landlordName));
+
+    if (landlord) {
+      return fail(403, {
+        message: "Ce bailleur existe déjà",
+        incorrect: true,
       });
-  
-      throw redirect(303, ROUTES.landing);
-    },
-      paymentDate: async ({ request }) => {
+    }
+
+    await db.insert(landlordsTable).values({
+      address,
+      postalCode,
+      city,
+      name: landlordName,
+      user_id: locals.user!.id,
+    });
+
+    throw redirect(303, ROUTES.landing);
+  },
+  paymentDate: async ({ request }) => {
     return await addPaymentDate(request);
   },
-};
+  addAll: async ({ request, locals }) => {
+    const data = await request.formData();
+    const { property, tenant } = FormDataToJson(data);
 
+    await db.insert(propertiesTable).values({
+      name: '',
+      landlord_id: locals.user!.id,
+      address: property.address,
+      postalCode: property.postalCode,
+      city: property.city,
+      rent: Number(property.rent),
+      condo_fees: 0,
+      taxes: 0
+    });
+
+    await db.insert(tenantsTable).values({
+      name: tenant.name,
+      siret: tenant.siret,
+      address: tenant.address,
+      city: tenant.city,
+      postalCode: tenant.postalCode,
+    });
+  }
+};

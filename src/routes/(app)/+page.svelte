@@ -8,11 +8,11 @@
   import Badge from "$lib/components/atoms/Badge.svelte";
   import type { ReceiptsModel } from "$lib/models";
   import Icon from "@iconify/svelte";
-    import { ROUTES } from "$lib/constants/routes";
+  import { ROUTES } from "$lib/constants/routes";
   import LandlordForm from "./landlords/landlordForm.svelte";
-    import Select from "$lib/components/atoms/Select.svelte";
-    import PropertyForm from "./properties/propertyForm.svelte";
-    import TenantForm from "./tenants/tenantForm.svelte";
+  import Select from "$lib/components/atoms/Select.svelte";
+  import PropertyForm from "./properties/propertyForm.svelte";
+  import TenantForm from "./tenants/tenantForm.svelte";
 
   let { data } = $props();
 
@@ -41,17 +41,20 @@
 
   let pdfBuffer: Blob;
   let showModalPaymentDate: boolean = $state(false);
-  let plop:boolean = $state(data.addLandlord)
-  let addMore:boolean = $state(false)
+  let plop: boolean = $derived(data.addLandlord);
+  let plip: boolean = $derived(false);
+  let addMore: boolean = $state(false);
   let selectedReceipts: ReceiptsModel = $state({
     startDate: toDay(),
     id: 0,
   } as ReceiptsModel);
-
+  let currentStep: number = $state(1);
   let documentName: string;
   async function getPdf(receiptId: number) {
     const response = await fetch(`/api/generate-pdf?receiptId=${receiptId}`)
       .then((res) => {
+        console.log("res", res);
+
         const getDocumentName = res.headers.get("document-name");
         if (getDocumentName) {
           documentName = getDocumentName;
@@ -66,24 +69,35 @@
 
     FileSaver.saveAs(blob, `quittance-${documentName}.pdf`);
   }
+
+  function nextStep() {
+    currentStep++;
+  }
+
+  function prevStep() {
+    currentStep--;
+  }
 </script>
+
 <section class="flex flex-col px-10 m-auto max-w-7xl">
   <h1 class="text-2xl font-bold font-hind text-slate-700">rapport du mois</h1>
   <div class="flex">
-    <div class="w-4/5">
-      plop
-    </div>
-    <div class="flex justify-end w-1/5">  
-      
-    <Clickable
-      variant="primary"
-      className="w-full justify-center"
-      onclick={() => addMore = true}
-    >
-      <div class="flex flex-row items-center justify-center">
-        Ajouter 
-      </div>
-    </Clickable>
+    <div class="w-4/5">plop</div>
+    <div class="flex justify-end w-1/5">
+      <Clickable
+        variant="primary"
+        className="w-full justify-center"
+        onclick={() => (addMore = true)}
+      >
+        <div class="flex flex-row items-center justify-center">Ajouter</div>
+      </Clickable>
+      <Clickable
+        variant="primary"
+        className="w-full justify-center"
+        onclick={() => (plip = true)}
+      >
+        <div class="flex flex-row items-center justify-center">PLIP</div>
+      </Clickable>
     </div>
   </div>
 </section>
@@ -189,21 +203,52 @@
     </div>
   </section>
 </Modal>
-<Modal bind:showModal={addMore}>
+<Modal bind:showModal={plip}>
   <section class="flex items-center justify-center w-full">
- <div>
-     <!-- <Select name="propriete" value={0} label="ICI" >
-        
-    </Select> -->
-    <PropertyForm all={false} />
- </div>
- <div>
-     <!-- <Select name="propriete" value={0} label="ICI" >
-
-
-    </Select> -->
-    <TenantForm />
- </div>
+    <div class="flex flex-col max-w-xl bg-white shadow-lg rounded-xl">
+      <div class="p-5 space-y-5 bg-indigo-500 rounded-t-xl">
+        <h2 class="text-3xl text-white font-hind">
+          {#if currentStep === 1}
+            Étape 1: Informations générales
+          {:else if currentStep === 2}
+            Étape 2: Localisation
+          {/if}
+        </h2>
+        <p class="text-base text-white font-hind">
+          {#if currentStep === 1}
+            Renseignez le nom et l'adresse du bailleur.
+          {:else if currentStep === 2}
+            Complétez avec le code postal et la ville.
+          {/if}
+        </p>
+      </div>
+      <div class="p-5">
+        <form id="landlord" method="POST" action="?/addAll" class="space-y-5">
+          <div class={currentStep === 1 ? "" : "hidden"}>
+            <PropertyForm all={false} namespace="property" />
+          </div>
+          <div class={currentStep === 2 ? "" : "hidden"}>
+            <TenantForm namespace="tenant" />
+          </div>
+          <div class="flex space-x-5">
+            {#if currentStep === 1}
+              <Clickable
+                variant="secondary"
+                className="w-full justify-center"
+                href={ROUTES.properties}>Annuler</Clickable
+              >
+              <Clickable variant="primary" type="button" onclick={nextStep}
+                >Suivant</Clickable
+              >
+            {:else if currentStep === 2}
+              <Clickable variant="secondary" type="button" onclick={prevStep}
+                >Précédent</Clickable
+              >
+              <Clickable variant="primary" type="submit">Ajouter</Clickable>
+            {/if}
+          </div>
+        </form>
+      </div>
+    </div>
   </section>
-  
 </Modal>
