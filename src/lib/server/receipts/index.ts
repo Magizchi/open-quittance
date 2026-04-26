@@ -49,7 +49,7 @@ export const generateNewReceipts = async () => {
     .from(receiptsTable)
     .where(
       sql`MONTH(${receiptsTable.startDate}) = ${dayjs().get("month") + 1}`
-    )) as { rental_id: number }[];
+    )) as { rental_id: number; }[];
 
   const firstDateOfThisMonth = dayjs().startOf("month").format("YYYY/MM/DD");
   const lastDateOfThisMonth = dayjs().endOf("month").format("YYYY/MM/DD");
