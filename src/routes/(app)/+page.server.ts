@@ -5,7 +5,7 @@ import {
   generateNewReceipts,
   getReceipts,
   addPaymentDate,
-} from "$lib/service/receipts";
+} from "$lib/server/receipts";
 import { fail, redirect } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 import FormDataToJson from "$lib/utils/FormDataToJson.js";
