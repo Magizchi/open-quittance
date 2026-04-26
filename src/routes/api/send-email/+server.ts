@@ -1,4 +1,4 @@
-import transporter from "$lib/service/mailer";
+import transporter from "$lib/server/mailer";
 import { json } from '@sveltejs/kit';
 
 export async function POST() {
@@ -6,13 +6,17 @@ export async function POST() {
   try {
     await transporter.sendMail({
       from: `dymanshe@gmail.Com`,
-      to: 'mek45031@laoia.com',           // ← your receiving address
+      to: 'dymanshe@gmail.com',           // ← your receiving address
       subject: `New message from $name`,
       html: `
         <p><strong>From:</strong></p>
         <p><strong>Message:</strong></p>
         <p>"message"</p>
       `,
+      attachments: [{
+        filename: "report.pdf",
+        path: "pdfs/fileName.pdf",
+      },]
     });
 
     return json({ success: true });
