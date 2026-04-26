@@ -1,8 +1,8 @@
 <script lang="ts">
   import Clickable from "$lib/components/atoms/Clickable.svelte";
-  import { Table, Tr, Td } from "$lib/components/organisms/Table";
-  import { ROUTES } from "$lib/constants/routes.js";
   import { addToast } from "$lib/components/atoms/notification/createNotification.store";
+  import { Table, Td, Tr } from "$lib/components/organisms/Table";
+  import { ROUTES } from "$lib/constants/routes.js";
   import Icon from "@iconify/svelte";
 
   let { data = $bindable() } = $props();
@@ -37,11 +37,8 @@
 
 <section class="px-10 space-y-3">
   <div class="flex justify-between">
-    <h1 class="text-2xl font-bold font-hind text-slate-700">
-      Liste des Propriétés
-    </h1>
-    <Clickable variant="primary" href={ROUTES.createProperty}
-      >Créer une propriété</Clickable
+    <h1 class="text-2xl font-bold font-hind text-slate-700">Propriétés</h1>
+    <Clickable variant="primary" href={ROUTES.createProperty}>Ajouter</Clickable
     >
   </div>
   <Table {columns} rows={data.properties}>

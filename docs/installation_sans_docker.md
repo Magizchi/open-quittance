@@ -23,14 +23,10 @@
    configuration suivantes :
 
    ```bash
-   ## Configuration de la base de données
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_PASSWORD=password
-   DB_USER=root
-   DB_DATABASE=pdfman
-   ## JWT
-   JWT_SECRET_TOKEN='{votre token JWT ici}'
+      ## Database URL
+      DB_URL={mariadb/postgres/etc}://{user}:{users password}@{server}/{database}
+      ## JWT
+      JWT_SECRET_TOKEN='{votre token JWT ici}'
    ```
 
    Remplacez `'{votre token JWT ici}'` par un token JWT généré (vous pouvez

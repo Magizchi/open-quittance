@@ -19,7 +19,6 @@ export async function GET({ url }) {
     .select()
     .from(receiptsTable)
     .where(eq(receiptsTable.id, +receiptId));
-
   if (!receipt) {
     return json({ message: "Cette quittance n'existe pas" }, { status: 404 });
   }
@@ -38,9 +37,10 @@ export async function GET({ url }) {
     ).format("MMMM")}-${dayjs(receipt.paymentDate).get("year")}`;
   }
 
-  return new Response(pdfBlob, {
+  return new Response(pdfBlob as any, {
     status: 200,
     headers: {
+      "content-type": "application/pdf",
       "document-name": documentName,
     },
   });

@@ -1,17 +1,14 @@
-import FormDataToJson from "$lib/utils/FormDataToJson.js";
-import { fail, redirect } from "@sveltejs/kit";
+import { ROUTES } from "$lib/constants/routes.js";
 import db from "$lib/db/drizzle";
 import { landlordsTable } from "$lib/db/schema.js";
+import FormDataToJson from "$lib/utils/FormDataToJson.js";
+import { fail, redirect } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
-import { ROUTES } from "$lib/constants/routes.js";
 
-export const load = async ({ parent }) => {
-  const user = await parent();
-  return { user };
-};
+export const load = async () => {};
 
 export const actions = {
-  default: async ({ request }) => {
+  default: async ({ request, locals }) => {
     const data = await request.formData();
     const { postalCode, address, city, landlordName } = FormDataToJson(data);
 
@@ -32,6 +29,7 @@ export const actions = {
       postalCode,
       city,
       name: landlordName,
+      user_id: locals.user!.id,
     });
 
     throw redirect(303, ROUTES.landing);

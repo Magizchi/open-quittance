@@ -31,12 +31,8 @@
    suivante :
 
 ```bash
-## Configuration de la base de données
-DB_HOST=db
-DB_PORT=3306
-DB_PASSWORD=password
-DB_USER=root
-DB_DATABASE=pdfman
+## Database URL
+DB_URL={mariadb/postgres/etc}://{user}:{users password}@{server}/{database}
 ## JWT
 JWT_SECRET_TOKEN='{votre token JWT ici}'
 ```

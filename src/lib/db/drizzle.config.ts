@@ -7,6 +7,6 @@ export default {
   out: "./migrations",
   dialect: "mysql",
   dbCredentials: {
-    url: process.env.DB_URL!
+    url: process.env.DB_URL!,
   },
 } satisfies Config;

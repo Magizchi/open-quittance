@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
   import Clickable from "$lib/components/atoms/Clickable.svelte";
   import { ROUTES } from "$lib/constants/routes";
-  import LandlordForm from "../landlordForm.svelte";
+  import LandlordForm from "../../(app)/landlords/landlordForm.svelte";
   let { data } = $props();
 </script>
 
@@ -15,7 +15,12 @@
       </p>
     </div>
     <div class="p-5">
-      <form method="POST" class="space-y-5">
+      <form
+        id="landlord"
+        method="POST"
+        class="space-y-5"
+        action="/landlords/new"
+      >
         <LandlordForm />
         <div class="flex space-x-5">
           <Clickable
