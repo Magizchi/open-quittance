@@ -16,4 +16,10 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  optimizeDeps: {
+    exclude: ['nodemailer']
+  },
+  ssr: {
+    noExternal: []
+  }
 });
